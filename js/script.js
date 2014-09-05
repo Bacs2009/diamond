@@ -304,16 +304,20 @@ window.onload = function(){
         dataType: 'html',
 
         success: function(data){
-          $('.b-colletcion-list').html(data);
-          $('.b-colletcion-list a').each(function() {
-        	  var href = $(this).attr('href');
-        	  var arr = href.split('/');
-        	  href = transliterate(arr[3]);
-	          $(this).attr('href', '/#/collection/'+href);
-          });
-          top_x = $('.b-colletcion').height();
-          $('.b-colletcion').css('top',0-top_x);
-          $('.b-colletcion').show().animate({'top':45});
+            $('.b-colletcion-list').html(data);
+            $('.b-colletcion-list a').each(function() {
+                var href = $(this).attr('href');
+                var arr = href.split('/');
+                if(arr[1]==='ua' || arr[1]==='en'){
+                    href = transliterate(arr[4]);
+                }else{
+                    href = transliterate(arr[3]);
+                }
+                $(this).attr('href', '/#/collection/'+href);
+            });
+            top_x = $('.b-colletcion').height();
+            $('.b-colletcion').css('top',0-top_x);
+            $('.b-colletcion').show().animate({'top':45});
         }
       });
     }else{
@@ -2323,7 +2327,8 @@ function transliterate(word){
     A["ф"]="f";A["ы"]="i";A["в"]="v";A["а"]="a";A["п"]="p";A["р"]="r";A["о"]="o";A["л"]="l";A["д"]="d";A["ж"]="zh";A["э"]="e";
     A["Я"]="YA";A["Ч"]="CH";A["С"]="S";A["М"]="M";A["И"]="I";A["Т"]="T";A["Ь"]="";A["Б"]="B";A["Ю"]="YU";
     A["я"]="ya";A["ч"]="ch";A["с"]="s";A["м"]="m";A["и"]="i";A["т"]="t";A["ь"]="";A["б"]="b";A["ю"]="yu";A[" "]="_";A["."]=".";A["L"]="l";A["o"]="o";A["v"]="v";A["e"]="e";A["u"]="u";A["c"]="c";A["k"]="k";A["i"]="i";A["f"]="f";
-
+    A["A"]="A";A["B"]="B";A["C"]="C";A["D"]="D";A["E"]="E";A["F"]="F";A["G"]="g";A["H"]="H";A["I"]="I";A["J"]="J";A["K"]="K";A["L"]="L";A["M"]="M";A["N"]="N";A["O"]="O";A["P"]="P";A["Q"]="Q";A["R"]="R";A["S"]="S";A["T"]="T";A["W"]="W";A["X"]="X";A["Y"]="Y";A["Z"]="Z";
+    A["a"]="a";A["b"]="b";A["c"]="c";A["d"]="d";A["e"]="e";A["f"]="f";A["g"]="g";A["h"]="h";A["i"]="i";A["j"]="j";A["k"]="k";A["l"]="l";A["m"]="m";A["n"]="n";A["o"]="o";A["p"]="p";A["q"]="q";A["r"]="r";A["s"]="s";A["t"]="t";A["w"]="w";A["x"]="x";A["y"]="y";A["z"]="z";
     for (i in word){
 
         if (A[word[i]] === 'undefined'){
