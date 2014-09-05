@@ -1,0 +1,21 @@
+{% autoescape  false %}
+
+<div class="view">
+	<b>{{ CHtml.encode(data.getAttributeLabel('name_ru')) }}:</b>
+	{{ CHtml.encode(data.name_ru) }}
+	<br />
+
+	<b>{{ CHtml.encode(data.getAttributeLabel('name_ua')) }}:</b>
+	{{ CHtml.encode(data.name_ua) }}
+	<br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('name_en')) }}:</b>
+  {{ CHtml.encode(data.name_en) }}
+  <br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('lat')) }}:</b>
+	{{ CHtml.encode(data.lat) }}
+	<br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('lng')) }}:</b>
+	{{ CHtml.encode(data.lng) }}
+	<br />
+</div>
+{% endautoescape %}

@@ -1,0 +1,72 @@
+{% extends this.layout %}
+{% block content %}
+   <div role="main" class="main">
+     <div class="b-inner-container b-hide-print">
+      <div class="b-h2">{{ lang.t('site', 'Список сравнения') }} (<span id='compare_count'>{{compare_count}}</span>)</div>
+      <a href="/{% if Yii.params.language != 'ru' %}{{Yii.params.language}}/{% endif %}" class="b-add-compare">{{ lang.t('site', 'Добавить еще модели') }}</a>
+      <div class="b-search-icons"><span class="b-links-def"><a href="#" class="b-print-page b-comapre"><img src="/images/social5.jpg" alt=""></a></span></div>
+      </div>
+      
+      <div class="b-compare-items">
+        <div class="b-wrapper">
+        	{% set i = 0 %}
+          {% for compare in list_compare %}
+        	<div class="b-item ajax-continaer-ring" id='compare_{{i}}'>
+        	 <a style='cursor:pointer' onclick="remove_from_compare('{{compare["f"].id}}','{{compare["m"].id}}',{{i}})" class="b-close">&times;</a>
+        	 <div class="b-offer-item">
+        	      <div class="b-wrapper b-prduct-block">
+        	      	<div class="b-name-collection b-title-collection">{{compare.collection.name}}</div>
+        	        <div class="b-name-ring b-title-product">- {% if compare["f"] %}{{compare["f"].getLangProp('name')}}{% else %}{{compare["m"].getLangProp('name')}}{% endif %} -</div>
+        	        <div class="b-block-for-who b-price-product">
+					 {% if compare["f"] %}
+  					 <div class="b-img b-img-full b-she-it"><a href="{{ Yii.createAbsoluteUrl('/') }}{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/?collection_id={{compare['collection']['id']}}&ring_id={{compare['collection']['main_ring_id']}}"><img src="/old_images/{{compare['f']['articul']}}.png" width='200px' style='margin: -50px 0px;' alt=""></a></div>
+          	 <div class="b-who"><span class="b-checkbox"  id='ring_w_{{compare['f'].id}}'><input type="checkbox" id="checker_{{compare['f'].id}}"><span class="b-input"></span>{{ lang.t('site', 'Для нее') }}</span></div>
+          	 <div class="b-txt"><span id='metal_{{compare["f"].id}}'>{% if compare['f'].metal.name_ua == 'золото' %}<span class='m_names'>{{compare['f'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize | slice(0,-2)}}</span>{% endif %} {{compare['f'].metal.getLangProp('name')}}{% if compare['f'].metal.name_short == 'WB' %}, {{ lang.t('site','черный родий')}}{% endif %}</span><br /><span id='probe_{{compare["f"].id}}'>{{compare['f'].metal.probe}} {{lang.t('site','проба')}}</span>
+             <span id='stones_{{compare["f"].id}}'>{% for stone in compare['f'].stones %}<br /><span class='m_name'>{{ stone.stones.getLangProp('color') }} {{stone.stones.getLangProp('name')}}</span> {{stone.stones.size}}{{lang.t('site','мм')}}, {{stone.count}}{{lang.t('site','шт')}}, {{stone.stones.karatnost*stone.count}}ct{% endfor %}</span>
+             {% if compare['f'].surface_id != '' and compare['f'].surface_id != 0 %}<span id='surface_{{compare['f'].id}}'><br />{{ lang.t('site', 'Тип покрытия') }}: {{compare['f'].surface_type.getLangProp('name')}}</span>{% endif %}
+  					 {% if compare['f'].enamel_id != '' and compare['f'].enamel_id != 0 %}<span id='enamel_{{compare['f'].id}}'><br />{{ lang.t('site', 'Цвет эмали') }}: {{compare['f'].enamel.getLangProp('name')}}</span>{% endif %}
+  				   <span id='weight_{{compare["f"].id}}'><br />{{ lang.t('site', 'Вес кольца') }} {{ compare['f'].weight}}{{ lang.t('site','г')}}</span> <span><img src='/images/comment_question.png' style="margin-top:-5px;cursor:pointer" rel='f_{{compare['f'].id}}' class='weight_help'/><div id='hint_f_{{compare['f'].id}}' class='test-popup'>{{lang.t('site','вес украшений, заявленный на сайте, может отличаться от фактического ввиду ручной обработки и на конечную стоимость не влияет')}}</div></span>
+             <br /><span class='sizer'>{{ lang.t('site', 'размер') }}</span>: <span class="b-open-size-select" id='ring_w_size_{{compare['f'].id}}'>{{compare['f'].size}}</span></div>
+          	 <div class="b-price b-price-block"><span style='display:none' class="b-uah" id="ring_w_price_{{compare['f'].id}}">{{compare['f'].price}}</span><span class="b-usd">{{compare['f'].price / 13}}</span> USD</div>
+          	 <div class="b-arcticul">{{ lang.t('site', 'артикул') }}: <span>{{compare["f"].articul}}</span></div>
+        	 {% endif %}
+        	        </div>
+        	        <div class="b-block-for-who b-price-product">
+        	 {% if compare["m"] %}
+  					 <div class="b-img b-img-full b-he-it"><a href="{{ Yii.createAbsoluteUrl('/') }}{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/?collection_id={{compare['collection']['id']}}&ring_id={{compare['collection']['main_ring_id']}}"><img src="/old_images/{{compare['m']['articul']}}.png" width='200px'  style='margin: -50px 0px;' alt=""></a></div>
+          	 <div class="b-who"><span class="b-checkbox" id='ring_m_{{compare['m'].id}}'><input type="checkbox" id="checker_{{compare['m'].id}}"><span class="b-input"></span>{{ lang.t('site', 'Для него') }}</span></div>
+          	 <div class="b-txt"><span id='metal_{{compare["m"].id}}'>{% if compare['m'].metal.name_ua == 'золото' %}<span class='m_names'>{{compare['m'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize | slice(0,-2)}}</span>{% endif %} {{compare['m'].metal.getLangProp('name')}}{% if compare['m'].metal.name_short == 'WB' %}, {{ lang.t('site','черный родий')}}{% endif %}</span><br /><span id='probe_{{compare["m"].id}}'>{{compare['m'].metal.probe}} {{lang.t('site','проба')}}</span>
+             <span id='stones_{{compare["m"].id}}'>{% for stone in compare['m'].stones %}<br /><span class='m_name'>{{ stone.stones.getLangProp('color') }} {{stone.stones.getLangProp('name')}}</span> {{stone.stones.size}}{{lang.t('site','мм')}}, {{stone.count}}{{lang.t('site','шт')}}, {{stone.stones.karatnost*stone.count}}ct{% endfor %}</span>
+             {% if compare['m'].surface_id != '' and compare['m'].surface_id != 0 %}<span id='surface_{{compare['m'].id}}'><br />{{ lang.t('site', 'Тип покрытия') }}: {{compare['m'].surface_type.getLangProp('name')}}</span>{% endif %}
+             {% if compare['m'].enamel_id != '' and compare['m'].enamel_id != 0 %}<span id='enamel_{{compare['m'].id}}'><br />{{ lang.t('site', 'Цвет эмали') }}: {{compare['m'].enamel.getLangProp('name')}}</span>{% endif %} 
+             <span id='weight_{{compare["m"].id}}'><br />{{ lang.t('site', 'Вес кольца') }} {{ compare['m'].weight}}{{ lang.t('site','г')}}</span> <span><img src='/images/comment_question.png' style="margin-top:-5px;cursor:pointer" rel='m_{{compare['m'].id}}' class='weight_help'/><div id='hint_m_{{compare['m'].id}}' class='test-popup'>{{lang.t('site','вес украшений, заявленный на сайте, может отличаться от фактического ввиду ручной обработки и на конечную стоимость не влияет')}}</div></span>
+             <br />{{ lang.t('site', 'размер') }}: <span class="b-open-size-select" id='ring_m_size_{{compare['m'].id}}'>{{compare['m'].size}}</span></div>
+          	 <div class="b-price b-price-block"><span style='display:none' class="b-uah" id="ring_m_price_{{compare['m'].id}}">{{compare['m'].price}}</span><span class="b-usd">{{compare['m'].price / 13}}</span> USD</div>
+          	 <div class="b-arcticul">{{ lang.t('site', 'артикул') }}: <span>{{compare["m"].articul}}</span></div>
+        	 {% endif %}
+        	        </div>
+        	      </div>
+        	     </div>
+        	     <div class="b-show-offers"><a href="#order-form" onclick="set_order_info('ring_w_{{compare['f'].id}}','ring_m_{{compare['m'].id}}')" class="b-button-by">{{ lang.t('site', 'оформить заказ') }}</a></div>
+        	</div>
+        	{% set i = i+1 %}
+        	{% endfor %}
+        	
+        </div>
+        <div class="clear"></div>
+        </div>
+   </div>
+   <script>
+   var last_metal_w = '';
+   var last_metal_m = '';
+   var last_probe_w = '';
+   var last_probe_m = '';
+   var last_surface_w = '';
+   var last_surface_m = '';
+   var last_enamel_w = '';
+   var last_enamel_m = '';
+   var last_stones_w = '';
+   var last_stones_m = '';
+  </script>
+   {% endblock %}
+   

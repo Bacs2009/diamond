@@ -1,0 +1,35 @@
+{% extends this.layout %}
+{% block content%}
+
+
+<section>
+    		<p id="page-name">{{ lang.t('mobile', 'Онлайн-сервис') }}</p>
+			<div id="service">
+					<p class="header">{{ lang.t('mobile', 'УВАЖАЕМЫЕ ДАМЫ И ГОСПОДА') }}!</p>
+					<p>{{ lang.t('mobile', 'Бренд STDIAMOND предлагает сервис полного цикла от создания до сервисного обслуживания украшений и осуществляет прием заказов на:') }}</p>
+					<ul>
+						<li>{{ lang.t('mobile', 'изготовление украшений ОНЛАЙН') }};</li>
+						<li>{{ lang.t('mobile', 'выездную доставку украшений') }};</li>
+						<li>{{ lang.t('mobile', 'вызов специалиста компании, который оформит заказ на изготовление или сервисное обслуживание украшений дома или в офисе клиента, в удобное для него время') }}.</li>
+					</ul>
+					<p>{{ lang.t('mobile', 'Детальную консультацию можно получить у нашего квалифицированного персонала в следующих городах') }}:</p>
+					<div id="managers">
+						<p class="location"><span>{{ lang.t('mobile', 'КиеВ') }}:</span> +38 067 239 08 88</p>
+						<img src="{{Yii.baseUrl(true)}}/images/people1.jpg" alt="">
+						<p class="man-info">{{ lang.t('mobile', 'Орлова Наталия') }}<span>{{ lang.t('mobile', 'продавец-консультант') }}</span></p>
+						<img src="{{Yii.baseUrl(true)}}/images/people2.jpg" alt="">
+						<p class="man-info">{{ lang.t('mobile', 'Орлова Наталия') }}<span>{{ lang.t('mobile', 'продавец-консультант') }}</span></p>
+						<img src="{{Yii.baseUrl(true)}}/images/people3.jpg" alt="">
+						<p class="man-info">{{ lang.t('mobile', 'Орлова Наталия') }}<span>{{ lang.t('mobile', 'продавец-консультант') }}</span></p>
+						<p class="location"><span>{{ lang.t('mobile', 'ЛьвоВ') }}:</span> +38 067 239 08 88</p>
+						<img src="{{Yii.baseUrl(true)}}/images/people1.jpg" alt="">
+						<p class="man-info">{{ lang.t('mobile', 'Орлова Наталия') }}<span>{{ lang.t('mobile', 'продавец-консультант') }}</span></p>
+						<img src="{{Yii.baseUrl(true)}}/images/people2.jpg" alt="">
+						<p class="man-info">{{ lang.t('mobile', 'Орлова Наталия') }}<span>{{ lang.t('mobile', 'продавец-консультант') }}</span></p>
+						<img src="{{Yii.baseUrl(true)}}/images/people3.jpg" alt="">
+						<p class="man-info">{{ lang.t('mobile', 'Орлова Наталия') }}<span>{{ lang.t('mobile', 'продавец-консультант') }}</span></p>
+					</div>
+			</div>
+	</section>
+{% endblock %}
+

@@ -1,0 +1,27 @@
+{% autoescape false %}
+
+<div class="wide form">
+
+	{% set form = beginWidget('CActiveForm', {'action' : Yii.createUrl(this.route), 'method' : 'get'}) %}
+
+	<div class="row">
+		{{ form.label(model, 'name') }}
+		{{ form.textField(model, 'name', {'size' : 60, 'maxlength' : 100}) }}
+	</div>
+	<div class="row">
+		{{ form.label(model, 'email') }}
+		{{ form.textField(model, 'email', {'size' : 60, 'maxlength' : 100}) }}
+	</div>
+	<div class="row">
+		{{ form.label(model, 'phone') }}
+		{{ form.textField(model, 'phone', {'size' : 60, 'maxlength' : 100}) }}
+	</div>
+	<div class="row buttons">
+		{{ CHtml.submitButton('Искать') }}
+	</div>
+
+	{% endWidget %}
+
+</div>
+
+{% endautoescape %}

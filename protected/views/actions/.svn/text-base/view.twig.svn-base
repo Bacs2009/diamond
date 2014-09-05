@@ -1,0 +1,21 @@
+{% extends this.layout %}
+
+{% block content %}
+
+   <div role="main" class="main">
+     <div class="b-inner-container">
+       <div class="b-h2 b-bread-crump"><a href="{{ menuItem.url }}">{{ menuItem.label }}</a><span class="b-sep">/</span><span class="b-text">{{ action.getLangProp('title') }}</span></div>
+          <div class="b-offer-inner">
+            <!--div class="b-img"><img src="{{ action.imageUrl['big'] }}" alt=""></div-->
+            <div class="b-description" style="width: auto !important;">
+             <!--div class="b-offer-name-collection">{{ action.getLangProp('title') }}</div-->
+             <div class="b-offer-text">
+              {{ action.getLangProp('description')|raw }}
+             </div>
+             <div class="clear"></div>
+            </div>
+          </div>
+     </div>
+   </div>
+
+{% endblock %}

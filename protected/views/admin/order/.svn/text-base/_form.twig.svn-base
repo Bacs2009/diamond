@@ -1,0 +1,123 @@
+{% autoescape  false %}
+
+<div class="form">
+
+    {% set form = beginWidget('CActiveForm', {'id' : 'actions-form', 'enableAjaxValidation' : false, 'htmlOptions' : {'enctype' : 'multipart/form-data'}}) %}
+
+    <p class="note">Поля отмеченные <span class="required">*</span> являются обязательными.</p>
+
+    {{ form.errorSummary(model, 'Исправьте, пожалуйста, следующие ошибки:') }}
+
+    {% set tab1 %}
+
+    <div class="row">
+        {{ form.labelEx(model, 'title_ru') }}
+        {{ form.textField(model, 'title_ru', {'size' : '96%', 'maxlength' : 100}) }}
+        {{ form.error(model, 'title_ru') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'description_ru') }}
+        {% widget('ext.editme.ExtEditMe', {'model' : model, 'attribute' : 'description_ru'}) %}
+        {{ form.error(model, 'description_ru') }}
+    </div>
+
+    {% endset %}
+
+    {% set tab2 %}
+
+    <div class="row">
+        {{ form.labelEx(model, 'title_ua') }}
+        {{ form.textField(model, 'title_ua', {'size' : '96%', 'maxlength' : 100}) }}
+        {{ form.error(model, 'title_ua') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'description_ua') }}
+        {% widget('ext.editme.ExtEditMe', {'model' : model, 'attribute' : 'description_ua'}) %}
+        {{ form.error(model, 'description_ua') }}
+    </div>
+   
+    {% endset %}
+
+    {% set tab3 %}
+
+    <div class="row">
+        {{ form.labelEx(model, 'startDate') }}
+        {% widget('zii.widgets.jui.CJuiDateTimePicker',
+        	{
+          	'attribute' : 'startDate',
+            'model' : model,
+            'options' : {'showAnim' : 'drop', 'dateFormat' : 'dd.mm.yy'},
+            'language' : Yii.language|slice(0, 2)
+        }) %}
+        {% registerScript('dateInit_startDate', "$('#Actions_startDate').datepicker('setDate', $.datepicker.parseDateTime('yy-mm-dd', 'hh:mm:ss', $('#Actions_startDate').attr('value')));") %}
+        {{ form.error(model, 'startDate') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'endDate') }}
+        {% widget('zii.widgets.jui.CJuiDateTimePicker',
+        	{
+            'attribute' : 'endDate',
+            'model' : model,
+            'options' : {'showAnim' : 'drop', 'dateFormat' : 'dd.mm.yy'},
+            'language' : Yii.language|slice(0, 2)
+        }) %}
+        {% registerScript('dateInit_endDate', "$('#Actions_endDate').datepicker('setDate', $.datepicker.parseDateTime('yy-mm-dd', 'hh:mm:ss', $('#Actions_endDate').attr('value')));") %}
+        {{ form.error(model, 'endDate') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'link') }}
+        {{ form.textField(model, 'link',{'size' : '96%', 'maxlength' : 500}) }}
+        {{ form.error(model, 'link') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'onMain') }}
+        {{ form.checkBox(model, 'onMain') }}
+        {{ form.error(model, 'onMain') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'active') }}
+        {{ form.checkBox(model, 'active') }}
+        {{ form.error(model, 'active') }}
+    </div>
+
+    {% endset %}
+
+    {% set tab4 %}
+
+		{% if model.imageUrl['big'] %}
+    <img src="{{ model.imageUrl['big'] }}"/>
+    {% endif %}
+    <div class="row">
+        {{ form.labelEx(model, 'bigImage') }}
+        {{ form.fileField(model, 'bigImage') }}
+        {{ form.error(model, 'bigImage') }}
+    </div>
+
+		{% if model.imageUrl['preview'] %}
+    <img src="{{ model.imageUrl['preview'] }}"/>
+    {% endif %}
+    <div class="row">
+        {{ form.labelEx(model, 'previewImage') }}
+        {{ form.fileField(model, 'previewImage') }}
+        {{ form.error(model, 'previewImage') }}
+    </div>
+
+    {% endset %}
+
+    <div class="row buttons">
+        {{ CHtml.submitButton(model.isNewRecord ? 'Добавить' : 'Сохранить') }}
+    </div>
+
+    {% widget('system.web.widgets.CTabView', {'tabs':
+    	{
+				'tab1' : {'title' : 'Информация (рус)', 'content' : tab1},
+				'tab2' : {'title' : 'Информация (укр)', 'content' : tab2},
+				'tab3' : {'title' : 'Настройки', 'content' : tab3},
+				'tab4' : {'title' : 'Изображения', 'content' : tab4}
+			}})
+		%}
+
+    {% endWidget %}
+
+</div>
+{% endautoescape %}

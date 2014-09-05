@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<order>
+  <id>42</id>
+  <name>Ольга</name>
+  <email>osavelleva@mail.ru</email>
+  <phone>89224205043</phone>
+  <comment>Комментарий к заказу</comment>
+  <city>Сургут</city>
+  <ordered_m>
+    <ring_original>
+      <name_ru>Согласие Тайна рассвета</name_ru>
+      <name_ua>Злагода Таємниця світанку</name_ua>
+      <articul>0001507</articul>
+      <size>20.5</size>
+      <gender>m</gender>
+      <width>7</width>
+      <height>0</height>
+      <koeff>5.005</koeff>
+      <weight>7.882</weight>
+      <thickness>2.3</thickness>
+      <price>15470</price>
+      <remote_id>00013EOF </remote_id>
+      <active_st_size>0</active_st_size>
+      <collection>
+        <id>1</id>
+        <id_for_ring>1</id_for_ring>
+        <name_ua>Злагода</name_ua>
+        <name_ru>Согласие</name_ru>
+      </collection>
+      <metal>
+        <id>1</id>
+        <name_ua>золото</name_ua>
+        <name_ru>золото</name_ru>
+        <name_short>YP</name_short>
+        <probe>585</probe>
+      </metal>
+      <surface>
+        <id>1</id>
+        <name_ua>полірована</name_ua>
+        <name_ru>полированная</name_ru>
+      </surface>
+      <enamel>
+        <id>1</id>
+        <name_ua>чорна</name_ua>
+        <name_ru>черная</name_ru>
+      </enamel>
+    </ring_original>
+    <selected_size>19.5</selected_size>
+    <selected_surface>
+      <id></id>
+      <name_ua></name_ua>
+      <name_ru></name_ru>
+    </selected_surface>
+    <selected_enamel>
+      <id></id>
+      <name_ua></name_ua>
+      <name_ru></name_ru>
+    </selected_enamel>
+    <selected_metal/>
+    <selected_stones/>
+    <calculated_price>14715</calculated_price>
+  </ordered_m>
+  <ordered_w>
+    <ring_original>
+      <name_ru>Согласие Тайна рассвета</name_ru>
+      <name_ua>Злагода Таємниця світанку</name_ua>
+      <articul>0001508</articul>
+      <size>16.5</size>
+      <gender>f</gender>
+      <width>7</width>
+      <height>0</height>
+      <koeff>5.005</koeff>
+      <weight>8.18</weight>
+      <thickness>2.3</thickness>
+      <price>16900</price>
+      <remote_id>00013DOF </remote_id>
+      <active_st_size>0</active_st_size>
+      <collection>
+        <id>1</id>
+        <id_for_ring>1</id_for_ring>
+        <name_ua>Злагода</name_ua>
+        <name_ru>Согласие</name_ru>
+      </collection>
+      <metal>
+        <id>1</id>
+        <name_ua>золото</name_ua>
+        <name_ru>золото</name_ru>
+        <name_short>YP</name_short>
+        <probe>585</probe>
+      </metal>
+      <surface>
+        <id>1</id>
+        <name_ua>полірована</name_ua>
+        <name_ru>полированная</name_ru>
+      </surface>
+      <enamel>
+        <id>2</id>
+        <name_ua>біла</name_ua>
+        <name_ru>белая</name_ru>
+      </enamel>
+    </ring_original>
+    <selected_size>15.5</selected_size>
+    <selected_surface>
+      <id></id>
+      <name_ua></name_ua>
+      <name_ru></name_ru>
+    </selected_surface>
+    <selected_enamel>
+      <id></id>
+      <name_ua></name_ua>
+      <name_ru></name_ru>
+    </selected_enamel>
+    <selected_metal/>
+    <selected_stones/>
+    <calculated_price>15930</calculated_price>
+  </ordered_w>
+</order>

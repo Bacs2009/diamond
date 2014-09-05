@@ -1,0 +1,147 @@
+{% autoescape  false %}
+{# this CollectionController #}
+{# model Collection #}
+{# form CActiveForm #}
+
+<div class="form">
+
+    {% set form = beginWidget('CActiveForm', {
+	    'id':'cityItem-form',
+	    'enableAjaxValidation':false,
+	    'htmlOptions' : {'enctype' : 'multipart/form-data'}
+    }) %}
+
+    <p class="note">Поля отмеченные <span class="required">*</span> являются обязательными.</p>
+
+    {{ form.errorSummary(model) }}
+
+    {% set clip1 %}
+
+    <div class="row">
+        {{ form.labelEx(model,'name_ru') }}
+        {{ form.textField(model,'name_ru',{'size':'96%','maxlength':128}) }}
+        {{ form.error(model,'name_ru') }}
+    </div>
+	  <div class="row">
+        {{ form.labelEx(model,'name_ua') }}
+        {{ form.textField(model,'name_ua',{'size':'96%','maxlength':128}) }}
+        {{ form.error(model,'name_ua') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model,'name_en') }}
+        {{ form.textField(model,'name_en',{'size':'96%','maxlength':128}) }}
+        {{ form.error(model,'name_en') }}
+    </div>
+     <div class="row">
+        {{ form.labelEx(model,'text_ru') }}
+        {% widget('ext.editme.ExtEditMe', {
+            'model': model,
+            'attribute':'text_ru'
+        }) %}
+        {{ form.error(model,'text_ru') }}
+    </div>
+     <div class="row">
+        {{ form.labelEx(model,'text_ua') }}
+        {% widget('ext.editme.ExtEditMe', {
+            'model': model,
+            'attribute':'text_ua'
+        }) %}
+        {{ form.error(model,'text_ua') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model,'text_en') }}
+        {% widget('ext.editme.ExtEditMe', {
+            'model': model,
+            'attribute':'text_en'
+        }) %}
+        {{ form.error(model,'text_en') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model,'remote_id') }}
+        {{ form.textField(model,'remote_id',{'size':'20%','maxlength':128}) }}
+        {{ form.error(model,'remote_id') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model,'active') }}
+        {{ form.checkBox(model,'active') }}
+        {{ form.error(model,'active') }}
+    </div>
+    
+    {% endset %}
+
+    {% set clip2 %}
+    <img src="{{ model.imageUrl['big'] }}"/>
+    <div class="row">
+        {{ form.labelEx(model,'image') }}
+        {{ form.fileField(model,'image') }}
+        {{ form.error(model,'image') }}
+    </div>
+
+    <img src="{{ model.imageUrl['forMain'] }}"/>
+    <div class="row">
+        {{ form.labelEx(model,'imageForMainPage') }}
+        {{ form.fileField(model,'imageForMainPage') }}
+        {{ form.error(model,'imageForMainPage') }}
+    </div>
+    {% endset %}
+
+    {% set clip3 %}
+    <div class="row">
+        {{ form.labelEx(model,'bg_all_class') }}
+        {{ form.textField(model,'bg_all_class',{'size':'20%','maxlength':128}) }}
+        {{ form.error(model,'bg_all_class') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model,'bg1_class') }}
+        {{ form.textField(model,'bg1_class',{'size':'20%','maxlength':128}) }}
+        {{ form.error(model,'bg1_class') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model,'bg2_class') }}
+        {{ form.textField(model,'bg2_class',{'size':'20%','maxlength':128}) }}
+        {{ form.error(model,'bg2_class') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model,'bg3_class') }}
+        {{ form.textField(model,'bg3_class',{'size':'20%','maxlength':128}) }}
+        {{ form.error(model,'bg3_class') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model,'bg4_class') }}
+        {{ form.textField(model,'bg4_class',{'size':'20%','maxlength':128}) }}
+        {{ form.error(model,'bg4_class') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model,'menu_color') }}
+        {{ form.textField(model,'menu_color',{'size':'96%','maxlength':128}) }}
+        {{ form.error(model,'menu_color') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model,'menu_color_add') }}
+        {{ form.textField(model,'menu_color_add',{'size':'96%','maxlength':128}) }}
+        {{ form.error(model,'menu_color_add') }}
+    </div>
+    {% endset %}
+    {% set clip4 %}
+     <div class="row">
+        {{ form.labelEx(model,'formula') }}
+        {{ form.textArea(model,'formula',{'rows':'30', 'cols':'70'}) }}
+        {{ form.error(model,'formula') }}
+    </div>
+    {% endset %}
+    <div class="row buttons">
+        {{ CHtml.submitButton(model.isNewRecord ? 'Добавить' : 'Сохранить') }}
+    </div>
+
+    {% widget('system.web.widgets.CTabView', {'tabs':{
+                                                    'tab1':{'title':'Коллекция', 'content':clip1},
+                                                    'tab3':{'title':'Изображения', 'content':clip2},
+                                                    'tab2':{'title':'Бекграунды', 'content':clip3},
+                                                    'tab4':{'title':'Формула','content':clip4}
+                                                }
+                                              }) %}
+
+    {% endWidget %}
+
+</div><!-- form -->
+{% endautoescape %}

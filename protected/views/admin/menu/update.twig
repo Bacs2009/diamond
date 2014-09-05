@@ -1,0 +1,26 @@
+{% extends this.layout %}
+
+{% block breadcrumbs %}
+	{% widget('zii.widgets.CBreadcrumbs', {'links' : {'Коллекции' : ['index'], 0 : 'редактирование'}}) %}
+{% endblock %}
+
+{% block bigColumn %}
+
+	<h1>Редактирование пункта меню: "{{ model.name_ru }}"</h1>
+
+	{{ this.renderPartial('_form', {'model' : model}) }}
+
+{% endblock %}
+
+{% block sidebar %}
+	{% set menu = [
+			{'label' : 'К списку пунктов меню', 'url' : ['index']},
+			{'label' : 'Добавить новый пункт', 'url' : ['create']}
+	] %}
+	{% if model.system == 0 %}
+		{% set menu = menu|merge([{'label' : 'Удалить текщий', 'url' : 'javascript:void(0);', 'linkOptions' : {'submit' : {0 : 'delete', 'id' : model.id}, 'confirm' : 'Вы уверены, удалить этот пункт меню?'}}]) %}
+	{% endif %}
+	{% beginWidget('zii.widgets.CPortlet', {'title' : 'Действия'}) %}
+		{% widget('zii.widgets.CMenu', {'items' : menu, 'htmlOptions' : {'class' : 'operations'}}) %}
+	{% endWidget %}
+{% endblock %}

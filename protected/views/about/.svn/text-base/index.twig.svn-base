@@ -1,0 +1,15 @@
+{% extends this.layout %}
+
+{% block content %}
+
+   <div role="main" class="main">
+		<div class="b-inner-container">
+			<div class="b-h2">{{ menuItem.label }}</div>
+			<div class="b-static">
+				{{ content|raw }}
+				<div class="clear">&nbsp;</div>
+			</div>
+		</div>
+   </div>
+
+{% endblock %}

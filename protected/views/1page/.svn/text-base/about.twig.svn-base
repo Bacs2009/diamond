@@ -1,0 +1,14 @@
+{% extends this.layout %}
+
+{% block content %}
+
+   <div role="main" class="main">
+     <div class="b-inner-container">
+      <div class="b-h2">Компания</div>
+          <div class="b-static">
+          {{ content|raw }}
+          </div>
+     </div>
+   </div>
+
+{% endblock %}

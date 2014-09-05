@@ -1,0 +1,28 @@
+{% autoescape  false %}
+{# this CollectionController #}
+{# model Collection #}
+{# form CActiveForm #}
+
+<div class="view">
+	
+	<b>{{ CHtml.encode(data.getAttributeLabel('name')) }}:</b>
+	{{ CHtml.encode(data.name) }}
+	<br />
+
+	<b>{{ CHtml.encode(data.getAttributeLabel('email')) }}:</b>
+	{{ CHtml.encode(data.email) }}
+	<br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('phone')) }}:</b>
+	{{ CHtml.encode(data.phone) }}
+	<br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('city')) }}:</b>
+	{{ CHtml.encode(data.city) }}
+	<br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('comment')) }}:</b>
+	{{ CHtml.encode(data.comment }}
+	<br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('order_info')) }}:</b>
+	{{ CHtml.encode(data.all_info|escape)|raw  }}
+	<br />
+</div>
+{% endautoescape %}

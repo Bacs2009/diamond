@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="language" content="en" />
+
+	<!-- blueprint CSS framework -->
+	<link rel="stylesheet" type="text/css" href="{{ Yii.request.baseUrl }}/css/screen.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="{{ Yii.request.baseUrl }}/css/print.css" media="print" />
+	<!--[if lt IE 8]>
+	<link rel="stylesheet" type="text/css" href="{{ Yii.request.baseUrl }}/css/ie.css" media="screen, projection" />
+	<![endif]-->
+
+	<link rel="stylesheet" type="text/css" href="{{ Yii.request.baseUrl }}/css/admin_main.css" />
+	<link rel="stylesheet" type="text/css" href="{{ Yii.request.baseUrl }}/css/form.css" />
+
+	<title>{% block pageTitle %}{{ this.pageTitle }}{% endblock %}</title>
+</head>
+
+<body>
+
+<div class="container" id="page">
+
+	<div id="header">
+		<div id="logo">Админка Rings</div>
+	</div><!-- header -->
+
+	<div id="jqueryslidemenu">
+		<div id="mainMenu" class="jqueryslidemenu">
+			{% widget('application.components.widgets.MainMenu', this.adminMenu) %}
+			<br style="clear: left"/>
+		</div>
+	</div><!-- mainmenu -->
+	{% block breadcrumbs %}
+        {% if this.breadcrumbs %}
+            {% widget('zii.widgets.CBreadcrumbs',{'links':this.breadcrumbs}) %}
+            <!-- breadcrumbs -->
+        {% endif %}
+	{% endblock %}
+
+	{% block content %}
+	{% endblock %}
+
+	<div class="clear"></div>
+
+	<div id="footer">
+		Copyright &copy; 2012 by My Company.<br/>
+		All Rights Reserved.<br/>
+	</div><!-- footer -->
+
+</div><!-- page -->
+</body>
+</html>

@@ -1,0 +1,12 @@
+K 18
+svn:global-ignores
+V 10
+.settings
+
+K 10
+svn:ignore
+V 20
+.buildpath
+.project
+
+END

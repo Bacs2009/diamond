@@ -1,0 +1,209 @@
+{% extends this.layout %}
+{% block content%}
+<div class="b-h2">{{ lang.t('site', 'Результат поиска') }} ({{search_count}})</div>
+  {% for item in content[0] %}
+  
+  <section>
+    <p class="item-header">{{item.collection.name}}</p>
+    <div class="b-title-product">- {% if item["f"] %}{{item["f"].getLangProp('name')}}{% else %}{{item["m"].getLangProp('name')}}{% endif %} -</div>
+    {% if item["f"] %}
+    
+    <div id="she" class="item"><img src="/old_images/{{item['f']['articul']}}.png" alt="" id="245" pair_id="244"></div>
+    <p class="for"><span></span>Для нее</p>
+      <ul class="item-char she" style="font-size: 12px!important;">
+        <li>{% if item['f'].metal.name_ua == 'золото' %}{{item['f'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}{% endif %} {{item['f'].metal.getLangProp('name')}}{% if item['f'].metal.name_short == 'WB' %}, {{ lang.t('site','черный родий')}}{% endif %}<br />{{item['f'].metal.probe}} {{lang.t('site','проба')}}</li>
+        {% for stone in item['f'].stones %}
+       	{{ stone.stones.getLangProp('color') }} {{stone.stones.getLangProp('name')}} {{stone.stones.size}}{{lang.t('site','мм')}}, {{stone.count}}{{lang.t('site','шт')}}, {{stone.stones.karatnost*stone.count}}ct<br />
+       	{% endfor %}
+       	{% if item['f'].surface_id != '' and item['f'].surface_id != 0 %}
+            <span id='surface_{{item['f'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {{item['f'].surface_type.getLangProp('name')}}</span><br />
+        {% endif %}
+        {% if item['f'].enamel_id != '' and item['f'].enamel_id != 0 %}
+            <span id='enamel_{{item['f'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {{item['f'].enamel.getLangProp('name')}}</span><br />
+        {% endif %}            	                 	
+       	{{ lang.t('site', 'Вес кольца') }} {{ item['f'].weight}}{{ lang.t('site','г')}}
+       	<br /> {{ lang.t('site', 'размер') }}: {{item['f'].size}}</div>
+      <div class="b-price">{{item["f"].price}} USD</div>
+      </ul>
+  </section>
+  {% endif %}
+   {% if item["m"] %}
+  <section>
+   
+    
+    <div id="she" class="item"><img src="/old_images/{{item['m']['articul']}}.png" alt="" id="245" pair_id="244"></div>
+    <p class="for"><span></span>Для него</p>
+      <ul class="item-char she" style="font-size: 12px!important;">
+        <li>{% if item['m'].metal.name_ua == 'золото' %}{{item['m'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}{% endif %} {{item['m'].metal.getLangProp('name')}}{% if item['m'].metal.name_short == 'WB' %}, {{ lang.t('site','черный родий')}}{% endif %}<br />{{item['m'].metal.probe}} {{lang.t('site','проба')}}</li>
+        {% for stone in item['m'].stones %}
+       	{{ stone.stones.getLangProp('color') }} {{stone.stones.getLangProp('name')}} {{stone.stones.size}}{{lang.t('site','мм')}}, {{stone.count}}{{lang.t('site','шт')}}, {{stone.stones.karatnost*stone.count}}ct<br />
+       	{% endfor %}
+       	{% if item['m'].surface_id != '' and item['m'].surface_id != 0 %}
+            <span id='surface_{{item['f'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {{item['m'].surface_type.getLangProp('name')}}</span><br />
+        {% endif %}
+        {% if item['m'].enamel_id != '' and item['m'].enamel_id != 0 %}
+            <span id='enamel_{{item['m'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {{item['m'].enamel.getLangProp('name')}}</span><br />
+        {% endif %}            	                 	
+       	{{ lang.t('site', 'Вес кольца') }} {{ item['m'].weight}}{{ lang.t('site','г')}}
+       	<br /> {{ lang.t('site', 'размер') }}: {{item['m'].size}}</div>
+      <div class="b-price">{{item["m"].price}} USD</div>
+      </ul>
+  </section>
+  <hr/>
+  {% endif %}
+  {% endfor %}
+  {% for item in content[1] %}
+  
+  <section>
+    <p class="item-header">{{item.collection.name}}</p>
+    <div class="b-title-product">- {% if item["f"] %}{{item["f"].getLangProp('name')}}{% else %}{{item["m"].getLangProp('name')}}{% endif %} -</div>
+    {% if item["f"] %}
+    
+    <div id="she" class="item"><img src="/old_images/{{item['f']['articul']}}.png" alt="" id="245" pair_id="244"></div>
+    <p class="for"><span></span>Для нее</p>
+      <ul class="item-char she" style="font-size: 12px!important;">
+        <li>{% if item['f'].metal.name_ua == 'золото' %}{{item['f'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}{% endif %} {{item['f'].metal.getLangProp('name')}}{% if item['f'].metal.name_short == 'WB' %}, {{ lang.t('site','черный родий')}}{% endif %}<br />{{item['f'].metal.probe}} {{lang.t('site','проба')}}</li>
+        {% for stone in item['f'].stones %}
+       	{{ stone.stones.getLangProp('color') }} {{stone.stones.getLangProp('name')}} {{stone.stones.size}}{{lang.t('site','мм')}}, {{stone.count}}{{lang.t('site','шт')}}, {{stone.stones.karatnost*stone.count}}ct<br />
+       	{% endfor %}
+       	{% if item['f'].surface_id != '' and item['f'].surface_id != 0 %}
+            <span id='surface_{{item['f'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {{item['f'].surface_type.getLangProp('name')}}</span><br />
+        {% endif %}
+        {% if item['f'].enamel_id != '' and item['f'].enamel_id != 0 %}
+            <span id='enamel_{{item['f'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {{item['f'].enamel.getLangProp('name')}}</span><br />
+        {% endif %}            	                 	
+       	{{ lang.t('site', 'Вес кольца') }} {{ item['f'].weight}}{{ lang.t('site','г')}}
+       	<br /> {{ lang.t('site', 'размер') }}: {{item['f'].size}}</div>
+      <div class="b-price">{{item["f"].price}} USD</div>
+      </ul>
+  </section>
+  {% endif %}
+   {% if item["m"] %}
+  <section>
+   
+    
+    <div id="she" class="item"><img src="/old_images/{{item['m']['articul']}}.png" alt="" id="245" pair_id="244"></div>
+    <p class="for"><span></span>Для него</p>
+      <ul class="item-char she" style="font-size: 12px!important;">
+        <li>{% if item['m'].metal.name_ua == 'золото' %}{{item['m'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}{% endif %} {{item['m'].metal.getLangProp('name')}}{% if item['m'].metal.name_short == 'WB' %}, {{ lang.t('site','черный родий')}}{% endif %}<br />{{item['m'].metal.probe}} {{lang.t('site','проба')}}</li>
+        {% for stone in item['m'].stones %}
+       	{{ stone.stones.getLangProp('color') }} {{stone.stones.getLangProp('name')}} {{stone.stones.size}}{{lang.t('site','мм')}}, {{stone.count}}{{lang.t('site','шт')}}, {{stone.stones.karatnost*stone.count}}ct<br />
+       	{% endfor %}
+       	{% if item['m'].surface_id != '' and item['m'].surface_id != 0 %}
+            <span id='surface_{{item['f'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {{item['m'].surface_type.getLangProp('name')}}</span><br />
+        {% endif %}
+        {% if item['m'].enamel_id != '' and item['m'].enamel_id != 0 %}
+            <span id='enamel_{{item['m'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {{item['m'].enamel.getLangProp('name')}}</span><br />
+        {% endif %}            	                 	
+       	{{ lang.t('site', 'Вес кольца') }} {{ item['m'].weight}}{{ lang.t('site','г')}}
+       	<br /> {{ lang.t('site', 'размер') }}: {{item['m'].size}}</div>
+      <div class="b-price">{{item["m"].price}} USD</div>
+      </ul>
+  </section>
+  <hr/>
+  {% endif %}
+  {% endfor %}
+  {% for item in content[2] %}
+  
+  <section>
+    <p class="item-header">{{item.collection.name}}</p>
+    <div class="b-title-product">- {% if item["f"] %}{{item["f"].getLangProp('name')}}{% else %}{{item["m"].getLangProp('name')}}{% endif %} -</div>
+    {% if item["f"] %}
+    
+    <div id="she" class="item"><img src="/old_images/{{item['f']['articul']}}.png" alt="" id="245" pair_id="244"></div>
+    <p class="for"><span></span>Для нее</p>
+      <ul class="item-char she" style="font-size: 12px!important;">
+        <li>{% if item['f'].metal.name_ua == 'золото' %}{{item['f'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}{% endif %} {{item['f'].metal.getLangProp('name')}}{% if item['f'].metal.name_short == 'WB' %}, {{ lang.t('site','черный родий')}}{% endif %}<br />{{item['f'].metal.probe}} {{lang.t('site','проба')}}</li>
+        {% for stone in item['f'].stones %}
+       	{{ stone.stones.getLangProp('color') }} {{stone.stones.getLangProp('name')}} {{stone.stones.size}}{{lang.t('site','мм')}}, {{stone.count}}{{lang.t('site','шт')}}, {{stone.stones.karatnost*stone.count}}ct<br />
+       	{% endfor %}
+       	{% if item['f'].surface_id != '' and item['f'].surface_id != 0 %}
+            <span id='surface_{{item['f'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {{item['f'].surface_type.getLangProp('name')}}</span><br />
+        {% endif %}
+        {% if item['f'].enamel_id != '' and item['f'].enamel_id != 0 %}
+            <span id='enamel_{{item['f'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {{item['f'].enamel.getLangProp('name')}}</span><br />
+        {% endif %}            	                 	
+       	{{ lang.t('site', 'Вес кольца') }} {{ item['f'].weight}}{{ lang.t('site','г')}}
+       	<br /> {{ lang.t('site', 'размер') }}: {{item['f'].size}}</div>
+      <div class="b-price">{{item["f"].price}} USD</div>
+      </ul>
+  </section>
+  {% endif %}
+   {% if item["m"] %}
+  <section>
+   
+    
+    <div id="she" class="item"><img src="/old_images/{{item['m']['articul']}}.png" alt="" id="245" pair_id="244"></div>
+    <p class="for"><span></span>Для него</p>
+      <ul class="item-char she" style="font-size: 12px!important;">
+        <li>{% if item['m'].metal.name_ua == 'золото' %}{{item['m'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}{% endif %} {{item['m'].metal.getLangProp('name')}}{% if item['m'].metal.name_short == 'WB' %}, {{ lang.t('site','черный родий')}}{% endif %}<br />{{item['m'].metal.probe}} {{lang.t('site','проба')}}</li>
+        {% for stone in item['m'].stones %}
+       	{{ stone.stones.getLangProp('color') }} {{stone.stones.getLangProp('name')}} {{stone.stones.size}}{{lang.t('site','мм')}}, {{stone.count}}{{lang.t('site','шт')}}, {{stone.stones.karatnost*stone.count}}ct<br />
+       	{% endfor %}
+       	{% if item['m'].surface_id != '' and item['m'].surface_id != 0 %}
+            <span id='surface_{{item['f'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {{item['m'].surface_type.getLangProp('name')}}</span><br />
+        {% endif %}
+        {% if item['m'].enamel_id != '' and item['m'].enamel_id != 0 %}
+            <span id='enamel_{{item['m'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {{item['m'].enamel.getLangProp('name')}}</span><br />
+        {% endif %}            	                 	
+       	{{ lang.t('site', 'Вес кольца') }} {{ item['m'].weight}}{{ lang.t('site','г')}}
+       	<br /> {{ lang.t('site', 'размер') }}: {{item['m'].size}}</div>
+      <div class="b-price">{{item["m"].price}} USD</div>
+      </ul>
+  </section>
+  <hr/>
+  {% endif %}
+  {% endfor %}
+  {% for item in content[3] %}
+  
+  <section>
+    <p class="item-header">{{item.collection.name}}</p>
+    <div class="b-title-product">- {% if item["f"] %}{{item["f"].getLangProp('name')}}{% else %}{{item["m"].getLangProp('name')}}{% endif %} -</div>
+    {% if item["f"] %}
+    
+    <div id="she" class="item"><img src="/old_images/{{item['f']['articul']}}.png" alt="" id="245" pair_id="244"></div>
+    <p class="for"><span></span>Для нее</p>
+      <ul class="item-char she" style="font-size: 12px!important;">
+        <li>{% if item['f'].metal.name_ua == 'золото' %}{{item['f'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}{% endif %} {{item['f'].metal.getLangProp('name')}}{% if item['f'].metal.name_short == 'WB' %}, {{ lang.t('site','черный родий')}}{% endif %}<br />{{item['f'].metal.probe}} {{lang.t('site','проба')}}</li>
+        {% for stone in item['f'].stones %}
+       	{{ stone.stones.getLangProp('color') }} {{stone.stones.getLangProp('name')}} {{stone.stones.size}}{{lang.t('site','мм')}}, {{stone.count}}{{lang.t('site','шт')}}, {{stone.stones.karatnost*stone.count}}ct<br />
+       	{% endfor %}
+       	{% if item['f'].surface_id != '' and item['f'].surface_id != 0 %}
+            <span id='surface_{{item['f'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {{item['f'].surface_type.getLangProp('name')}}</span><br />
+        {% endif %}
+        {% if item['f'].enamel_id != '' and item['f'].enamel_id != 0 %}
+            <span id='enamel_{{item['f'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {{item['f'].enamel.getLangProp('name')}}</span><br />
+        {% endif %}            	                 	
+       	{{ lang.t('site', 'Вес кольца') }} {{ item['f'].weight}}{{ lang.t('site','г')}}
+       	<br /> {{ lang.t('site', 'размер') }}: {{item['f'].size}}</div>
+      <div class="b-price">{{item["f"].price}} USD</div>
+      </ul>
+  </section>
+  {% endif %}
+   {% if item["m"] %}
+  <section>
+   
+    
+    <div id="she" class="item"><img src="/old_images/{{item['m']['articul']}}.png" alt="" id="245" pair_id="244"></div>
+    <p class="for"><span></span>Для него</p>
+      <ul class="item-char she" style="font-size: 12px!important;">
+        <li>{% if item['m'].metal.name_ua == 'золото' %}{{item['m'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}{% endif %} {{item['m'].metal.getLangProp('name')}}{% if item['m'].metal.name_short == 'WB' %}, {{ lang.t('site','черный родий')}}{% endif %}<br />{{item['m'].metal.probe}} {{lang.t('site','проба')}}</li>
+        {% for stone in item['m'].stones %}
+       	{{ stone.stones.getLangProp('color') }} {{stone.stones.getLangProp('name')}} {{stone.stones.size}}{{lang.t('site','мм')}}, {{stone.count}}{{lang.t('site','шт')}}, {{stone.stones.karatnost*stone.count}}ct<br />
+       	{% endfor %}
+       	{% if item['m'].surface_id != '' and item['m'].surface_id != 0 %}
+            <span id='surface_{{item['f'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {{item['m'].surface_type.getLangProp('name')}}</span><br />
+        {% endif %}
+        {% if item['m'].enamel_id != '' and item['m'].enamel_id != 0 %}
+            <span id='enamel_{{item['m'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {{item['m'].enamel.getLangProp('name')}}</span><br />
+        {% endif %}            	                 	
+       	{{ lang.t('site', 'Вес кольца') }} {{ item['m'].weight}}{{ lang.t('site','г')}}
+       	<br /> {{ lang.t('site', 'размер') }}: {{item['m'].size}}</div>
+      <div class="b-price">{{item["m"].price}} USD</div>
+      </ul>
+  </section>
+  <hr/>
+  {% endif %}
+  {% endfor %}
+{% endblock %}
+

@@ -1,0 +1,44 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: admin
+ * Date: 19.08.12
+ * Time: 00:43
+ * To change this template use File | Settings | File Templates.
+ */
+
+class YiiTwigExtension extends Twig_Extension {
+
+    public function getName() {
+        return 'YiiTwigExtension';
+    }
+
+    public function getTokenParsers() {
+        return array(
+            new BeginWidget_TokenParser(),
+            new EndWidget_TokenParser(),
+            new Widget_TokenParser(),
+            new RegisterScript_TokenParser(),
+            new RegisterScriptFile_TokenParser(),
+            new Cache_TokenParser()
+        );
+    }
+
+    public function getFunctions() {
+        return array(
+            'beginWidget' => new Twig_Function_Function('$context["this"]->beginWidget'),
+            'assetsPublish' => new Twig_Function_Function('Yii::app()->assetManager->publish'),
+        );
+    }
+
+    public function getFilters() {
+        return array_merge(parent::getFilters(), array(
+            'date' => new Twig_Filter_Method($this, 'dateFilter'),
+        ));
+    }
+
+    function dateFilter($timestamp, $format)
+    {
+        return Yii::app()->dateFormatter->format($format, $timestamp);
+    }
+}

@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<order>
+  <id>11</id>
+  <name>Виталий</name>
+  <email>klimenko@diamond.ua</email>
+  <phone>0934546545</phone>
+  <comment>Сделать ровно</comment>
+  <city>Киев</city>
+  <ordered_m>
+    <ring_original>
+      <name_ru>Невинность Объятия рассвета</name_ru>
+      <name_ua>Невинність Обійми світанку</name_ua>
+      <articul>0001415</articul>
+      <size>19.5</size>
+      <gender>m</gender>
+      <width>5</width>
+      <height>0</height>
+      <koeff>5.005</koeff>
+      <weight>5.333</weight>
+      <thickness>1.5</thickness>
+      <price>21850</price>
+      <remote_id>00000QOF </remote_id>
+      <active_st_size>1</active_st_size>
+      <collection>
+        <id>2</id>
+        <id_for_ring>2</id_for_ring>
+        <name_ua>Невинність</name_ua>
+        <name_ru>Невинность</name_ru>
+        <formula>$knk = 5.005;&#13;
+$original_cost_stones = 0;&#13;
+$selected_cost_stones = 0;&#13;
+$original_weight_stones = 0;&#13;
+$original_ring_cost_metal = 0;&#13;
+$select_ring_cost_metal = 0;&#13;
+&#13;
+if(isset($ring_info_m['ring_original']))&#13;
+{&#13;
+//------------------------------------------------------------&#13;
+//$original_cost_stones - стоимость вставки&#13;
+if($ring_info_m['ring_original']['stones'])&#13;
+{&#13;
+foreach($ring_info_m['ring_original']['stones'] as $stone)&#13;
+{&#13;
+$original_cost_stones += $stone['count'] * $stone['price'] * $stone['karatnost'];&#13;
+$original_weight_stones += $stone['count'] * $stone['karatnost'] /5;&#13;
+&#13;
+}&#13;
+$original_cost_stones = $original_cost_stones * $knk;&#13;
+}&#13;
+else&#13;
+{&#13;
+	$original_cost_stones = 0;&#13;
+	$original_weight_stones = 0;&#13;
+}&#13;
+//------------------------------------------------------------&#13;
+//$selected_cost_stones - стоимость выбранной вставки&#13;
+if($ring_info_m['selected_stones'])&#13;
+{&#13;
+ foreach($ring_info_m['selected_stones']['size'] as $stone)&#13;
+{&#13;
+  foreach($stone as $s)&#13;
+{&#13;
+  $selected_cost_stones += $s['karatnost'] * $s['price'] * $s['count'];&#13;
+$stone_type = $s['color_ru'];&#13;
+&#13;
+}&#13;
+$selected_cost_stones = $selected_cost_stones * $knk;&#13;
+}&#13;
+}&#13;
+else&#13;
+{&#13;
+    $selected_cost_stones = $original_cost_stones;&#13;
+   &#13;
+}&#13;
+&#13;
+//стоимость оригинального метала&#13;
+switch($ring_info_m['ring_original']['metal']['probe']) {&#13;
+		case '585': $cost_metal = 30; $koef_metal = 1; $koef_oncost = 5.005; break;&#13;
+		case '950': $cost_metal = 65; $koef_metal = 1.52; $koef_oncost = 5.005; break;&#13;
+		case '850': $cost_metal = 23; $koef_metal = 0.83; $koef_oncost = 7; break; &#13;
+		case '750': $cost_metal = 40; $koef_metal = 1.2; $koef_oncost = 5.005; break; &#13;
+	}&#13;
+$original_ring_cost_metal = ($ring_info_m['ring_original']['weight'] - $original_weight_stones) * $cost_metal * $koef_metal * $koef_oncost;	&#13;
+$original_ring_cost_metal = ceil($original_ring_cost_metal/10)*10*8.5;&#13;
+//------------------------------------------------------------&#13;
+//стоимость выбранного метала&#13;
+if($ring_info_m['selected_metal'])&#13;
+	{&#13;
+	switch($ring_info_m['selected_metal']['probe']) {&#13;
+		case '585': $cost_metal = 30; $koef_metal = 1; $koef_oncost = 5.005; break;&#13;
+		case '950': $cost_metal = 65; $koef_metal = 1.52; $koef_oncost = 5.005; break;&#13;
+		case '850': $cost_metal = 23; $koef_metal = 0.83; $koef_oncost = 7; break; // не забыть поделить наценку&#13;
+		case '750': $cost_metal = 40; $koef_metal = 1.2; $koef_oncost = 5.005; break;&#13;
+		&#13;
+	}	&#13;
+$select_ring_cost_metal = ($ring_info_m['ring_original']['weight'] - $original_weight_stones)* $cost_metal * $koef_metal * $koef_oncost;&#13;
+$select_ring_cost_metal = ceil($select_ring_cost_metal/10)*10*8.5;&#13;
+	}&#13;
+else&#13;
+{&#13;
+   $select_ring_cost_metal = $original_ring_cost_metal;&#13;
+}&#13;
+//------------------------------------------------------------&#13;
+//ФОРМУЛА&#13;
+if($ring_info_m['ring_original']['active_st_size'])&#13;
+{&#13;
+	if(!$ring_info_m['selected_stones'])&#13;
+	{&#13;
+		$new_price_m = ($ring_info_m['ring_original']['price'] - $original_ring_cost_metal + $select_ring_cost_metal)* $ring_info_m['selected_size']/$ring_info_m['ring_original']['size'];&#13;
+	}&#13;
+	else&#13;
+	{&#13;
+		if($stone_type === 'Белый')&#13;
+		{&#13;
+		$new_price_m = (($ring_info_m['ring_original']['price'] - $original_ring_cost_metal) + $select_ring_cost_metal)* $ring_info_m['selected_size']/$ring_info_m['ring_original']['size'];&#13;
+		}&#13;
+		else&#13;
+		{&#13;
+		$new_price_m = ($selected_cost_stones + $select_ring_cost_metal)* $ring_info_m['selected_size']/$ring_info_m['ring_original']['size'];&#13;
+		}&#13;
+	}&#13;
+}&#13;
+else&#13;
+{&#13;
+	if(!$ring_info_m['selected_stones'])&#13;
+	{&#13;
+		$new_price_m = $select_ring_cost_metal * $ring_info_m['selected_size']/$ring_info_m['ring_original']['size'] + ($ring_info_m['ring_original']['price'] - $original_ring_cost_metal);&#13;
+	}&#13;
+        else&#13;
+        {&#13;
+		if($stone_type === 'Белый')&#13;
+		{&#13;
+		$new_price_m = $select_ring_cost_metal * $ring_info_m['selected_size']/$ring_info_m['ring_original']['size'] + ($ring_info_m['ring_original']['price'] - $original_ring_cost_metal);&#13;
+&#13;
+		}&#13;
+		else&#13;
+		{&#13;
+		$new_price_m = $select_ring_cost_metal * $ring_info_m['selected_size']/$ring_info_m['ring_original']['size'] + $selected_cost_stones;&#13;
+&#13;
+		}&#13;
+	}&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+if(isset($ring_info_w['ring_original']))&#13;
+{&#13;
+   &#13;
+//------------------------------------------------------------&#13;
+&#13;
+&#13;
+//$original_cost_stones - стоимость вставки&#13;
+if($ring_info_w['ring_original']['stones'])&#13;
+{&#13;
+foreach($ring_info_w['ring_original']['stones'] as $stone)&#13;
+{&#13;
+$original_cost_stones += $stone['count'] * $stone['price'] * $stone['karatnost'];&#13;
+$original_weight_stones += $stone['count'] * $stone['karatnost'] /5;&#13;
+&#13;
+}&#13;
+$original_cost_stones = $original_cost_stones * $knk;&#13;
+}&#13;
+else&#13;
+{&#13;
+	$original_cost_stones = 0;&#13;
+	$original_weight_stones = 0;&#13;
+}&#13;
+//------------------------------------------------------------&#13;
+//$selected_cost_stones - стоимость выбранной вставки&#13;
+if($ring_info_w['selected_stones'])&#13;
+{&#13;
+ foreach($ring_info_w['selected_stones']['size'] as $stone)&#13;
+{&#13;
+  foreach($stone as $s)&#13;
+{&#13;
+  $selected_cost_stones += $s['karatnost'] * $s['price'] * $s['count'];&#13;
+$stone_type = $s['color_ru'];&#13;
+&#13;
+}&#13;
+$selected_cost_stones = $selected_cost_stones * $knk;&#13;
+}&#13;
+}&#13;
+else&#13;
+{&#13;
+    $selected_cost_stones = $original_cost_stones;&#13;
+   &#13;
+}&#13;
+&#13;
+//стоимость оригинального метала&#13;
+switch($ring_info_w['ring_original']['metal']['probe']) {&#13;
+		case '585': $cost_metal = 30; $koef_metal = 1; $koef_oncost = 5.005; break;&#13;
+		case '950': $cost_metal = 65; $koef_metal = 1.52; $koef_oncost = 5.005; break;&#13;
+		case '850': $cost_metal = 23; $koef_metal = 0.83; $koef_oncost = 7; break; &#13;
+		case '750': $cost_metal = 40; $koef_metal = 1.2; $koef_oncost = 5.005; break; &#13;
+	}&#13;
+$original_ring_cost_metal = ($ring_info_w['ring_original']['weight'] - $original_weight_stones) * $cost_metal * $koef_metal * $koef_oncost;	&#13;
+$original_ring_cost_metal = ceil($original_ring_cost_metal/10)*10*8.5;&#13;
+//------------------------------------------------------------&#13;
+//стоимость выбранного метала&#13;
+if($ring_info_w['selected_metal'])&#13;
+	{&#13;
+	switch($ring_info_w['selected_metal']['probe']) {&#13;
+		case '585': $cost_metal = 30; $koef_metal = 1; $koef_oncost = 5.005; break;&#13;
+		case '950': $cost_metal = 65; $koef_metal = 1.52; $koef_oncost = 5.005; break;&#13;
+		case '850': $cost_metal = 23; $koef_metal = 0.83; $koef_oncost = 7; break; // не забыть поделить наценку&#13;
+		case '750': $cost_metal = 40; $koef_metal = 1.2; $koef_oncost = 5.005; break;&#13;
+		&#13;
+	}	&#13;
+$select_ring_cost_metal = ($ring_info_w['ring_original']['weight'] - $original_weight_stones)* $cost_metal * $koef_metal * $koef_oncost;&#13;
+$select_ring_cost_metal = ceil($select_ring_cost_metal/10)*10*8.5;&#13;
+	}&#13;
+else&#13;
+{&#13;
+   $select_ring_cost_metal = $original_ring_cost_metal;&#13;
+}&#13;
+//------------------------------------------------------------&#13;
+//ФОРМУЛА&#13;
+if($ring_info_w['ring_original']['active_st_size'])&#13;
+{&#13;
+	if(!$ring_info_w['selected_stones'])&#13;
+	{&#13;
+		$new_price_w = ($ring_info_w['ring_original']['price'] - $original_ring_cost_metal + $select_ring_cost_metal)* $ring_info_w['selected_size']/$ring_info_w['ring_original']['size'];&#13;
+	}&#13;
+	else&#13;
+	{&#13;
+		if($stone_type === 'Белый')&#13;
+		{&#13;
+		$new_price_w = (($ring_info_w['ring_original']['price'] - $original_ring_cost_metal) + $select_ring_cost_metal)* $ring_info_w['selected_size']/$ring_info_w['ring_original']['size'];&#13;
+		}&#13;
+		else&#13;
+		{&#13;
+		$new_price_w = ($selected_cost_stones + $select_ring_cost_metal)* $ring_info_w['selected_size']/$ring_info_w['ring_original']['size'];&#13;
+		}&#13;
+	}&#13;
+}&#13;
+else&#13;
+{&#13;
+	if(!$ring_info_w['selected_stones'])&#13;
+	{&#13;
+		$new_price_w = $select_ring_cost_metal * $ring_info_w['selected_size']/$ring_info_w['ring_original']['size'] + ($ring_info_w['ring_original']['price'] - $original_ring_cost_metal);&#13;
+	}&#13;
+        else&#13;
+        {&#13;
+		if($stone_type === 'Белый')&#13;
+		{&#13;
+		$new_price_w = $select_ring_cost_metal * $ring_info_w['selected_size']/$ring_info_w['ring_original']['size'] + ($ring_info_w['ring_original']['price'] - $original_ring_cost_metal);&#13;
+&#13;
+		}&#13;
+		else&#13;
+		{&#13;
+		$new_price_w = $select_ring_cost_metal * $ring_info_w['selected_size']/$ring_info_w['ring_original']['size'] + $selected_cost_stones;&#13;
+&#13;
+		}&#13;
+	}&#13;
+}&#13;
+}</formula>
+      </collection>
+      <metal>
+        <id>3</id>
+        <name_ua>золото</name_ua>
+        <name_ru>золото</name_ru>
+        <name_short>W</name_short>
+        <probe>585</probe>
+      </metal>
+      <surface>
+        <id>1</id>
+        <name_ua>полірована</name_ua>
+        <name_ru>полированная</name_ru>
+      </surface>
+      <enamel>
+        <id>0</id>
+        <name_ua></name_ua>
+        <name_ru></name_ru>
+      </enamel>
+      <stones>
+        <stone_0>
+          <id>1</id>
+          <count>47</count>
+          <name_ua>діамант</name_ua>
+          <name_ru>бриллиант</name_ru>
+          <karatnost>0.005</karatnost>
+          <price>6970</price>
+          <stone_size>1</stone_size>
+          <size_dimention>мм</size_dimention>
+          <ogranka>Круг</ogranka>
+          <naturalnost>1</naturalnost>
+          <color_ru>Белый</color_ru>
+          <color_ua>Белый</color_ua>
+          <remote_id>0</remote_id>
+        </stone_0>
+        <stone_1>
+          <id>6</id>
+          <count>94</count>
+          <name_ua>діамант</name_ua>
+          <name_ru>бриллиант</name_ru>
+          <karatnost>0.005</karatnost>
+          <price>2635</price>
+          <stone_size>1</stone_size>
+          <size_dimention>мм</size_dimention>
+          <ogranka>Круг</ogranka>
+          <naturalnost>1</naturalnost>
+          <color_ru>Черный</color_ru>
+          <color_ua>Черный</color_ua>
+          <remote_id>0</remote_id>
+        </stone_1>
+      </stones>
+    </ring_original>
+    <selected_size>19.5</selected_size>
+    <selected_surface>
+      <id></id>
+      <name_ua></name_ua>
+      <name_ru></name_ru>
+    </selected_surface>
+    <selected_enamel>
+      <id></id>
+      <name_ua></name_ua>
+      <name_ru></name_ru>
+    </selected_enamel>
+    <selected_metal>
+      <metal_name>Wзолото</metal_name>
+      <probe>750</probe>
+      <id>12</id>
+      <name_ua>золото</name_ua>
+      <name_ru>золото</name_ru>
+      <name_short>W</name_short>
+    </selected_metal>
+    <selected_stones/>
+  </ordered_m>
+  <ordered_w>
+    <ring_original>
+      <name_ru>Невинность Объятия рассвета</name_ru>
+      <name_ua>Невинність Обійми світанку</name_ua>
+      <articul>0001416</articul>
+      <size>16</size>
+      <gender>f</gender>
+      <width>5</width>
+      <height>0</height>
+      <koeff>5.005</koeff>
+      <weight>4.462</weight>
+      <thickness>1.5</thickness>
+      <price>25840</price>
+      <remote_id>00017NOF </remote_id>
+      <active_st_size>1</active_st_size>
+      <collection>
+        <id>2</id>
+        <id_for_ring>2</id_for_ring>
+        <name_ua>Невинність</name_ua>
+        <name_ru>Невинность</name_ru>
+        <formula>$knk = 5.005;&#13;
+$original_cost_stones = 0;&#13;
+$selected_cost_stones = 0;&#13;
+$original_weight_stones = 0;&#13;
+$original_ring_cost_metal = 0;&#13;
+$select_ring_cost_metal = 0;&#13;
+&#13;
+if(isset($ring_info_m['ring_original']))&#13;
+{&#13;
+//------------------------------------------------------------&#13;
+//$original_cost_stones - стоимость вставки&#13;
+if($ring_info_m['ring_original']['stones'])&#13;
+{&#13;
+foreach($ring_info_m['ring_original']['stones'] as $stone)&#13;
+{&#13;
+$original_cost_stones += $stone['count'] * $stone['price'] * $stone['karatnost'];&#13;
+$original_weight_stones += $stone['count'] * $stone['karatnost'] /5;&#13;
+&#13;
+}&#13;
+$original_cost_stones = $original_cost_stones * $knk;&#13;
+}&#13;
+else&#13;
+{&#13;
+	$original_cost_stones = 0;&#13;
+	$original_weight_stones = 0;&#13;
+}&#13;
+//------------------------------------------------------------&#13;
+//$selected_cost_stones - стоимость выбранной вставки&#13;
+if($ring_info_m['selected_stones'])&#13;
+{&#13;
+ foreach($ring_info_m['selected_stones']['size'] as $stone)&#13;
+{&#13;
+  foreach($stone as $s)&#13;
+{&#13;
+  $selected_cost_stones += $s['karatnost'] * $s['price'] * $s['count'];&#13;
+$stone_type = $s['color_ru'];&#13;
+&#13;
+}&#13;
+$selected_cost_stones = $selected_cost_stones * $knk;&#13;
+}&#13;
+}&#13;
+else&#13;
+{&#13;
+    $selected_cost_stones = $original_cost_stones;&#13;
+   &#13;
+}&#13;
+&#13;
+//стоимость оригинального метала&#13;
+switch($ring_info_m['ring_original']['metal']['probe']) {&#13;
+		case '585': $cost_metal = 30; $koef_metal = 1; $koef_oncost = 5.005; break;&#13;
+		case '950': $cost_metal = 65; $koef_metal = 1.52; $koef_oncost = 5.005; break;&#13;
+		case '850': $cost_metal = 23; $koef_metal = 0.83; $koef_oncost = 7; break; &#13;
+		case '750': $cost_metal = 40; $koef_metal = 1.2; $koef_oncost = 5.005; break; &#13;
+	}&#13;
+$original_ring_cost_metal = ($ring_info_m['ring_original']['weight'] - $original_weight_stones) * $cost_metal * $koef_metal * $koef_oncost;	&#13;
+$original_ring_cost_metal = ceil($original_ring_cost_metal/10)*10*8.5;&#13;
+//------------------------------------------------------------&#13;
+//стоимость выбранного метала&#13;
+if($ring_info_m['selected_metal'])&#13;
+	{&#13;
+	switch($ring_info_m['selected_metal']['probe']) {&#13;
+		case '585': $cost_metal = 30; $koef_metal = 1; $koef_oncost = 5.005; break;&#13;
+		case '950': $cost_metal = 65; $koef_metal = 1.52; $koef_oncost = 5.005; break;&#13;
+		case '850': $cost_metal = 23; $koef_metal = 0.83; $koef_oncost = 7; break; // не забыть поделить наценку&#13;
+		case '750': $cost_metal = 40; $koef_metal = 1.2; $koef_oncost = 5.005; break;&#13;
+		&#13;
+	}	&#13;
+$select_ring_cost_metal = ($ring_info_m['ring_original']['weight'] - $original_weight_stones)* $cost_metal * $koef_metal * $koef_oncost;&#13;
+$select_ring_cost_metal = ceil($select_ring_cost_metal/10)*10*8.5;&#13;
+	}&#13;
+else&#13;
+{&#13;
+   $select_ring_cost_metal = $original_ring_cost_metal;&#13;
+}&#13;
+//------------------------------------------------------------&#13;
+//ФОРМУЛА&#13;
+if($ring_info_m['ring_original']['active_st_size'])&#13;
+{&#13;
+	if(!$ring_info_m['selected_stones'])&#13;
+	{&#13;
+		$new_price_m = ($ring_info_m['ring_original']['price'] - $original_ring_cost_metal + $select_ring_cost_metal)* $ring_info_m['selected_size']/$ring_info_m['ring_original']['size'];&#13;
+	}&#13;
+	else&#13;
+	{&#13;
+		if($stone_type === 'Белый')&#13;
+		{&#13;
+		$new_price_m = (($ring_info_m['ring_original']['price'] - $original_ring_cost_metal) + $select_ring_cost_metal)* $ring_info_m['selected_size']/$ring_info_m['ring_original']['size'];&#13;
+		}&#13;
+		else&#13;
+		{&#13;
+		$new_price_m = ($selected_cost_stones + $select_ring_cost_metal)* $ring_info_m['selected_size']/$ring_info_m['ring_original']['size'];&#13;
+		}&#13;
+	}&#13;
+}&#13;
+else&#13;
+{&#13;
+	if(!$ring_info_m['selected_stones'])&#13;
+	{&#13;
+		$new_price_m = $select_ring_cost_metal * $ring_info_m['selected_size']/$ring_info_m['ring_original']['size'] + ($ring_info_m['ring_original']['price'] - $original_ring_cost_metal);&#13;
+	}&#13;
+        else&#13;
+        {&#13;
+		if($stone_type === 'Белый')&#13;
+		{&#13;
+		$new_price_m = $select_ring_cost_metal * $ring_info_m['selected_size']/$ring_info_m['ring_original']['size'] + ($ring_info_m['ring_original']['price'] - $original_ring_cost_metal);&#13;
+&#13;
+		}&#13;
+		else&#13;
+		{&#13;
+		$new_price_m = $select_ring_cost_metal * $ring_info_m['selected_size']/$ring_info_m['ring_original']['size'] + $selected_cost_stones;&#13;
+&#13;
+		}&#13;
+	}&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+if(isset($ring_info_w['ring_original']))&#13;
+{&#13;
+   &#13;
+//------------------------------------------------------------&#13;
+&#13;
+&#13;
+//$original_cost_stones - стоимость вставки&#13;
+if($ring_info_w['ring_original']['stones'])&#13;
+{&#13;
+foreach($ring_info_w['ring_original']['stones'] as $stone)&#13;
+{&#13;
+$original_cost_stones += $stone['count'] * $stone['price'] * $stone['karatnost'];&#13;
+$original_weight_stones += $stone['count'] * $stone['karatnost'] /5;&#13;
+&#13;
+}&#13;
+$original_cost_stones = $original_cost_stones * $knk;&#13;
+}&#13;
+else&#13;
+{&#13;
+	$original_cost_stones = 0;&#13;
+	$original_weight_stones = 0;&#13;
+}&#13;
+//------------------------------------------------------------&#13;
+//$selected_cost_stones - стоимость выбранной вставки&#13;
+if($ring_info_w['selected_stones'])&#13;
+{&#13;
+ foreach($ring_info_w['selected_stones']['size'] as $stone)&#13;
+{&#13;
+  foreach($stone as $s)&#13;
+{&#13;
+  $selected_cost_stones += $s['karatnost'] * $s['price'] * $s['count'];&#13;
+$stone_type = $s['color_ru'];&#13;
+&#13;
+}&#13;
+$selected_cost_stones = $selected_cost_stones * $knk;&#13;
+}&#13;
+}&#13;
+else&#13;
+{&#13;
+    $selected_cost_stones = $original_cost_stones;&#13;
+   &#13;
+}&#13;
+&#13;
+//стоимость оригинального метала&#13;
+switch($ring_info_w['ring_original']['metal']['probe']) {&#13;
+		case '585': $cost_metal = 30; $koef_metal = 1; $koef_oncost = 5.005; break;&#13;
+		case '950': $cost_metal = 65; $koef_metal = 1.52; $koef_oncost = 5.005; break;&#13;
+		case '850': $cost_metal = 23; $koef_metal = 0.83; $koef_oncost = 7; break; &#13;
+		case '750': $cost_metal = 40; $koef_metal = 1.2; $koef_oncost = 5.005; break; &#13;
+	}&#13;
+$original_ring_cost_metal = ($ring_info_w['ring_original']['weight'] - $original_weight_stones) * $cost_metal * $koef_metal * $koef_oncost;	&#13;
+$original_ring_cost_metal = ceil($original_ring_cost_metal/10)*10*8.5;&#13;
+//------------------------------------------------------------&#13;
+//стоимость выбранного метала&#13;
+if($ring_info_w['selected_metal'])&#13;
+	{&#13;
+	switch($ring_info_w['selected_metal']['probe']) {&#13;
+		case '585': $cost_metal = 30; $koef_metal = 1; $koef_oncost = 5.005; break;&#13;
+		case '950': $cost_metal = 65; $koef_metal = 1.52; $koef_oncost = 5.005; break;&#13;
+		case '850': $cost_metal = 23; $koef_metal = 0.83; $koef_oncost = 7; break; // не забыть поделить наценку&#13;
+		case '750': $cost_metal = 40; $koef_metal = 1.2; $koef_oncost = 5.005; break;&#13;
+		&#13;
+	}	&#13;
+$select_ring_cost_metal = ($ring_info_w['ring_original']['weight'] - $original_weight_stones)* $cost_metal * $koef_metal * $koef_oncost;&#13;
+$select_ring_cost_metal = ceil($select_ring_cost_metal/10)*10*8.5;&#13;
+	}&#13;
+else&#13;
+{&#13;
+   $select_ring_cost_metal = $original_ring_cost_metal;&#13;
+}&#13;
+//------------------------------------------------------------&#13;
+//ФОРМУЛА&#13;
+if($ring_info_w['ring_original']['active_st_size'])&#13;
+{&#13;
+	if(!$ring_info_w['selected_stones'])&#13;
+	{&#13;
+		$new_price_w = ($ring_info_w['ring_original']['price'] - $original_ring_cost_metal + $select_ring_cost_metal)* $ring_info_w['selected_size']/$ring_info_w['ring_original']['size'];&#13;
+	}&#13;
+	else&#13;
+	{&#13;
+		if($stone_type === 'Белый')&#13;
+		{&#13;
+		$new_price_w = (($ring_info_w['ring_original']['price'] - $original_ring_cost_metal) + $select_ring_cost_metal)* $ring_info_w['selected_size']/$ring_info_w['ring_original']['size'];&#13;
+		}&#13;
+		else&#13;
+		{&#13;
+		$new_price_w = ($selected_cost_stones + $select_ring_cost_metal)* $ring_info_w['selected_size']/$ring_info_w['ring_original']['size'];&#13;
+		}&#13;
+	}&#13;
+}&#13;
+else&#13;
+{&#13;
+	if(!$ring_info_w['selected_stones'])&#13;
+	{&#13;
+		$new_price_w = $select_ring_cost_metal * $ring_info_w['selected_size']/$ring_info_w['ring_original']['size'] + ($ring_info_w['ring_original']['price'] - $original_ring_cost_metal);&#13;
+	}&#13;
+        else&#13;
+        {&#13;
+		if($stone_type === 'Белый')&#13;
+		{&#13;
+		$new_price_w = $select_ring_cost_metal * $ring_info_w['selected_size']/$ring_info_w['ring_original']['size'] + ($ring_info_w['ring_original']['price'] - $original_ring_cost_metal);&#13;
+&#13;
+		}&#13;
+		else&#13;
+		{&#13;
+		$new_price_w = $select_ring_cost_metal * $ring_info_w['selected_size']/$ring_info_w['ring_original']['size'] + $selected_cost_stones;&#13;
+&#13;
+		}&#13;
+	}&#13;
+}&#13;
+}</formula>
+      </collection>
+      <metal>
+        <id>3</id>
+        <name_ua>золото</name_ua>
+        <name_ru>золото</name_ru>
+        <name_short>W</name_short>
+        <probe>585</probe>
+      </metal>
+      <surface>
+        <id>1</id>
+        <name_ua>полірована</name_ua>
+        <name_ru>полированная</name_ru>
+      </surface>
+      <enamel>
+        <id>0</id>
+        <name_ua></name_ua>
+        <name_ru></name_ru>
+      </enamel>
+      <stones>
+        <stone_0>
+          <id>1</id>
+          <count>117</count>
+          <name_ua>діамант</name_ua>
+          <name_ru>бриллиант</name_ru>
+          <karatnost>0.005</karatnost>
+          <price>6970</price>
+          <stone_size>1</stone_size>
+          <size_dimention>мм</size_dimention>
+          <ogranka>Круг</ogranka>
+          <naturalnost>1</naturalnost>
+          <color_ru>Белый</color_ru>
+          <color_ua>Белый</color_ua>
+          <remote_id>0</remote_id>
+        </stone_0>
+      </stones>
+    </ring_original>
+  </ordered_w>
+</order>

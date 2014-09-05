@@ -1,0 +1,32 @@
+{% extends this.layout %}
+
+{% block breadcrumbs %}
+	{% widget('zii.widgets.CBreadcrumbs', {'links' : ['Города']}) %}
+{% endblock %}
+
+{% block bigColumn %}
+
+	{% registerScript('search',"
+	$('.search-button').click(function(){ $('.search-form').toggle(); return false; });
+	$('.search-form form').submit(function(){
+		$.fn.yiiGridView.update('shops-grid', {data : $(this).serialize()});
+		return false;
+	});
+	") %}
+
+	<h1>Управление магазинами</h1>
+
+	<div class="search-form">
+		{{ this.renderPartial('_search', {'model' : model}) }}
+	</div>
+
+	{% widget('application.components.widgets.AdminGridView', {'id' : 'shops-grid', 'dataProvider' : model.search(), 'columns' : ['id', 'cityItem.name_ru', 'name_ru', 'name_ua','name_en']}) %}
+
+{% endblock %}
+
+{% block sidebar %}
+	{% set menu = [{'label' : 'Добавить новый', 'url' : ['create']}] %}
+	{% beginWidget('zii.widgets.CPortlet', {'title' : 'Действия'}) %}
+		{% widget('zii.widgets.CMenu', {'items' : menu, 'htmlOptions' : {'class' : 'operations'}}) %}
+	{% endWidget %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends this.layout %}
+{% block pageTitle %}{{ Yii.name }} - Error{% endblock %}
+{% block content %}
+	<img src="/images/cable.png" class="m_cable" alt="" />
+	<img src="/images/m_logo.png" class="logo" alt="" />
+	<div class="user_block not_found">
+		<h1>404</h1>
+		<p><strong>Помилка 404.</strong> Невірно набрана адреса, або такої сторінки на сайті більше не існує.</p>
+		<a href="/" class="gotomain">Повернутись на головну сторінку</a>
+	</div>
+{% endblock %}

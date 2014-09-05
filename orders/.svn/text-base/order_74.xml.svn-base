@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<order>
+  <id>74</id>
+  <name>Виктория</name>
+  <email>vik29166274@yandex.ru</email>
+  <phone>+79104935803</phone>
+  <comment>скидка 30%</comment>
+  <city>Москва</city>
+  <ordered_m>
+    <ring_original>
+      <name_ru>Грани любви Чудотворная любовь</name_ru>
+      <name_ua>Грані любові чудотворна любов</name_ua>
+      <articul>0001392</articul>
+      <size>18</size>
+      <gender>m</gender>
+      <width>5.3</width>
+      <height>0</height>
+      <koeff>3.999996</koeff>
+      <weight>5.354</weight>
+      <thickness>1.7</thickness>
+      <price>8450</price>
+      <remote_id>000147OF </remote_id>
+      <active_st_size>1</active_st_size>
+      <collection>
+        <id>4</id>
+        <id_for_ring>4</id_for_ring>
+        <name_ua>Грані любові</name_ua>
+        <name_ru>Грани любви</name_ru>
+      </collection>
+      <metal>
+        <id>3</id>
+        <name_ua>золото</name_ua>
+        <name_ru>золото</name_ru>
+        <name_short>W</name_short>
+        <probe>585</probe>
+      </metal>
+      <surface>
+        <id>2</id>
+        <name_ua>матована</name_ua>
+        <name_ru>матированная</name_ru>
+      </surface>
+      <enamel>
+        <id>0</id>
+        <name_ua></name_ua>
+        <name_ru></name_ru>
+      </enamel>
+    </ring_original>
+    <selected_size>19</selected_size>
+    <selected_surface>
+      <id></id>
+      <name_ua></name_ua>
+      <name_ru></name_ru>
+    </selected_surface>
+    <selected_enamel>
+      <id></id>
+      <name_ua></name_ua>
+      <name_ru></name_ru>
+    </selected_enamel>
+    <selected_metal/>
+    <selected_stones/>
+    <calculated_price>8919</calculated_price>
+  </ordered_m>
+</order>

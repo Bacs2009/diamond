@@ -1,0 +1,10 @@
+{% extends this.layout %}
+{% block pageTitle %}{{Yii.name + ' - Error'}}{% endblock %}
+{% block bigColumn %}
+{% set breadcrumbs = ['Error'] %}
+<h2>Error {{code}}</h2>
+
+<div class="error">
+{{ message|e }}
+</div>
+{% endblock %}

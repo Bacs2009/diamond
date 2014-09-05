@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<order>
+  <id>43</id>
+  <name>Иван</name>
+  <email>myshenkov_ivan@mail.ru</email>
+  <phone>+7(960)240-80-87</phone>
+  <comment>Подскажите, пожалуйста, можно ли найти вашу продукцию в СПб?</comment>
+  <city>Санкт-Петербург</city>
+  <ordered_m>
+    <ring_original>
+      <name_ru>Хранители Хранители Счастья</name_ru>
+      <name_ua>Хранителі Хранителі Щастя</name_ua>
+      <articul>0001614</articul>
+      <size>21</size>
+      <gender>m</gender>
+      <width>7</width>
+      <height>0</height>
+      <koeff>5.005</koeff>
+      <weight>7.702</weight>
+      <thickness>1.8</thickness>
+      <price>15340</price>
+      <remote_id>000194OF </remote_id>
+      <active_st_size>0</active_st_size>
+      <collection>
+        <id>6</id>
+        <id_for_ring>6</id_for_ring>
+        <name_ua>Хранителі</name_ua>
+        <name_ru>Хранители</name_ru>
+      </collection>
+      <metal>
+        <id>5</id>
+        <name_ua>золото</name_ua>
+        <name_ru>золото</name_ru>
+        <name_short>Y</name_short>
+        <probe>585</probe>
+      </metal>
+      <surface>
+        <id>1</id>
+        <name_ua>полірована</name_ua>
+        <name_ru>полированная</name_ru>
+      </surface>
+      <enamel>
+        <id>4</id>
+        <name_ua>червона,чорна,біла</name_ua>
+        <name_ru>красная, черная,белая</name_ru>
+      </enamel>
+    </ring_original>
+    <calculated_price>15340</calculated_price>
+  </ordered_m>
+  <ordered_w>
+    <ring_original>
+      <name_ru>Хранители Хранители Счастья</name_ru>
+      <name_ua>Хранителі Хранителі Щастя</name_ua>
+      <articul>0001613</articul>
+      <size>17</size>
+      <gender>f</gender>
+      <width>7</width>
+      <height>0</height>
+      <koeff>5.005</koeff>
+      <weight>7.034</weight>
+      <thickness>1.8</thickness>
+      <price>15860</price>
+      <remote_id>000193OF </remote_id>
+      <active_st_size>0</active_st_size>
+      <collection>
+        <id>6</id>
+        <id_for_ring>6</id_for_ring>
+        <name_ua>Хранителі</name_ua>
+        <name_ru>Хранители</name_ru>
+      </collection>
+      <metal>
+        <id>5</id>
+        <name_ua>золото</name_ua>
+        <name_ru>золото</name_ru>
+        <name_short>Y</name_short>
+        <probe>585</probe>
+      </metal>
+      <surface>
+        <id>1</id>
+        <name_ua>полірована</name_ua>
+        <name_ru>полированная</name_ru>
+      </surface>
+      <enamel>
+        <id>4</id>
+        <name_ua>червона,чорна,біла</name_ua>
+        <name_ru>красная, черная,белая</name_ru>
+      </enamel>
+      <stones>
+        <stone_0>
+          <id>2</id>
+          <count>4</count>
+          <name_ua>діамант</name_ua>
+          <name_ru>бриллиант</name_ru>
+          <karatnost>0.008</karatnost>
+          <price>10660</price>
+          <stone_size>1.25</stone_size>
+          <size_dimention>мм</size_dimention>
+          <ogranka>Круг</ogranka>
+          <naturalnost>1</naturalnost>
+          <color_ru>Белый</color_ru>
+          <color_ua>Білий</color_ua>
+          <remote_id>0</remote_id>
+        </stone_0>
+      </stones>
+    </ring_original>
+    <calculated_price>15860</calculated_price>
+  </ordered_w>
+</order>

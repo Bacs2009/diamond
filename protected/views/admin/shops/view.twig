@@ -1,0 +1,43 @@
+{% extends this.layout %}
+
+{% block breadcrumbs %}
+	{% widget('zii.widgets.CBreadcrumbs', {'links' : {'Города' : ['index'], 0 : 'просмотр'}}) %}
+{% endblock %}
+
+{% block bigColumn %}
+
+	<h1>Просмотр магазина: "{{ model.name_ru }}"</h1>
+
+	{% widget('zii.widgets.CDetailView', {
+		'data' : model,
+		'attributes' :
+		[
+			'id',
+			'city_id',
+			'name_ru',
+			'name_ua',
+			'name_en',
+			'address_ru',
+			'address_ua',
+			'address_en',
+			'phone_ru',
+			'phone_ua',
+			'phone_en',
+			'lat',
+			'lng'
+		]
+	}) %}
+
+{% endblock %}
+
+{% block sidebar %}
+	{% set menu = [
+			{'label' : 'К списку магазинов', 'url' : ['index']},
+			{'label' : 'Добавить новый', 'url' : ['create']},
+			{'label' : 'Редактировать текущий', 'url' : {0 : 'update', 'id' : model.id}},
+			{'label' : 'Удалить текщий', 'url' : 'javascript:void(0);', 'linkOptions' : {'submit' : {0 : 'delete', 'id' : model.id}, 'confirm' : 'Вы уверены, удалить этот магазин?'}}
+	] %}
+	{% beginWidget('zii.widgets.CPortlet', {'title' : 'Действия'}) %}
+		{% widget('zii.widgets.CMenu', {'items' : menu, 'htmlOptions' : {'class' : 'operations'}}) %}
+	{% endWidget %}
+{% endblock %}

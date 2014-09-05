@@ -1,0 +1,37 @@
+{% extends this.layout %}
+
+{% registerScriptFile("#{Yii.baseUrl(true)}/js/actions.js") %}
+
+{% block content %}
+
+   <div role="main" class="main">
+     <div class="b-inner-container">
+      <div class="b-h2">{{ menuItem.label }}</div>
+          <div class="b-offer-block">
+           <div class="b-col">
+						{% for i in 1..4 %}
+            <div class="b-item" id="actions-column-{{ i }}">
+						{% for key, action in actions %}
+						{% if (key % 4) + 1 == i %}
+             <div class="b-offer-item">
+              <div class="b-wrapper">
+              	<div class="b-img"><a href="{% if action.link == '' %}{{ action.getUrl() }}{% else %}{{action.link}}{% endif %}" {% if action.link != '' %}target='_blank'{% endif %} ><img src="{{ action.imageUrl['preview'] }}" alt=""></a></div>
+              	<div class="b-title">{{ action.getLangProp('title') }}</div>
+              	<div class="b-text">{{ action.getLangProp('description')|raw }}</div>
+              </div>
+             </div>
+             <hr/>
+             {% endif %}
+            {% endfor %}
+            </div>
+            {% endfor %}
+           </div>
+           {% if count > 8 %}
+           <div class="b-show-offers">{{ CHtml.ajaxLink(lang.t('actions', 'показать еще'), moreUrl, {'type' : 'POST', 'dataType' : 'json', 'data' : {'page' : 'js:actions.page'}, 'beforeSend' : 'actions.beforeSend', 'success' : 'actions.success'},{'id' : 'show-more', 'href' : 'javascript:void(0);'})|raw }}</div>
+           {% endif %}
+          </div>
+      <div class="clear"></div>
+     </div>
+   </div>
+
+{% endblock %}

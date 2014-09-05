@@ -1,0 +1,1038 @@
+@charset "utf-8";
+@import url(reset.css);
+
+@font-face { 	font-family: Bodoni; font-weight: 400; src: url('../fonts/bodoni.woff');}
+@font-face { 	font-family: Nivea; font-weight: 400; src: url('../fonts/nivbk.woff');}
+@font-face { 	font-family: Nivea; font-weight: 300; src: url('../fonts/nivli.woff');}
+html {
+	height: 100%;
+}
+body {
+	font-family: Nivea;
+	font-weight: 300;
+	background-color: #fff;
+	margin-top: 60px;
+	position: relative;
+	width: 100%;
+}
+a {
+	text-decoration: none; 
+	color: #000;
+}
+header {
+	top: 0;
+	left: 0;
+	height: 60px;
+	width: 100%;
+	background-color: #000;
+	position: fixed;
+	z-index: 10;
+	transition: all 0.3s linear;
+}
+#back {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 5px;
+	background:url('../images/mobile/ui/back.png') no-repeat 50% 50%;
+	background-size: contain;
+	width: 70px;
+	height: 100%;
+}
+#logo {
+	background: url('../images/mobile/ui/logo.png') no-repeat 50% 50%;
+	background-size: contain;
+	width: 315px;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -193px;
+}
+#menu {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	max-width: 71px;
+	transition: all 0.3s linear;
+	background-color: #000;
+}
+#menu a {
+	display: block;
+	width: 71px;
+	background: url('../images/mobile/ui/menu.png') no-repeat 0 50%;
+	height: 100%;
+	float: left;
+	position: absolute;
+	z-index: 2;
+}
+#menu.hide {max-width: 297px; right: -297px;}
+#menu.hide a {background-image: url('../images/mobile/ui/menu-hide.png');}
+#menu form {
+	position: relative;
+	width: 226px;
+	height: 48px;
+	margin: 10px 0 0 71px;
+}
+#menu input[type="text"]{
+	width: 140px;
+	height: 28px;
+	border: 0;
+	padding: 5px 56px 5px 10px;
+	outline: none;
+	font: 300 15px/28px 'Nivea';
+}
+#menu input[type="submit"]{
+	width: 56px;
+	height: 38px;
+	border: 0;
+	padding: 0;
+	background: url('../images/mobile/ui/search.png') no-repeat 11px 50% #fff;
+	position: absolute;
+	top: 0;
+	right: 20px;
+	outline: none;
+	cursor: pointer;
+}
+nav {
+	z-index: 9;
+	top: 0;
+	right: 0;
+	padding-top: 60px;
+	position: fixed;
+	max-width: 0;
+	height: 100%;
+	background-color: #fff;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	transition: all 0.3s linear;
+}
+nav.visible {
+	max-width: 270px;
+}
+nav li {
+	width: 212px;
+	margin: 13px 29px;
+	list-style-type: none;
+}
+nav li:first-child {
+	margin-top: 33px;
+}
+nav .lang a{
+	margin: 0 7px 0 0;
+	padding: 0;
+	width: 48px;
+	border: 1px solid #000;
+	text-align: center;
+}
+nav .lang .active {
+	color: #fff;
+	background-color: #000;
+}
+nav .lang {
+	position: absolute;
+	bottom: 10px;
+	left: 6px;
+}
+nav a {
+	display: inline-block;
+	font: 300 15px/27px 'Nivea';
+	text-transform: uppercase;
+	padding: 0 13px;
+	border: 1px solid #fff;
+	letter-spacing: 0.025em;
+}
+nav a:hover {
+	border: 1px solid #000;
+}
+section {
+	padding: 0 15px;
+	transition: all 0.3s linear;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	width: 100%;
+}
+#cont {
+	padding: 0;
+}
+section img {
+	max-width: 100%;
+	display: block;
+	margin: 0 auto;
+}
+header.move {
+	margin-left: -297px;
+}
+section.move,
+#tabs.move, 
+footer.move {
+	margin-left: -270px;
+}
+.slides > div {
+	background-image: url('../images/mobile/slide1.jpg');
+	background-size: cover;
+	background-position: 50% 0;
+	width: 100%;
+	height: 100%;
+}
+#main-page {
+	margin: 0;
+	padding-top: 60px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	height: 100%;
+	width: 100%;
+}
+#main-slider {
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+#main-slider .dark * {
+	color: #fff;
+	border-color: #fff;
+}
+#main-slider .dark {
+	background-image: url('../images/mobile/slide2.jpg');
+}
+#main-slider .lucklove {
+	background-image: url('../images/mobile/slide3.jpg');
+}
+#main-slider .pomolv {
+	background-image: url('../images/mobile/slide4.jpg');
+}
+#main-slider .nevin {
+	background-image: url('../images/mobile/slide5.jpg');
+}
+.pgr-wrap {
+	width: 10px;
+	height: 300px;
+	position: absolute;
+	top: 50%;
+	right: 20px;
+	margin-top: -150px;
+}
+.pgr {
+	width: 10px;
+	height: 300px;
+	display: table-cell;
+	vertical-align: middle;
+}
+.slide-wrap{
+	margin: 0 auto;
+	width: 440px;
+}
+.col-desc {
+	text-transform: uppercase!important;
+}
+.slide-content {
+	width: 440px;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	font-family: 'Geogria', Serif;
+	font-style: italic;
+}
+.slide-content p{
+	font: 300 12px/12px 'Nivea';
+	margin: 11px 0 15px;
+	text-transform: none;
+}
+.slide-content img {
+	max-width: 80%;
+}
+.top a {
+	margin-top: 20px!important;
+}
+.slide-content a{
+	margin-top: 18px;
+	display: inline-block;
+	font: 12px/12px 'Nivea';
+	height: 12px;
+	padding: 8px 12px;
+	border: 1px solid #000;
+	text-transform: uppercase;
+}
+.col-info {
+	font: 300 16px/24px 'Nivea';
+	text-transform: none;
+}
+h2 {
+	font: 45px/45px 'Bodoni', Serif;
+	letter-spacing: 0.075em;
+	text-align: center;
+	text-transform: uppercase;
+}
+#page-name {
+	text-align: center;
+	font: 30px/30px 'Bodoni';
+	text-transform: uppercase;
+	padding: 22px 0;
+}
+#social {
+	font-size: 0;
+	text-align: center;
+	margin: 40px 0 12px -30px;
+}
+#social li {
+	display: inline-block;
+}
+#social a {
+	display: block;
+	background-image: url('../images/mobile/ui/social.png');
+	width: 32px;
+	height: 32px;
+	margin: 0 2.5px;
+	border-radius: 50%;
+}
+#social .soc-tw {background-position: -64px 0;}
+#social .soc-gp {background-position: -32px 0;}
+#social .soc-yt {background-position: -128px 0;}
+#social .soc-vk {background-position: -96px 0;}
+footer {
+	font: 300 13px/30px 'Nivea';
+	text-transform: uppercase;
+	text-align: center;
+	transition: all 0.3s linear;
+	width: 100%;
+	padding-bottom: 50px;
+}
+footer a{
+	text-decoration: underline;
+}
+footer .web,
+footer .web a {
+	color: #656565;
+}
+.item-list {
+	margin-bottom: 85px;
+}
+.item-list a,
+.compare-list a {
+	display: block;
+	text-align: center;
+	width: 100%;
+	margin: 85px 0 10px;
+	text-transform: uppercase;
+	color: #000;
+	letter-spacing: 0.05em;
+}
+.item-list img,
+.compare-list img {
+	max-width: 90%;
+}
+.item-name {
+	display: block;
+	margin-top: 30px;
+	font: 30px/30px 'Bodoni';
+}
+.hint {
+	font: 300 12px/12px 'Nivea';
+	text-decoration: underline;
+	margin-top: 11px;
+	display: block;
+}
+#col-select{
+	display: block;
+	height: 24px;
+	width: 100%;
+	padding: 10px 0;
+	border-top: 1px solid #595959;
+	border-bottom: 1px solid #595959;
+}
+#col-select select{
+	height: 24px;
+	border: 0;
+	font: 300 18px/24px 'Nivea';
+	width: 100%;
+	margin: 0;
+	background: url('../images/mobile/ui/select.png') no-repeat 100% 50%;
+	border: none;
+	outline: none;
+}
+.for {
+	position: relative;
+	font: 20px/22px 'Nivea';
+	text-transform: uppercase;
+	padding-left: 37px;
+	margin-bottom: 14px;
+}
+.for span{
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: block;
+	width: 22px;
+	height: 22px;
+	background: url('../images/mobile/ui/checkbox.png') -37px -5px;
+}
+.item-char li {
+	font: 300 12px/18px 'Nivea';
+	margin-bottom: 6px;
+	list-style-type: none;
+}
+.item-char span {
+	font-weight: 400;
+}
+.item img {
+	margin: 30px auto;
+	display: block;
+}
+.item-header {
+	margin-top: 5px;
+	font: 30px/50px 'Bodoni';
+	text-align: center;
+	text-transform: uppercase;
+}
+.item-sub {
+	font-size: 18px;
+	text-align: center;
+	text-transform: uppercase;
+}
+.item-price {
+	height: 33px;
+	font: 300 15px/33px 'Nivea';
+	margin-top: 16px;
+	text-align: right;
+}
+.item-price span {
+	font-weight: 400;
+	color: #fff;
+	background-color: #000;
+	display: inline-block;
+	padding: 0 10px;
+	margin-right: 15px;
+	float: left;
+}
+.btns .btn {
+	font: 18px/18px 'Nivea';
+	height: 18px;
+	padding: 10px 16px;
+}
+#awards-text {
+	font: 300 12px/24px 'Nivea';
+	letter-spacing: 0.05em;
+}
+#awards-text p{
+	margin-bottom: 24px;
+	
+	letter-spacing: normal;
+	
+}
+#awards-text .img-desc {
+	font: 400 18px/30px 'Nivea';
+	text-align: center;
+}
+.btn{
+	margin-top: 10px;
+	display: inline-block;
+	font: 12px/12px 'Nivea';
+	height: 12px;
+	padding: 6px 10px;
+	border: 1px solid #000;
+}
+.btns {
+	text-align: center;
+}
+.item .btn {
+	margin-top: 30px;
+}
+#proj-list {
+	margin-top: 30px;
+	list-style-type: none;
+	margin-left: -2em;
+}
+#proj-list a {
+	display: block;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 75px;
+}
+#proj-list img {
+	display: block;
+	margin: 0 auto 30px;
+}
+#proj-list span {
+	display: block;
+	font: 24px/24px 'Bodoni';
+	text-transform: uppercase;
+}
+#const label {
+	position: relative;
+	display: inline-block;
+	font: 400 18px/22px 'Nivea';
+	padding-left: 38px;
+	margin: 57px 18px 25px 0;
+	text-transform: uppercase;
+}
+#const label input{
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+}
+#const label span{
+	position: absolute;
+	display: block;
+	top: 0;
+	left: 0;
+	width: 22px;
+	height: 22px;
+	background: url('../images/mobile/ui/checkbox.png') no-repeat -5px -5px;
+}
+#const p {
+	font: 300 16px/30px 'Nivea';
+	margin-top: 28px;
+}
+label.checked span{
+	background-position: -37px -5px!important;
+}
+#const select{
+	display: block;
+	height: 41px;
+	border: 1px solid #000;
+	font: 300 16px/41px 'Nivea';
+	background: url('../images/mobile/ui/select.png') no-repeat 100% 50%;
+	width: 100%;
+	margin: 0 0 17px;
+}
+#tabs {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	overflow: hidden;
+	height: 43px;
+	border-top: 1px solid #000;
+	background-color: #fff;
+	font-size: 0;
+	transition: all 0.3s linear;
+}
+#tabs a {
+	width: 50%;
+	height: 100%;
+	font-size: 13px;
+	line-height: 43px;
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+}
+#tabs .active {
+	background-color: #000;
+	color: #fff;
+}
+#awards-text .header {
+	font: 400 18px 'Nivea';
+	margin: 20px 0 0 15px;
+}
+#hran {
+	margin-bottom: 12px!important;
+}
+#save ul,
+#service ul {
+	padding-left: 18px;
+}
+#save li,
+#service li{
+	list-style: disc;
+}
+#mod ul{
+	list-style-type: none;
+}
+#mod li {
+	border-top: 1px solid #000;
+	padding: 20px 0;
+	float: left;
+width: 100%;
+}
+#mod li:first-child {
+	border-top: 0;
+}
+#mod img {
+	margin: 0 15px 0 0;
+	float: left;
+	max-width: 33%;
+}
+#service {
+	font: 300 12px/24px 'Nivea';
+}
+#service .header {
+	font: 400 18px/24px 'Nivea';
+	text-align: center;
+	margin-bottom: 6px;
+}
+#managers {
+	text-align: center;
+	font: 400 15px/24px 'Nivea';
+}
+#managers img {
+	margin-bottom: 10px;
+}
+#managers .man-info span {
+	display: block;
+	font-weight: 300;
+	font-size: 12px;
+	margin-bottom: 24px;
+}
+.location {
+	text-transform: uppercase;
+	margin: 32px 0 26px;
+}
+.compare-list {
+	padding: 5px 0 45px;
+}
+.compare label {
+	position: relative;
+	display: inline-block;
+	font: 300 18px/22px 'Nivea';
+	padding-right: 38px;
+	text-transform: uppercase;
+	margin-top: 14px;
+}
+.compare label input{
+	position: absolute;
+	top: 0;
+	right: 0;
+	opacity: 0;
+}
+.compare label span{
+	position: absolute;
+	display: block;
+	top: 0;
+	right: 0;
+	width: 22px;
+	height: 22px;
+	background: url('../images/mobile/ui/checkbox.png') no-repeat -5px -5px;
+}
+#offer p {
+	font: 400 20px/20px 'Nivea';
+	margin: 8px 0 22px;
+}
+#offer input {
+	display: block;
+	width: 100%;
+	height: 48px;
+	font: 300 18px/48px 'Nivea';
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-bottom: 10px;
+	padding: 0 14px;
+	border-radius: 0;
+	background-color: #fff;
+}
+#offer textarea{
+	resize: none;
+	display: block;
+	width: 100%;
+	font: 300 18px/18px 'Nivea';
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-bottom: 30px;
+	padding: 10px 14px;
+	border-radius: 0;
+	background-color: #fff;
+}
+#sum {
+	height: 56px;
+}
+#sum span{
+	padding: 0 18px;
+	float: left;
+	font: 400 20px/44px 'Nivea';
+	color: #fff;
+	background-color: #000;
+}
+#sum button {
+	border: 1px solid #000;
+	float: right;
+	margin: 0;
+	padding: 0 24px;
+	background-color: #fff;
+	font: 400 20px/42px 'Nivea';
+	height: 42px;
+	display: block;
+}
+#map_canvas {
+	height: 630px;
+	width: 100%;
+}
+#city-list {
+	position: absolute;
+	top: 105px;
+	right: 0;
+	z-index: 3;
+	max-height: 57px;
+	transition: all 0.3s linear;
+	overflow: hidden;
+	list-style-type: none;
+}
+#city-list.visible {
+	max-height: 360px;
+}
+#city-list li {
+	padding-right: 24px;
+	background-color: rgba(0,0,0,0.6);
+	font: 300 18px/57px 'Nivea';
+	width: 214px;
+	text-align: right;
+}
+#city-list a {
+	color: #fff;
+	text-transform: uppercase;
+}
+#city-list li:first-child {
+	margin-bottom: 1px;
+	padding-right: 36px;
+	width: 202px;
+	background:url('../images/mobile/ui/triancle.png') no-repeat 209px 50%;
+	background-color: rgba(0,0,0,0.6);
+	font-weight: 400;
+}
+@media	only screen and (-webkit-min-device-pixel-ratio: 1.3),
+	only screen and (-o-min-device-pixel-ratio: 13/10),
+	only screen and (min-resolution: 120dpi)
+	{
+		.slide-wrap, .slide-content{width: 290px;}
+		h2 { font: 32px/32px 'Bodoni', Serif!important; }
+		#logo {
+			width: 150px;
+			margin-left: -75px;
+		}
+		#sum span,
+		#sum button {
+			font-size: 15px;
+			line-height: 33px;
+			padding: 0 6px;
+			height: 33px;
+		}
+		/*
+		#offer p {
+			font-size: 15px;
+			line-height: 15px;
+			margin: 6px 0 16px;
+		}
+		header {
+			height: 60px;
+		}
+		body {
+			margin-top: 60px;
+		}
+		#page-name {
+			font-size: 30px;
+			line-height: 85px;
+		}
+		#offer input {
+			font-size: 13px;
+			line-height: 36px;
+			height: 36px;
+			margin-bottom: 7px;
+		}
+		#offer textarea {
+			font-size: 13px;
+			line-height: 13px;
+			margin-bottom: 23px;
+		}
+		#tabs {
+			height: 36px;
+		}
+		#tabs a {
+			font-size: 12px;
+			line-height: 36px;
+		}
+		footer {
+			font-size: 10px;
+			line-height: 23px;
+			padding-bottom: 48px;
+		}
+		#social {
+			margin: 30px 0 9px;
+		}*/
+	}
+	
+	
+	
+/* 31.07.2014 Styles */
+
+#col-slider {
+	font-family: 'Bodoni';
+	font-size: 9px;
+	text-transform: uppercase;
+	text-align: center;
+	border-bottom: 5px solid #000;
+	position: relative;
+}
+#col-slider .bx-viewport a {
+	display: table-cell;
+	vertical-align: middle;
+	width: 80px;
+	height: 90px;
+}
+#col-slider .bx-viewport img {
+	display: inline-block;
+	max-width: 70px;
+	margin-bottom: 5px;
+}
+
+/* ==========================================================================
+   Order popup
+   ========================================================================== */
+#order-form{
+padding:7px 0;
+width:610px;
+padding-bottom: 28px;
+}
+#order-form .b-h3{
+letter-spacing:1px;
+}
+.b-order-popup{
+float:left;
+width:272px;
+padding-top: 25px;
+padding-left: 9px;
+}   
+.b-order-form{
+float: right;
+width: 290px;
+padding-top: 30px;
+}
+.b-img-popup{
+width:222px;
+margin-top: 14px;
+}
+.b-img-popup img{
+width:100%;
+height:auto;
+}
+.b-name-ring-popup{
+font:18px HelveticBold;
+line-height:100%;
+letter-spacing: 3px;
+}
+.b-name-collection-popup{
+/*font: 12px CharisSilItalic;*/
+
+font-family: Georgia,CharisSilItalic;
+font-size: 12px;
+font-style: italic;
+
+line-height: 17px;
+}
+.b-who-popup{
+margin-top: 16px;
+padding-left: 2px;
+margin-bottom: 19px;
+}
+.b-who-popup .b-for-who{
+font:12px HelveticBold;
+}
+.b-size-popup{
+/*font: 12px CharisSilItalic;*/
+
+font-family: Georgia,CharisSilItalic;
+font-size: 12px;
+font-style: italic;
+
+line-height: 100%;
+}
+.b-size-popup span{
+margin-left: 5px;
+text-decoration: underline;
+}
+.b-price-popup{
+text-transform: uppercase;
+margin-top: 7px;
+font: 13px HelveticBold;
+}
+.b-total  {
+margin-top: 33px;
+}
+.b-total > span{
+float: left;
+font: 16px CharisSilItalic;
+display: inline-block;
+line-height: 34px;
+padding-left: 4px;
+padding-right: 15px;
+}
+
+.b-size-popup a {
+padding-top: 3px;
+padding-bottom: 4px;
+}
+.b-size-popup .b-size-select{
+padding-right: 10px;
+width: 148px;
+}
+
+.b-order-form .b-title{
+font: 13px HelveticBold;
+line-height: 17px;
+margin-bottom: 20px;
+}
+.b-txt-input, .b-textarea-input{
+font: 11px HelveticRoman;
+border: 1px solid #000;
+}
+.b-textarea-input{
+padding: 9px;
+}
+.b-txt-input.b-error{
+border-color:#f70000;
+}
+.b-txt-input{
+height: 12px;
+padding: 9px 12px;
+}
+.b-order-form .b-txt-input,.b-order-form .b-textarea-input {
+width: 255px;
+}
+.b-order-form .b-textarea-input {
+height: 103px;
+width: 261px;
+}
+.b-submit-button{
+border: 1px solid #000;
+background: #FFF;
+font: 13px HelveticBold;
+margin-top: 8px;
+padding: 10px 25px;
+}
+
+.b-order-form .b-item-form{
+padding-left: 4px;
+margin-bottom: 8px;
+}
+.b-close-popup{
+position:absolute;
+right:10px;
+top:10px;
+/*width:13px;*/
+height:14px;
+background:url(../images/close.jpg) no-repeat right;
+cursor:pointer;
+z-index:1;
+}
+.b-poup-img img{
+width:50%;
+}
+#order-form.b-tow-by .b-who-popup {
+display: inline-block;
+vertical-align: top;
+width: 189px;
+margin-right: 20px;
+}
+#order-form.b-tow-by .b-order-popup{
+width: 402px;
+}
+#order-form.b-tow-by .b-who-blocks-popaup{
+width:105%;
+}
+#order-form.b-tow-by{
+width:717px;
+}
+.b-order-aceeted{
+display:none;
+font:19px HelveticBold;
+text-align:center;
+margin-top: 31px;
+}
+
+.b-poup-img{
+margin-bottom:15px;
+}
+
+section .b-title-product{
+/*font: 19px CharisSilItalic;*/
+font-family: Georgia,CharisSilItalic;
+font-size: 19px;
+font-style: italic;
+
+text-align: center;
+
+line-height: 100%;
+margin-top: -20px;
+}
+
+.b-poup-img{
+margin-bottom:15px;
+}
+
+.b-checkbox{
+	float: right;
+	margin-top: -170px;
+	right: 60%;
+	z-index:9999999999;
+	position:absolute;
+}
+
+.b-usd{
+	top: 30px;
+  position: relative;
+  font-weight: bold;
+}
+
+.b-txt-input.b-error{
+border-color:#f70000;
+}
+
+.b-size-select{
+border: 1px solid #000;
+padding: 10px;
+width: 236px;
+position: relative;
+padding-right: 10px;
+display:none;
+}
+.b-size-select a{
+display: inline-block;
+width: 23px;
+text-align: center;
+margin: 0 6px;
+}
+.b-size-select-close{
+position: absolute;
+right: 7px;
+top: 3px;
+text-decoration: none;
+text-transform: uppercase;
+font:13px HelveticBold;
+line-height: 100%;
+font-weight: bold;
+cursor:pointer;
+}
+.b-open-size-select{
+display: inline-block;
+border: 1px solid transparent;
+border-bottom: none;
+background: #FFF;
+padding: 0 6px;
+padding-bottom: 3px;
+margin-bottom: -1px;
+position: relative;
+z-index: 1;
+}
+.b-open-size-select.b-active{
+border: 1px solid #000;
+border-bottom: none;
+}
+
+.content_point_m{
+  position: fixed;
+  margin-left: 18.5%;
+  margin-right: 18.5%;
+  width: 63%;
+  top: 45px;
+  bottom: 41px;
+  left: 0;
+  /* background: green; */
+  background: #fff;
+  display: none;
+  z-index: 8012;
+}

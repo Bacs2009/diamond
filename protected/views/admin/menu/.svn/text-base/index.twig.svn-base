@@ -1,0 +1,84 @@
+{% extends this.layout %}
+
+{% block breadcrumbs %}
+	{% widget('zii.widgets.CBreadcrumbs', {'links' : ['Управление меню']}) %}
+{% endblock %}
+
+{% block bigColumn %}
+
+	{% registerScript('search',"
+	$('.search-button').click(function(){ $('.search-form').toggle(); return false; });
+	$('.search-form form').submit(function(){ $.fn.yiiGridView.update('menu-grid', {data : $(this).serialize()}); return false; });
+	") %}
+
+	<h1>Список пунктов меню</h1>
+
+	<div class="search-form">
+		{{ this.renderPartial('_search', {'model' : model}) }}
+	</div>
+
+	{% widget('application.components.widgets.AdminGridView', {
+		'id' : 'menu-grid',
+		'dataProvider' : model.search(),
+		'columns' :
+		[
+			'name_ru',
+			'name_ua',
+			'name_en',
+			{
+				'name' : 'active',
+				'value' : '$data->active ? "да" : "нет"'
+			},
+			{
+				'template' : '{moveUp}{moveDown}{update}{delete}',
+				'buttons' :
+				{
+					'moveUp' :
+					{
+						'label' : 'Поднять',
+						'imageUrl' : '/images/admin/up_icon.png',
+						'url' : 'Yii::app()->createUrl("admin/menu/move", array("id" => $data->id, "direction" => -1))',
+						'click' : 'function()
+						{
+							$.fn.yiiGridView.update("menu-grid",
+							{
+								"type" : "POST",
+								"url" : $(this).attr("href"),
+								"success" : function(data) { $.fn.yiiGridView.update("menu-grid"); },
+								"error" : function(XHR) {}
+							});
+							return false;
+						}'
+					},
+					'moveDown' :
+					{
+						'label' : 'Опустить',
+						'imageUrl' : '/images/admin/down_icon.png',
+						'url' : 'Yii::app()->createUrl("admin/menu/move", array("id" => $data->id, "direction" => 1))',
+						'click' : 'function()
+						{
+							$.fn.yiiGridView.update("menu-grid",
+							{
+								"type" : "POST",
+								"url" : $(this).attr("href"),
+								"success" : function(data) { $.fn.yiiGridView.update("menu-grid"); },
+								"error" : function(XHR) {}
+							});
+							return false;
+						}'
+					},
+					'delete' : {'visible' : '$data->system == 0'}
+				},
+				'htmlOptions' : {'style' : 'width: 65px;'}
+			}
+		]
+	}) %}
+
+{% endblock %}
+
+{% block sidebar %}
+	{% set menu = [{'label' : 'Добавить новый пункт', 'url' : ['create']}] %}
+	{% beginWidget('zii.widgets.CPortlet', {'title' : 'Действия'}) %}
+		{% widget('zii.widgets.CMenu', {'items' : menu, 'htmlOptions' : {'class' : 'operations'}}) %}
+	{% endWidget %}
+{% endblock %}

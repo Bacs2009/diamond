@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<order>
+  <id>36</id>
+  <name>ТЕст</name>
+  <email>klimenko@diamond.ua</email>
+  <phone>(090) 978 98 90</phone>
+  <comment>Тест</comment>
+  <city>Тест</city>
+  <ordered_m>
+    <ring_original>
+      <name_ru>Монархия Абсолютная</name_ru>
+      <name_ua>Монархія Абсолютна</name_ua>
+      <articul>0001864</articul>
+      <size>20.5</size>
+      <gender>m</gender>
+      <width>7</width>
+      <height>0</height>
+      <koeff>7.999992</koeff>
+      <weight>9.51</weight>
+      <thickness>2.2</thickness>
+      <price>29770</price>
+      <remote_id>0001PROF </remote_id>
+      <active_st_size>0</active_st_size>
+      <collection>
+        <id>8</id>
+        <id_for_ring>8</id_for_ring>
+        <name_ua>Монархія</name_ua>
+        <name_ru>Монархия</name_ru>
+      </collection>
+      <metal>
+        <id>2</id>
+        <name_ua>золото</name_ua>
+        <name_ru>золото</name_ru>
+        <name_short>WP</name_short>
+        <probe>585</probe>
+      </metal>
+      <surface>
+        <id>1</id>
+        <name_ua>полірована</name_ua>
+        <name_ru>полированная</name_ru>
+      </surface>
+      <enamel>
+        <id>0</id>
+        <name_ua></name_ua>
+        <name_ru></name_ru>
+      </enamel>
+    </ring_original>
+    <calculated_price>29770</calculated_price>
+  </ordered_m>
+  <ordered_w>
+    <ring_original>
+      <name_ru>Монархия Абсолютная</name_ru>
+      <name_ua>Монархія Абсолютна</name_ua>
+      <articul>0001865</articul>
+      <size>16.5</size>
+      <gender>f</gender>
+      <width>8</width>
+      <height>0</height>
+      <koeff>7.999992</koeff>
+      <weight>7.973</weight>
+      <thickness>2.2</thickness>
+      <price>41990</price>
+      <remote_id>0001PSOF </remote_id>
+      <active_st_size>0</active_st_size>
+      <collection>
+        <id>8</id>
+        <id_for_ring>8</id_for_ring>
+        <name_ua>Монархія</name_ua>
+        <name_ru>Монархия</name_ru>
+      </collection>
+      <metal>
+        <id>2</id>
+        <name_ua>золото</name_ua>
+        <name_ru>золото</name_ru>
+        <name_short>WP</name_short>
+        <probe>585</probe>
+      </metal>
+      <surface>
+        <id>1</id>
+        <name_ua>полірована</name_ua>
+        <name_ru>полированная</name_ru>
+      </surface>
+      <enamel>
+        <id>0</id>
+        <name_ua></name_ua>
+        <name_ru></name_ru>
+      </enamel>
+      <stones>
+        <stone_0>
+          <id>1</id>
+          <count>26</count>
+          <name_ua>діамант</name_ua>
+          <name_ru>бриллиант</name_ru>
+          <karatnost>0.005</karatnost>
+          <price>10660</price>
+          <stone_size>1</stone_size>
+          <size_dimention>мм</size_dimention>
+          <ogranka>Круг</ogranka>
+          <naturalnost>1</naturalnost>
+          <color_ru>Белый</color_ru>
+          <color_ua>Білий</color_ua>
+          <remote_id>0</remote_id>
+        </stone_0>
+      </stones>
+    </ring_original>
+    <calculated_price>41990</calculated_price>
+  </ordered_w>
+</order>

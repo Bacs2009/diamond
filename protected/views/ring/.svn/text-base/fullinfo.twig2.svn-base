@@ -1,0 +1,289 @@
+<style>
+.b-img-full .b-img-item img{
+  margin-top: -80px;
+  margin-bottom: -57px;
+}
+</style>
+<div class="b-category-name">{% if rings.collection.id == 9 %}{{ lang.t('site', 'благотворительная<br>программа') | raw }}{% else %}{{ lang.t('site', 'коллекции') }}{% endif %}</div>
+<div class="b-title-collection">{{rings.collection.name}}{% set col_name = rings.collection.name %}</div>
+<div class="b-title-product"> - {% if rings['M'][0].name_ru != '' %}{{rings['collection']['M']['name']}}{% else %}{{rings['collection']['W']['name']}}{% endif %} -</div>
+<div class="b-compare-product"><a href="{{ Yii.createAbsoluteUrl('/') }}{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/compare">{{ lang.t('site', 'Список сравнения') }} (<span id='compare_count'>{{session_compare}}</span>)</a></div>
+<div class="b-product-left">
+
+  <div class="b-img-full">
+    {% if rings['W'][0].name_ru != ''%}
+    <span class="b-item-to-by">
+      <span class="b-img-item b-she-it">
+        <img src="/old_images/{{rings['W'][0]['articul']}}.png" alt="">
+        <span class="b-for-lab">{{ lang.t('site', 'Для нее') }}</span>
+      </span>
+    </span>
+    {% endif %}
+
+    {% if rings['M'][0].name_ru != '' %}
+    <span class="b-item-to-by">
+      <span class="b-img-item b-he-it">
+        <img src="/old_images/{{rings['M'][0]['articul']}}.png" alt="">
+        <span class="b-for-lab">{{ lang.t('site', 'Для него') }}</span>
+      </span>
+    </span>
+    {% endif %}
+  </div>
+<div id='link_ua' style="display:none">{{ Yii.createAbsoluteUrl("/") }}/ua/?collection_id={{rings.collection.remote_id}}&ring_id={{rings.collection.ring_id}}</div>
+<div id='link_ru' style="display:none">{{ Yii.createAbsoluteUrl("/") }}/?collection_id={{rings.collection.remote_id}}&ring_id={{rings.collection.ring_id}}</div>
+<div id='link_en' style="display:none">{{ Yii.createAbsoluteUrl("/") }}/en/?collection_id={{rings.collection.remote_id}}&ring_id={{rings.collection.ring_id}}</div>
+
+</div>
+
+<div class="b-product-right">
+  {% if rings['W'][0].name_ru != ''%}
+  <div class="b-price-product" >
+    <span class="b-checkbox" id='ring_w_{{rings['W'][0].id}}'><input type="checkbox" class="b-she" checked="checked"  id="checker_{{rings['W'][0]['id']}}"><span class="b-input"></span>{{ lang.t('site', 'Для нее') }}</span>
+    <div style="display:none" id='w_ring'>{{rings['W'][0].id}}</div>
+
+    <div class="b-txt">
+      <p id='all_info_{{rings['W'][0].id}}'><span id='metal_{{rings['W'][0].id}}'>{% if rings['W'][0].metal.name_ua == 'золото' %}<span class='m_names'>{{rings['W'][0].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, '),'B':lang.t('site','черное, ')}) | capitalize }}</span>{% endif %} {{rings['W'][0].metal.getLangProp('name')}}</span>, <span id='probe_{{rings['W'][0].id}}'>{{rings['W'][0].metal.probe}} {{lang.t('site','проба')}}</span>
+      <span id='stones_{{rings['W'][0].id}}'>{% for stone in rings['W'][0].stones %}<br /><span class='m_name'>{{ stone.stones.getLangProp('color') }} {{stone.stones.getLangProp('name')}}</span> {{stone.stones.size}}{{lang.t('site','мм')}}, {{stone.count}}{{lang.t('site','шт')}}, {{stone.stones.karatnost*stone.count}}ct{% endfor %}</span>
+      {% if rings['W'][0].surface_id != '' and rings['W'][0].surface_id != 0 %}
+        <span id='surface_{{rings['W'][0].id}}'><br />{{ lang.t('site', 'Тип покрытия') }}: {{rings['W'][0].surface_type.getLangProp('name')}}</span>
+        {% endif %}
+        {% if rings['W'][0].enamel_id != '' and rings['W'][0].enamel_id != 0 %}
+        <span id='enamel_{{rings['W'][0].id}}'><br />{{ lang.t('site', 'Цвет эмали') }}: {{rings['W'][0].enamel.getLangProp('name')}}</span>
+        {% endif %}
+      <span id='weight_{{rings['W'][0].id}}'><br />{{ lang.t('site', 'Вес кольца') }} {{ rings['W'][0]['weight']}}{{ lang.t('site','г')}}</span>
+      <span><img src='/images/comment_question.png' style="margin-top:-5px;cursor:pointer" rel='first' class='weight_help'/>
+        <div id='hint_first' class='test-popup'>{{lang.t('site','вес украшений, заявленный на сайте, может отличаться от фактического ввиду ручной обработки и на конечную стоимость не влияет')}}</div>
+      </span>
+      </p>
+
+      <div class="b-size-product">{{ lang.t('site', 'Размер кольца') }}:
+        <a href="#" class="b-open-size-select" id='ring_w_size_{{rings['W'][0].id}}'>{{rings['W'][0].size}}</a>
+        <div class="b-size-select">
+          <a href="14">14</a>
+          <a href="14.5">14.5</a>
+          <a href="15">15</a>
+          <a href="15.5">15.5</a>
+          <a href="16">16</a>
+          <a href="16.5">16.5</a>
+          <a href="17">17</a>
+          <a href="17.5">17.5</a>
+          <a href="18">18</a>
+          <a href="18.5">18.5</a>
+          <div class="b-size-select-close">&times;</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="b-price-block" {% if rings.collection.id == 9 %}style='display:none'{% endif %}><span style='display:none' class="b-uah" id="ring_w_price_{{rings['W'][0].id}}">{{rings['W'][0].price}}</span><span class="b-usd" id="ring_s_w_price_{{rings['W'][0].id}}">{{rings['W'][0].price//10}}</span> USD</div>
+    <div class="b-arcticul">{{ lang.t('site', 'артикул') }}: {{rings['W'][0].articul}}</div>
+    <div class="clear"></div>
+  </div>
+  {% endif %}
+
+  {% if rings['M'][0].name_ru != '' %}
+  <div class="b-price-product">
+    <span class="b-checkbox"  id="ring_m_{{rings['M'][0].id}}">
+      <input type="checkbox" class="b-he" checked="checked" id="checker_{{rings['M'][0]['id']}}">
+      <span class="b-input"></span>{{ lang.t('site', 'Для него') }}
+    </span>
+
+    <div style="display:none" id='m_ring'>{{rings['M'][0].id}}</div>
+
+    <div class="b-txt">
+      <p id='all_info_m'><span id='metal_{{rings['M'][0].id}}'>{% if rings['M'][0].metal.name_ua == 'золото' %}<span class='m_names'>{{rings['M'][0].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, '),'B':lang.t('site','черное, ')}) | capitalize }}</span>{% endif %} {{rings['M'][0].metal.getLangProp('name')}}</span>, <span id='probe_{{rings['M'][0].id}}'>{{rings['M'][0].metal.probe}} {{lang.t('site','проба')}}</span>
+        <span id='stones_{{rings['M'][0].id}}'>{% for stone in rings['M'][0].stones %}<br /><span class='m_name'>{{ stone.stones.getLangProp('color') }} {{stone.stones.getLangProp('name')}}</span> {{stone.stones.size}}{{lang.t('site','шт')}}, {{stone.count}}{{lang.t('site','мм')}}, {{stone.stones.karatnost*stone.count}}ct{% endfor %}</span>
+        {% if rings['M'][0].surface_id != '' and rings['M'][0].surface_id != 0 %}
+        <span id='surface_{{rings['M'][0].id}}'><br />{{ lang.t('site', 'Тип покрытия') }}: {{rings['M'][0].surface_type.getLangProp('name')}}</span>
+        {% endif %}
+        {% if rings['M'][0].enamel_id != '' and rings['M'][0].enamel_id != 0 %}
+        <span id='enamel_{{rings['M'][0].id}}'><br />{{ lang.t('site', 'Цвет эмали') }}: {{rings['M'][0].enamel.getLangProp('name')}}</span>
+        {% endif %}
+        <span id='weight_{{rings['M'][0].id}}'><br />{{ lang.t('site', 'Вес кольца') }} {{ rings['M'][0]['weight']}}{{ lang.t('site','г')}}</span> <span><img src='/images/comment_question.png' style="margin-top:-5px;cursor:pointer" rel='last' class='weight_help' /><div id='hint_last' class='test-popup'>{{lang.t('site','вес украшений, заявленный на сайте, может отличаться от фактического ввиду ручной обработки и на конечную стоимость не влияет')}}</div></span>
+      </p>
+      <div class="b-size-product">{{ lang.t('site', 'Размер кольца') }}: <a href="#" class="b-open-size-select" id='ring_m_size_{{rings['M'][0].id}}'>{{rings['M'][0].size}}</a>
+        <div class="b-size-select">
+           <a href="18.5">18.5</a>
+           <a href="19">19</a>
+           <a href="19.5">19.5</a>
+           <a href="20">20</a>
+           <a href="20.5">20.5</a>
+           <a href="21">21</a>
+           <a href="21.5">21.5</a>
+           <a href="22">22</a>
+           <a href="22.5">22.5</a>
+           <a href="23">23</a>
+           <a href="23.5">23.5</a>
+           <a href="24">24</a>
+           <div class="b-size-select-close">&times;</div>
+        </div>
+      </div>
+    </div>
+    <div class="b-price-block" {% if rings.collection.id == 9 %}style='display:none'{% endif %}><span style='display:none' class="b-uah" id="ring_m_price_{{rings['M'][0].id}}">{{rings['M'][0].price}}</span><span class="b-usd" id="ring_s_m_price_{{rings['M'][0].id}}">{{rings['M'][0].price//10}}</span> USD</div>
+    <div class="b-arcticul">{{ lang.t('site', 'артикул') }}: {{rings['M'][0].articul}}</div>
+    <div class="clear"></div>
+  </div>
+  {% endif %}
+
+  <div class="b-button-block">
+    {% if rings.collection.id == 9 %}
+    <a href="http://stdiamond.ua/wedding_rings/happypeople#/1" class="b-button-order"  target='_blank'>
+    {% else %}
+    <a href="#order-form" class="b-button-by" onclick="set_order_info('ring_w_{{rings['W'][0].id}}','ring_m_{{rings['M'][0].id}}')">
+    {% endif %}
+       {% if rings.collection.id == 9 %} {{ lang.t('site', 'ПОДАТЬ ЗАЯВКУ') }} {% else %} {{ lang.t('site', 'КУПИТЬ') }} {% endif %}
+    </a>
+    {% if rings.collection.id != 9 %}<a style='cursor:pointer' onclick="add_to_compare_list('{{rings['W'][0]['id']}}','{{rings['M'][0]['id']}}')" class="b-add-compare-link">{{ lang.t('site', 'добавить в список сравнения') }}</a>{% endif %}
+  </div>
+  <div class="b-status">{{ lang.t('site', 'Есть в наличии') }}</div>
+</div>
+<div class="clear"></div>
+
+<div class="b-constructor-product" style="clear: both;">
+  <div class="b-search-icons" style="position: relative; top: 0; right: 3px; margin-bottom: 10px;">
+    <a style="cursor:pointer" onclick="shareFB('{% if Yii.params.language != 'ru' %}/{{Yii.params.language}}{% endif %}/?collection_id={{rings.collection.id}}&ring_id={{rings.collection.ring_id}}','{% if rings['M'][0].name_ru != '' %}{{rings['collection']['M']['name']}}{% else %}{{rings['collection']['W']['name']}}{% endif %}','{% if rings['W'][0]['articul'] %}/old_images/{{rings['W'][0]['articul']}}.png{% else %}{{rings['M'][0]['articul']}}.png{% endif %}','{{ lang.t('site','Обручальные кольца')}} STDIAMOND')"><img src="/images/social1.jpg" alt=""></a>
+    <a style='cursor:pointer' onclick="shareVK('{% if Yii.params.language != 'ru' %}/{{Yii.params.language}}{% endif %}/?collection_id={{rings.collection.id}}&ring_id={{rings.collection.ring_id}}','{% if rings['M'][0].name_ru != '' %}{{rings['collection']['M']['name']}}{% else %}{{rings['collection']['W']['name']}}{% endif %}','{% if rings['W'][0]['articul'] %}/old_images/{{rings['W'][0]['articul']}}.png{% else %}{{rings['M'][0]['articul']}}.png{% endif %}','{{ lang.t('site','Обручальные кольца')}} STDIAMOND')"><img src="/images/social2.jpg" alt=""></a>
+    <span class="b-links-def"><a href="#send-letter-form" onclick="$('#hidden_email').val('collection_id={{rings.collection.id}}&ring_id={{rings.collection.ring_id}}')" class="b-send-letter"><img src="/images/social4.jpg" alt=""></a><a href="#" class="b-print-page"><img src="/images/social5.jpg" alt=""></a></span></div>
+    
+   {% if rings.collection.id != 9 %} <a href="#" class="b-constructor-open">{{ lang.t('site', 'Конструктор') }}</a>{% endif %}
+   {% if rings.collection.id == 12 %}
+    <a href="#garderob" class="b-garderob" onclick="select_flash({{rings.collection.id}},{% if rings['W'][0] != '' %}{{rings['W'][0].id}}{% else %}{{rings['W'][0].id}}{% endif %})">{{ lang.t('site', 'Примерочная') }}</a>
+   {% endif %}
+    <div class="b-consctructor-block">
+       <div class="b-constructor-product-close">
+        <div style="font-size: 8px; text-transform: uppercase; margin-right: 4px; margin-top: 1px; float:left;">{{ lang.t('site', 'Закрыть') }}</div>
+        <div style="float:left">&times;</div>
+      </div>
+      <div style="position:absolute; top:16px; left:136px;">
+        <input type="radio" name='fm' id='fm_f' checked="" {% if rings['W'][0].name_ru == '' %}disabled='disabled'{% endif %}>
+        <label for='fm_f'>{{ lang.t('site', 'Для нее') }}</label>
+        <input type="radio" name='fm' id='fm_m' {% if rings['M'][0].name_ru == '' %}disabled='disabled'{% endif %}>
+        <label for='fm_m'>{{ lang.t('site', 'Для него') }}</label>
+      </div>
+
+      <div class="b-item-form">
+        <select class="chzn-select" id='can_metal' onchange="metal_changed(this.value,'{{rings['W'][0]['id']}}','{{rings['M'][0]['id']}}')" style="width:180px;" tabindex="1">
+          <option value="">{{ lang.t('site', 'Металл') }}</option>
+          {% for elem in rings['can_metall'] %}
+          <option value='{{ elem.names_m }}'>{% if elem['name'] == 'золото'%}{{ elem['names_m'] | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, '),'B':lang.t('site','черное, ')}) | capitalize }}{% else %}{{elem['names_m'] | replace({'W':''}) | capitalize }}{% endif %}</option>
+          {% endfor %}
+        </select>
+
+        <select disabled="disabled" class="chzn-select" id='can_probe' onchange="probe_changed(this.value,'{{rings['W'][0]['id']}}','{{rings['M'][0]['id']}}')" style="width:180px;" tabindex="1">
+          <option value="">{{ lang.t('site', 'Проба') }}</option>
+          {% for elem in rings['can_probes'] %}
+          <option value='{{elem['probes']}}'>{{elem['probes']}}</option>
+          {% endfor %}
+        </select>
+        <!--span class="b-image-select"-->
+
+        <select class="chzn-select" id="surface_type" onchange="surface_changed(this.value,'{{rings['W'][0]['id']}}','{{rings['M'][0]['id']}}')" style="width:141px;" tabindex="1">
+          <option value="">{{ lang.t('site', 'Тип покрытия') }}</option>
+          {% for elem in rings['can_surface'] %}
+          <option value="{{elem.id}}">{{elem.getLangProp('name') | capitalize}}</option>
+          {% endfor %}
+          <!--option value="Брильянт" data-img-src="/images/slect_img1.jpg">Брильянт</option>
+          <option value="Рубин" data-img-src="/images/slect_img2.jpg">Рубин</option>
+          <option value="Цирконий" data-img-src="/images/slect_img3.jpg">Цирконий</option>
+          <option value="Сапфир" data-img-src="/images/slect_img4.jpg">Сапфир</option>
+          <option value="Семер камень" data-img-src="/images/slect_img5.jpg">Семер камень</option>
+          <option value="Семер камень" data-img-src="/images/slect_img5.jpg">Семер камень</option-->
+        </select>
+        <!--/span-->
+
+
+        <select class="chzn-select" id='can_stone' onchange="stones_changed(this.value,'{{rings['W'][0]['id']}}','{{rings['M'][0]['id']}}')" {% if (rings['W'][0].name_ru != '' and rings['can_stones']['w'] == 1 ) or (rings['W'][0].name_ru == '' and rings['can_stones']['m'] == 1) %} disabled='disabled'{% endif %} style="width:180px;" tabindex="1">
+          <option value="">{{ lang.t('site', 'Камни') }}</option>
+          <option value="Белый">{{ lang.t('site', "Белый бриллиант") }}</option>
+          <option value="Черный">{{ lang.t('site', "Черный бриллиант") }}</option>
+        </select>
+
+        <select class="chzn-select"  onchange="enamel_changed(this.value,'{{rings['W'][0]['id']}}','{{rings['M'][0]['id']}}')" id="enamel_type" style="width:180px;" tabindex="1" {% if rings['can_enamels_check'] == 0 %}disabled='disabled'{% endif %}>
+          <option value="">{{ lang.t('site', 'Цвет эмали') }}</option>
+          {% for elem in rings['can_enamels'] %}
+          <option value="{{elem.id}}">{{elem.getLangProp('name') | capitalize}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="b-note">{{ lang.t('site', 'Если Вы хотите заказать разные кольца из одной пары — пожалуйста, сделайте отдельный заказ для кажого из колец') }}</div>
+    </div>
+  </div>
+
+  {% if Yii.params.language == 'ua' %}
+  <a href="/kak_uznat_razmer_koltsa_ua.pdf" target='_blank' class="b-size-collection">{{ lang.t('site', 'ГИД ПО РАЗМЕРАМ КОЛЕЦ') }}</a>
+  {% elseif Yii.params.language == 'en'%}
+  <a href="/kak_uznat_razmer_koltsa_en.pdf" target='_blank' class="b-size-collection">{{ lang.t('site', 'ГИД ПО РАЗМЕРАМ КОЛЕЦ') }}</a>
+  {% else %}
+  <a href="/kak_uznat_razmer_koltsa.pdf" target='_blank' class="b-size-collection">{{ lang.t('site', 'ГИД ПО РАЗМЕРАМ КОЛЕЦ') }}</a>
+  {% endif %}
+</div>
+
+<script>
+var last_metal_w = '';
+var last_metal_m = '';
+var last_probe_w = '';
+var last_probe_m = '';
+var last_surface_w = '';
+var last_surface_m = '';
+var last_enamel_w = '';
+var last_enamel_m = '';
+var last_stones_w = '';
+var last_stones_m = '';
+
+ $('input[name="fm"]').change(function(){
+      rebuild_constructor();
+ });
+ var default_metal_w = $("#metal_{{rings['W'][0].id}}").html();
+ var default_metal_m = $("#metal_{{rings['M'][0].id}}").html();
+ var default_probe_w = $("#probe_{{rings['W'][0].id}}").html();
+ var default_probe_m = $("#probe_{{rings['M'][0].id}}").html();
+ var default_stones_w = $("#stones_{{rings['W'][0].id}}").html();
+ var default_stones_m = $("#stones_{{rings['M'][0].id}}").html();
+ var default_surface_w = $("#surface_{{rings['W'][0].id}}").html();
+ var default_surface_m = $("#surface_{{rings['M'][0].id}}").html();
+ var default_enamel_w = $("#enamel_{{rings['W'][0].id}}").html();
+ var default_enamel_m = $("#enamel_{{rings['M'][0].id}}").html();
+ 
+ $('.weight_help').bind('mouseover',function(){
+    ider = "hint_"+$(this).attr('rel');
+    $("#"+ider).show();
+  });
+  $('.weight_help').bind('mouseout',function(){
+    ider = "hint_"+$(this).attr('rel');
+    $("#"+ider).hide();
+  });
+  link_ua = "/ua/?collection_id={{rings.collection.remote_id}}&ring_id={{rings.collection.ring_id}}";
+  link_en = "/en/?collection_id={{rings.collection.remote_id}}&ring_id={{rings.collection.ring_id}}";
+  link_ru = "/?collection_id={{rings.collection.remote_id}}&ring_id={{rings.collection.ring_id}}";
+   $($('.b-lng-select a')[0]).attr('href',link_ru);
+   $($('.b-lng-select a')[1]).attr('href',link_ua);
+   $($('.b-lng-select a')[2]).attr('href',link_en);
+  {% if rings.collection.id != 9 %}
+    $("#popup_order_make_order").html("{{ lang.t('site', 'Оформить заказ') }}");
+    $("#popup_order_text_input").html("{{ lang.t('site', 'Для оформления заказа<br>введите Ваши данные')|raw}}");
+    $("#popup_order_button_order").html("{{ lang.t('site', 'ОФОРМИТЬ ЗАКАЗ') }}");
+    $("#order_comment").html("{{ lang.t('site', 'Комментарий к заказу') }}");
+    $("#order_comment").attr("placeholder","{{ lang.t('site', 'Комментарий к заказу') }}");
+    $("#order_send").html("{{ lang.t('site', 'Cпасибо, Ваш заказ принят. <br>В ближайшее время с Вами свяжется менеджер')|raw  }}");
+  {% else %}
+    $("#popup_order_make_order").html("{{ lang.t('site', 'Оформить заявку') }}");
+    $("#popup_order_text_input").html("{{ lang.t('site', 'Для оформления заявки<br>введите Ваши данные')|raw}}");
+    $("#popup_order_button_order").html("{{ lang.t('site', 'ОФОРМИТЬ ЗАЯВКУ') }}");
+    $("#order_comment").html("{{ lang.t('site', 'Комментарий к заявке') }}");
+    $("#order_comment").attr("placeholder","{{ lang.t('site', 'Комментарий к заявке') }}");
+    $("#order_send").html("{{ lang.t('site', 'Cпасибо, Ваша заявка принята. <br>В ближайшее время с Вами свяжется менеджер')|raw  }}");
+  {% endif %}
+</script>
+<style>
+.test-popup {
+  padding:5px;
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  width: 361px;
+  margin-left: -47px;
+  margin-top: 20px;
+  background: #FFF;
+  border: 1px solid;
+}
+</style>

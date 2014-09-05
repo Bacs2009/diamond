@@ -1,0 +1,38 @@
+{% extends this.layout %}
+
+{% block breadcrumbs %}
+	{% widget('zii.widgets.CBreadcrumbs',{'links':{'Коллекции':['index'],0:'просмотр'}}) %}
+{% endblock %}
+
+{% block bigColumn %}
+
+	<h1>Просмотр коллекции: "{{ model.name_ru }}"</h1>
+
+	{% widget('zii.widgets.CDetailView', {
+		'data':model,
+		'attributes':[
+			'id',
+			'name_ru',
+			'name_ua',
+			'name_en',
+			'text_ru',
+			'text_ua',
+			'text_en',
+			'active',
+			'remote_id'
+		]
+	}) %}
+
+{% endblock %}
+
+{% block sidebar %}
+	{% set menu=[
+			{'label':'К списку коллекций','url':['index']},
+			{'label':'Добавить новую','url':['create'] },
+			{'label':'Редактировать текущую','url':{0:'update','id':model.id}},
+			{'label':'Удалить текщую','url':'javascript:void(0);','linkOptions':{'submit':{0:'delete','id':model.id},'confirm':'Вы уверены, удалить этоу коллекцию?'}}
+	] %}
+	{% beginWidget('zii.widgets.CPortlet',{'title':'Действия'}) %}
+		{% widget('zii.widgets.CMenu',{'items':menu,'htmlOptions':{'class':'operations'}}) %}
+	{% endWidget %}
+{% endblock %}

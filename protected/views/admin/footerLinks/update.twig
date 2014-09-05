@@ -1,0 +1,24 @@
+{% extends this.layout %}
+
+{% block breadcrumbs %}
+	{% widget('zii.widgets.CBreadcrumbs', {'links' : {'Управление ссылками в футере' : ['index'], 0 : 'редактирование'}}) %}
+{% endblock %}
+
+{% block bigColumn %}
+
+	<h1>Добавление ссылки: "{{ model.name_ru }}"</h1>
+
+	{{ this.renderPartial('_form', {'model' : model}) }}
+
+{% endblock %}
+
+{% block sidebar %}
+	{% set menu = [
+			{'label' : 'К списку ссылок', 'url' : ['index']},
+			{'label' : 'Добавить новую ссылку', 'url' : ['create']},
+			{'label' : 'Удалить текущую', 'url' : 'javascript:void(0);', 'linkOptions' : {'submit' : {0 : 'delete', 'id' : model.id}, 'confirm' : 'Вы уверены, удалить эту ссылку?'}}
+	] %}
+	{% beginWidget('zii.widgets.CPortlet', {'title' : 'Действия'}) %}
+		{% widget('zii.widgets.CMenu', {'items' : menu, 'htmlOptions' : {'class' : 'operations'}}) %}
+	{% endWidget %}
+{% endblock %}

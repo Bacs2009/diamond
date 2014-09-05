@@ -1,0 +1,53 @@
+{% extends this.layout %}
+
+{% block breadcrumbs %}
+	{% widget('zii.widgets.CBreadcrumbs', {'links' : {'Шаблон письма "Заявка хепипипл"' : ['index'], 0 : 'редактирование'}}) %}
+{% endblock %}
+
+{% block bigColumn %}
+
+	<h1>Редактирование</h1>
+
+	{% autoescape false %}
+
+	<div class="form">
+
+		{% set form = beginWidget('CActiveForm', {'id' : 'about-form', 'enableAjaxValidation' : false, 'htmlOptions' : {'enctype' : 'multipart/form-data'}}) %}
+
+		{{ form.errorSummary(model, 'Исправьте, пожалуйста, следующие ошибки:') }}
+
+		<div class="row">
+        {{ form.labelEx(model, 'value_ru') }}
+        {% widget('ext.editme.ExtEditMe', {'model' : model, 'attribute' : 'value_ru'}) %}
+        {{ form.error(model, 'value_ru') }}
+    </div>
+
+		<div class="row">
+        {{ form.labelEx(model, 'value_ua') }}
+        {% widget('ext.editme.ExtEditMe', {'model' : model, 'attribute' : 'value_ua'}) %}
+        {{ form.error(model, 'value_ua') }}
+    </div>
+
+    <div class="row">
+        {{ form.labelEx(model, 'value_en') }}
+        {% widget('ext.editme.ExtEditMe', {'model' : model, 'attribute' : 'value_en'}) %}
+        {{ form.error(model, 'value_en') }}
+    </div>
+
+    <div class="row buttons">
+        {{ CHtml.submitButton('Сохранить') }}
+    </div>
+
+    {% endWidget %}
+
+	</div>
+	{% endautoescape %}
+
+{% endblock %}
+
+{% block sidebar %}
+	{% set menu = [{'label' : 'Просмотреть', 'url' : ['index']}] %}
+	{% beginWidget('zii.widgets.CPortlet', {'title' : 'Действия'}) %}
+		{% widget('zii.widgets.CMenu', {'items' : menu, 'htmlOptions' : {'class' : 'operations'}}) %}
+	{% endWidget %}
+{% endblock %}

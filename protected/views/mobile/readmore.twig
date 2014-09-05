@@ -1,0 +1,401 @@
+{% extends this.layout %}
+{% block content%}
+
+
+<div id="col-slider">
+	<ul class="slides">
+	{% for ring in content %}
+		<li><a href="" pair_id="{{ring['pair_id']}}" id="{{ring['id']}}"><img lang="{{ Yii.params.language }}" alt="" src="/old_images/{{ring['articul']}}.png" width='93px' height='94px'  alt=""><p>{{ring.getLangProp('name') | striptags}}</p></a></li>
+   {% endfor %}
+	</ul>
+</div>
+	
+	
+	<section>
+    		<!-- Section for information we'll get by Ajax from DB -->
+	</section>
+	
+	
+	<!-- -------========================================================   Jquery funcions  =================================================================================================== -->
+	<script type="text/javascript">
+	window.onload = function(){
+		//Loading first not hiding element in slider
+		loadInfoIntoSection($('.slides li[class!=bx-clone] a').attr('id'), $('.slides li[class!=bx-clone] a').attr('pair_id'), $('.slides li[class!=bx-clone] a img').attr('lang'));
+	}
+	// Preloader functions
+	function preload(){
+		
+  		var bodyH = $(window).height() / 2;
+      $("body").after('<div id="system-load" style="position:fixed;'
+              + 'top:0px; left:0px; background: rgba(255, 255, 255, 1); width:100%; height:100%;'
+              + 'z-index:99999999; color:#fff; padding-top:' + bodyH + 'px;"'
+              + 'align="center">'
+              + '<img src="/images/preloader.png">'
+              + '<div id="fill" style="background:#000; width:82px; height:0px; margin-top:-5px;"></div>'
+              + ' alt="Пожалуйста, подождите..." /></div>');
+      $('#fill').animate({height: '109px', marginTop: '-114px'}, 1000);
+    }
+    function remove_loader(){
+    	   setTimeout(function(){$('#system-load').fadeOut('slow').remove();}, 1000);
+    }
+ // Start top small slider
+	$('#col-slider .slides').bxSlider({
+	    pager: false,
+	    minSlides: 1,
+	    maxSlides: 3,
+	    slideWidth: 100,
+	    slideMargin: 5
+	});
+	
+	// On click to the some position in slider get full information about
+	$('body').on('click', '#col-slider .bx-viewport a', function(){
+		  loadInfoIntoSection($(this).attr('id'), $(this).attr('pair_id'), $(this).children().attr('lang'));
+		  return false;
+	});
+	function loadInfoIntoSection(id, p_id, lang){
+		  var lang = lang;
+		  var ring_id = id;
+		  var pair_id = p_id;
+		  $.ajaxSetup ({cache: false});
+  		$.ajax({
+          url: '/ring/getfullinfomobile?ring_id='+ring_id+'&lang='+lang,
+          dataType: 'json',
+          beforeSend: function(){
+        	   preload();
+          },
+          success: function(data){
+            if(data[0]['gender']=='m'){
+            	switch (lang){
+                case 'ru':
+                	 var gender = 'Для него';
+                	 var probe = 'проба';
+                	 var type = 'Тип поверхности';
+                	 var weight = 'Вес кольца';
+                	 var size = 'Размер кольца';
+                	 var art = 'артикул';
+                	 var buy = 'Купить';
+                	 break;
+                case 'ua':
+                	var gender = 'Для нього';
+                	var probe = 'проба';
+                	var type = 'Тип поверхні';
+                	var weight = 'Вага кільця';
+                	var size = 'Розмір кольца';
+                	var art = 'артикул';
+                	var buy = 'Купити';
+               	  break;
+               	default:
+               		var gender = 'For him';
+                	var probe = 'probe';
+                	var type = 'Surface type';
+                	var weight = 'Weight of ring';
+                	var size = 'Size of ring';
+                	var art = 'article';
+                	var buy = 'Buy';
+                }
+            	  var gender_id = 'he';
+            }else{
+            	switch (lang){
+                case 'ru':
+                	 var gender = 'Для нее';
+                	 var probe = 'проба';
+                	 var type = 'Тип поверхности';
+                	 var weight = 'Вес кольца';
+                	 var size = 'Размер кольца';
+                	 var art = 'артикул';
+                	 var buy = 'Купить';
+                	 var g = 'г';
+                	 break;
+                case 'ua':
+                	var gender = 'Для неї';
+                	var probe = 'проба';
+                	var type = 'Тип поверхні';
+                	var weight = 'Вага кільця';
+                	var size = 'Розмір кольца';
+                	var art = 'артикул';
+                	var buy = 'Купити';
+                	var g = 'г';
+               	  break;
+               	default:
+               		var gender = 'For her';
+                	var probe = 'probe';
+                	var type = 'Surface type';
+                	var weight = 'Weight of ring';
+                	var size = 'Size of ring';
+                	var art = 'article';
+                	var buy = 'Buy';
+                	var g = 'g';
+                }
+            	  var gender_id = 'she';
+            }
+            //alert(print_r(data));
+        	  var html = '<p class="item-header">'+data[0]['collection_name']+'</p>';
+        	  html = html+'<div class="b-title-product">- '+data[0]['name'].replace(data[0]['collection_name'], '')+' -</div>';
+            html = html+'<div id="'+gender_id+'" class="item">';
+            html = html+'<img src="/old_images/'+data[0]['articul']+'.png" alt="" id="'+data[0]['id']+'" pair_id="'+pair_id+'">';
+            html = html+'<p class="for"><span></span>'+gender+'</p>';
+            html = html+'<ul class="item-char she">';
+            html = html+'<li><span>';
+            data[0]['metal'] = data[0]['metal'].charAt(0).toUpperCase() + data[0]['metal'].substr(1);
+            html = html+data[0]['metal']+', '+data[0]['probe']+' '+probe;
+            html = html+'<li>'+type+': <span>'+data[0]['surface_type']+'</span></li>';
+            html = html+'<li>'+weight+': <span>'+data[0]['weight']+' '+g+'</span></li>';
+            html = html+'<li>'+size+': <span><div class="b-size-product" style="display:inline-block;"><a href="#" class="b-open-size-select" id="ring_w_size_'+data[0]['size']+'">'+data[0]['size']+'</a><div class="b-size-select"><a href="14">14</a><a href="14.5">14.5</a><a href="15">15</a><a href="15.5">15.5</a><a href="16">16</a><a href="16.5">16.5</a><a href="17">17</a><a href="17.5">17.5</a><a href="18">18</a><a href="18.5">18.5</a><div class="b-size-select-close">&times;</div></div></div></span></li>';
+            html = html+'</ul><p class="item-price"><span>'+data[0]['price']+' USD</span> '+art+': '+data[0]['articul']+'</p>';
+            html = html+'<div class="btns"><a href="#order-form" onclick="set_order_info('+lang+')" class="btn b-button-by" id="'+lang+'">'+buy+'</a></div>';
+            html = html+'</div>';
+
+            //If ring has pair
+            if( typeof pair_id !== "undefined" && pair_id > 0){
+            	$.ajax({
+                    url: '/ring/getfullinfomobile?ring_id='+pair_id+'&lang='+lang,
+                    dataType: 'json',
+                    type: 'POST',
+                    success: function(data){
+                    	if(data[0]['gender']=='m'){
+                            switch (lang){
+                            case 'ru':
+                            	 var gender = 'Для него';
+                            	 var probe = 'проба';
+                            	 var type = 'Тип поверхности';
+                            	 var weight = 'Вес кольца';
+                            	 var size = 'Размер кольца';
+                            	 var art = 'артикул';
+                            	 var buy = 'Купить';
+                            	 var g = 'г';
+                            	 break;
+                            case 'ua':
+                            	var gender = 'Для нього';
+                            	var probe = 'проба';
+                            	var type = 'Тип поверхні';
+                            	var weight = 'Вага кільця';
+                            	var size = 'Розмір кольца';
+                            	var art = 'артикул';
+                            	var buy = 'Купити';
+                            	var g = 'г';
+                           	  break;
+                           	default:
+                           		var gender = 'For him';
+                            	var probe = 'probe';
+                            	var type = 'Surface type';
+                            	var weight = 'Weight of ring';
+                            	var size = 'Size of ring';
+                            	var art = 'article';
+                            	var buy = 'Buy';
+                            	var g = 'g';
+                            }
+                        	  var gender_id = 'he';
+                        }else{
+                        	switch (lang){
+                            case 'ru':
+                            	 var gender = 'Для нее';
+                            	 var probe = 'проба';
+                            	 var type = 'Тип поверхности';
+                            	 var weight = 'Вес кольца';
+                            	 var size = 'Размер кольца';
+                            	 var art = 'артикул';
+                            	 var buy = 'Купить';
+                            	 break;
+                            case 'ua':
+                            	var gender = 'Для неї';
+                            	var probe = 'проба';
+                            	var type = 'Тип поверхні';
+                            	var weight = 'Вага кільця';
+                            	var size = 'Розмір кольца';
+                            	var art = 'артикул';
+                            	var buy = 'Купити';
+                           	  break;
+                           	default:
+                           		var gender = 'For her';
+                            	var probe = 'probe';
+                            	var type = 'Surface type';
+                            	var weight = 'Weight of ring';
+                            	var size = 'Size of ring';
+                            	var art = 'article';
+                            	var buy = 'Buy';
+                            }
+                        	  var gender_id = 'she';
+                        }
+                    	html = html+'<hr/><div id="'+gender_id+'" class="item">';
+                    	html = html+'<img src="/old_images/'+data[0]['articul']+'.png" id="'+data[0]['id']+'" alt="">';
+                    	html = html+'<p class="for"><span></span>'+gender+'</p>';
+                    	html = html+'<ul class="item-char">';
+                    	html = html+'<li><span>';
+                    	data[0]['metal'] = data[0]['metal'].charAt(0).toUpperCase() + data[0]['metal'].substr(1);
+                      html = html+data[0]['metal']+', '+data[0]['probe']+' '+probe;
+                      html = html+'<li>'+type+': <span>'+data[0]['surface_type']+'</span></li>';
+                    	html = html+'<li>'+weight+': <span>'+data[0]['weight']+' '+g+'</span></li>';
+                    	html = html+'<li>'+size+': <span><div class="b-size-product" style="display:inline-block;"><a href="#" class="b-open-size-select" id="ring_w_size_'+data[0]['size']+'">'+data[0]['size']+'</a><div class="b-size-select"><a href="19">19</a><a href="19.5">19.5</a><a href="20">20</a><a href="20.5">20.5</a><a href="21">21</a><a href="21.5">21.5</a><a href="22">22</a><a href="22.5">22.5</a><a href="23">23</a><a href="23.5">23.5</a><a href="24">24</a><div class="b-size-select-close">&times;</div></div></div></span></li>';
+                    	html = html+'</ul><p class="item-price"><span>'+data[0]['price']+' USD</span> '+art+': '+data[0]['articul']+'</p>';
+                    	html = html+'<div class="btns"><a href="#order-form" onclick="set_order_info('+lang+')" class="btn b-button-by" id="'+lang+'">'+buy+'</a></div>';
+                    	html = html+'</div>';
+                    	$('section').html(html);
+                    },
+                    error : function(xhr, status){
+                        console.log(status);
+                    }
+                });
+            }
+            
+            $('section').html(html);
+            remove_loader();
+          }
+      });
+	}
+	function print_r(arr, level) {
+	    var print_red_text = "";
+	    if(!level) level = 0;
+	    var level_padding = "";
+	    for(var j=0; j<level+1; j++) level_padding += "    ";
+	    if(typeof(arr) == 'object') {
+	        for(var item in arr) {
+	            var value = arr[item];
+	            if(typeof(value) == 'object') {
+	                print_red_text += level_padding + "'" + item + "' :\n";
+	                print_red_text += print_r(value,level+1);
+			} 
+	            else 
+	                print_red_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+	        }
+	    } 
+
+	    else  print_red_text = "===>"+arr+"<===("+typeof(arr)+")";
+	    return print_red_text;
+	}
+	// Buy button click functions
+	function set_order_info(w_id, m_id){
+	  $("#former_order").show();
+	}
+  $('body').on('click','.b-button-by',function(){
+	    $('.b-order-aceeted').hide();
+	    $('.b-order-form-wrapper').show();
+	    $('.b-who-blocks-popaup:eq(0)').empty();
+	    $('.b-who-blocks-popaup:eq(1), .b-usd, .b-checkbox').remove();
+	    var price_she = parseInt($('div#she p.item-price span').text().replace(/\D+/g,""));
+	    if($('div#he p.item-price span').text()){var price_he = parseInt($('div#he p.item-price span').text().replace(/\D+/g,""))}else{var price_he = 0};
+
+	    switch ($(this).attr('id')){
+        case 'ru':
+        	 var gender_she = 'Для нее';
+        	 var gender_he = 'Для него';
+        	 var size = 'Размер кольца';
+        	 break;
+        case 'ua':
+        	var gender_she = 'Для неї';
+        	var gender_he = 'Для нього';
+        	var size = 'Розмір кільця';
+       	  break;
+       	default:
+       		var gender_she = 'For her';
+          var gender_he = 'For him';
+          var size = 'Size of ring';
+        }
+	    
+	    // Add goods info into the order form
+	    $('.b-name-ring-popup').text($('section p.item-header').text());
+	    $('.b-name-collection-popup').text($('.b-title-product').text());
+	    $('.b-who-blocks-popaup')
+	     .append('<div class="b-poup-img"><img src="'+$('section .item img').attr('src')+'" id="'+$('section .item img').attr('id')+'"></div>')
+	     .append('<div class="b-for-who">'+gender_she+':</div>')
+	     .append('<div style="font-family:Georgia, CharisSilItalic; font-size:12px; font-style: italic;"><span class="m_names">'+$('div#she .item-char li:eq(0)').text()+'</span><br>'+$('div#she .item-char li:eq(1)').text()+'<br>'+$('div#she .item-char li:eq(2)').text()+'<br>'+size+': '+$('a.b-open-size-select:eq(0)').text()+'</div>');
+	    
+	    //If pair
+	    var pair_id = $('div#she img').attr('pair_id');
+	    if( typeof pair_id !== "undefined" && pair_id > 0){
+	    	$('.b-who-blocks-popaup')
+	    	  .after('<div class="b-who-blocks-popaup"><div class="b-poup-img"><img src="'+$('section .item img:eq(1)').attr('src')+'" id="'+$('section .item img:eq(1)').attr('id')+'"></div><div class="b-for-who">'+gender_he+':</div><div style="font-family:Georgia, CharisSilItalic; font-size:12px; font-style: italic;"><span class="m_names">'+$('div#he .item-char li:eq(0)').text()+'</span><br>'+$('div#he .item-char li:eq(1)').text()+'<br>'+$('div#he .item-char li:eq(2)').text()+'<br>'+size+': '+$('a.b-open-size-select:eq(1)').text()+'</div></div>');
+	    	$('.b-who-blocks-popaup:eq(0)').attr('price', price_she).after('<span class="b-checkbox"><input type="checkbox" class="b-she" checked="checked"></span>');
+		    $('.b-who-blocks-popaup:eq(1)').attr('price', price_he).after('<span class="b-usd"><br/>'+(price_she+price_he)+' USD</span>');
+		    $('.b-usd').before('<span class="b-checkbox"><input type="checkbox" class="b-she" checked="checked"></span>');
+			}else{
+	     $('.b-who-blocks-popaup:eq(0)').attr('price', price_she).after('<span class="b-checkbox"><input type="checkbox" class="b-she" checked="checked"></span><span class="b-usd">'+(price_she+price_he)+' USD</span>');
+			}
+
+	    // Checkboxes
+	    $('input.b-he, input.b-she').change(function(){
+	    	  var sum = 0;
+	    	  if($(this).is(":checked")){
+	    		  $(this).parent().prev().css({opacity:'1'});
+	    		  
+	    	  }else{
+		    	  if($('input.b-he, input.b-she').not(this).is(":checked")){
+		    		  $(this).parent().prev().css({opacity:'.3'});
+		    	  }else{
+		    		  alert('{{ lang.t("site", "Должно быть выбрано минимум одно кольцо") }}');
+		    		  $(this).prop('checked', true);
+			    	}  
+	    		  
+			    }
+	    	  $('.b-who-blocks-popaup').each(function(){
+	    		  if($(this).css('opacity') == 1){
+	    			  sum = sum + parseInt($(this).attr('price'));
+	    		  }
+	    		  
+    		  });  
+    		  $('.b-usd').text(sum + ' USD');
+		  });
+	    // Show order
+      $.fancybox({
+        href: '#order-form',
+        'closeBtn':false,
+        helpers : {
+          overlay : {
+            css : {
+              'background' : 'rgba(255, 255, 255, 0.8)'
+            }
+          }
+        }
+      });
+	    // Close order
+	    $('body').on('click','.b-close-popup',function(){
+        $.fancybox.close();
+      });
+   
+    return false;
+  });
+
+  
+  /*Select size ring*/
+  /*========================================================================== */
+  $('body').on('click','.b-size-select-close',function(){
+    var close_a = $(this);
+    close_a.parent().fadeOut();
+    close_a.parent().prev('.b-open-size-select').removeClass('b-active');
+  });
+
+
+
+  $('body').on('click','.b-size-select a',function(){
+    var size = $(this).html();
+    $(this).closest('.b-size-product').find('.b-open-size-select').html(size);
+
+    $(this).closest('.b-size-product').find('.b-size-select').fadeOut('fast');
+    $(this).closest('.b-size-product').find('.b-open-size-select').removeClass('b-active');
+    if($(this).closest('.b-size-product').find('.b-open-size-select').attr('id').indexOf('w') != -1){
+      ring_id = $(this).closest('.b-size-product').find('.b-open-size-select').attr('id').split('_')[3];
+      $("#hidden_size_w").val(size);
+      old_price = $("#popup_w_price_"+ring_id).html();
+      old_price_s = $("#popup_s_w_price_"+ring_id).html();
+      
+    }
+    if($(this).closest('.b-size-product').find('.b-open-size-select').attr('id').indexOf('m') != -1){
+      ring_id = $(this).closest('.b-size-product').find('.b-open-size-select').attr('id').split('_')[3];
+      $("#hidden_size_m").val(size);
+      old_price = $("#popup_m_price_"+ring_id).html();
+      old_price_s = $("#popup_s_m_price_"+ring_id).html();
+      
+    }
+    return false;
+  });
+
+
+
+  $('body').on('click','.b-open-size-select',function(){
+    var open_a = $(this);
+    open_a.addClass('b-active');
+    open_a.next('.b-size-select').fadeIn();
+    return false;
+  });
+  </script>
+{% endblock %}
+

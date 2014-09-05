@@ -1,0 +1,1 @@
+{    "shareFunction": "share",     "getCollectionsURL": "/ring/collectionslist",     "getItemsURL": "/ring/flashitems",     "sendMailURL": "/ring/sendmail",     "saveImageURL": "/ring/saveshare",     "productURL": "/?" }

@@ -1,0 +1,34 @@
+{% extends this.layout %}
+
+{% block breadcrumbs %}
+	{% widget('zii.widgets.CBreadcrumbs',{'links':{'Заказы':['index'],0:'просмотр'}}) %}
+{% endblock %}
+
+{% block bigColumn %}
+
+	<h1>Просмотр заказа: "{{ model.id }}"</h1>
+
+	{% widget('zii.widgets.CDetailView', {
+		'data':model,
+		'attributes':[
+			'id',
+			'name',
+			'email',
+			'city',
+			'phone',
+			'comment',
+			{'name':'all_info','type':'raw'}
+		]
+	}) %}
+
+{% endblock %}
+
+{% block sidebar %}
+	{% set menu=[
+			{'label':'К списку заказов','url':['index']},
+			{'label':'Удалить заказ','url':'javascript:void(0);','linkOptions':{'submit':{0:'delete','id':model.id},'confirm':'Вы уверены, удалить этот заказ?'}}
+	] %}
+	{% beginWidget('zii.widgets.CPortlet',{'title':'Действия'}) %}
+		{% widget('zii.widgets.CMenu',{'items':menu,'htmlOptions':{'class':'operations'}}) %}
+	{% endWidget %}
+{% endblock %}

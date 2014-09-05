@@ -1,0 +1,7 @@
+{% extends "views/layouts/admin_main.twig" %}
+{% block content %}
+<div id="content">
+    {% block bigColumn %}
+    {% endblock %}
+</div><!-- content -->
+{% endblock %}

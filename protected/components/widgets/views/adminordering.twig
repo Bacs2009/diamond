@@ -1,0 +1,28 @@
+{% autoescape false %}
+
+{% set form = beginWidget('CActiveForm',{'id':'order-form','enableAjaxValidation':false}) %}
+
+<div class="row buttons">
+	{{ CHtml.ajaxSubmitButton(button,'',{'dataType':'json','success':'SuccessSaved'})|raw }}
+</div>
+
+<ul id="order_list">
+{% for item in items %}
+	<li>
+		<div>
+			<img src="{{ item.imageUrl[img] }}" alt="{{ item[title] }}" title="{{ item[title] }}">
+			{{ CHtml.hiddenField('Order[]',item[id]) }}
+		</div>
+	</li>
+{% endfor %}
+</ul>
+<div style="clear: both;"></div>
+
+<script type="text/javascript">
+	var SuccessSaved=function(data) { alert(data.data); }
+	new OrderBox("order_list");
+</script>
+
+{% endWidget %}
+
+{% endautoescape %}

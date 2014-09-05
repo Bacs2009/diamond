@@ -1,0 +1,44 @@
+{% autoescape  false %}
+
+<div class="form">
+
+    {% set form = beginWidget('CActiveForm', {'id' : 'cityItem-form', 'enableAjaxValidation' : false, 'htmlOptions' : {'enctype' : 'multipart/form-data'}}) %}
+
+    <p class="note">Поля отмеченные <span class="required">*</span> являются обязательными.</p>
+
+    {{ form.errorSummary(model, 'Исправьте, пожалуйста, следующие ошибки:') }}
+
+    <div class="row">
+        {{ form.labelEx(model, 'name_ru') }}
+        {{ form.textField(model, 'name_ru', {'size' : '46%', 'maxlength' : 20}) }}
+        {{ form.error(model,'name_ru') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'name_ua') }}
+        {{ form.textField(model, 'name_ua', {'size' : '46%', 'maxlength' : 20}) }}
+        {{ form.error(model, 'name_ua') }}
+    </div>
+     <div class="row">
+        {{ form.labelEx(model, 'name_en') }}
+        {{ form.textField(model, 'name_en', {'size' : '46%', 'maxlength' : 20}) }}
+        {{ form.error(model, 'name_en') }}
+    </div>
+	<div class="row">
+        {{ form.labelEx(model, 'lat') }}
+        {{ form.textField(model, 'lat', {'size' : '16%', 'maxlength' : 12}) }}
+        {{ form.error(model, 'lat') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'lng') }}
+        {{ form.textField(model, 'lng', {'size' : '16%', 'maxlength' : 12}) }}
+        {{ form.error(model, 'lng') }}
+    </div>
+
+    <div class="row buttons">
+        {{ CHtml.submitButton(model.isNewRecord ? 'Добавить' : 'Сохранить') }}
+    </div>
+
+    {% endWidget %}
+
+</div>
+{% endautoescape %}

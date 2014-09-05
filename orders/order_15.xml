@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<order>
+  <id>15</id>
+  <name>tset</name>
+  <email>test@test.ru</email>
+  <phone>1111111</phone>
+  <comment>1233</comment>
+  <city>киев</city>
+  <ordered_m>
+    <ring_original>
+      <name_ru> ХЕПИПИПЛ  Новая семья</name_ru>
+      <name_ua>ХЕПІПІПЛ Нова сім'я</name_ua>
+      <articul>0003465</articul>
+      <size>19.5</size>
+      <gender>m</gender>
+      <width>0</width>
+      <height>0</height>
+      <koeff>5.005</koeff>
+      <weight>3.72</weight>
+      <thickness>0</thickness>
+      <price>4760</price>
+      <remote_id>0002OBOF </remote_id>
+      <active_st_size>0</active_st_size>
+      <collection>
+        <id>9</id>
+        <id_for_ring>13</id_for_ring>
+        <name_ua>ХЕПІПІПЛ</name_ua>
+        <name_ru>ХЕПИПИПЛ</name_ru>
+      </collection>
+      <metal>
+        <id>5</id>
+        <name_ua>золото</name_ua>
+        <name_ru>золото</name_ru>
+        <name_short>Y</name_short>
+        <probe>585</probe>
+      </metal>
+      <surface>
+        <id>1</id>
+        <name_ua>полірована</name_ua>
+        <name_ru>полированная</name_ru>
+      </surface>
+      <enamel>
+        <id>0</id>
+        <name_ua></name_ua>
+        <name_ru></name_ru>
+      </enamel>
+    </ring_original>
+    <calculated_price>4760</calculated_price>
+  </ordered_m>
+  <ordered_w>
+    <ring_original>
+      <name_ru>ХЕПИПИПЛ ХЕПИПИПЛ Новая семья</name_ru>
+      <name_ua>ХЕПИПИПЛ ХЕПИПИПЛ  Новая семья</name_ua>
+      <articul>0003466</articul>
+      <size>16.5</size>
+      <gender>f</gender>
+      <width>0</width>
+      <height>0</height>
+      <koeff>5.005</koeff>
+      <weight>3.5</weight>
+      <thickness>0</thickness>
+      <price>4510</price>
+      <remote_id>0002OCOF </remote_id>
+      <active_st_size>0</active_st_size>
+      <collection>
+        <id>9</id>
+        <id_for_ring>13</id_for_ring>
+        <name_ua>ХЕПІПІПЛ</name_ua>
+        <name_ru>ХЕПИПИПЛ</name_ru>
+      </collection>
+      <metal>
+        <id>5</id>
+        <name_ua>золото</name_ua>
+        <name_ru>золото</name_ru>
+        <name_short>Y</name_short>
+        <probe>585</probe>
+      </metal>
+      <surface>
+        <id>1</id>
+        <name_ua>полірована</name_ua>
+        <name_ru>полированная</name_ru>
+      </surface>
+      <enamel>
+        <id>0</id>
+        <name_ua></name_ua>
+        <name_ru></name_ru>
+      </enamel>
+    </ring_original>
+    <calculated_price>4510</calculated_price>
+  </ordered_w>
+</order>

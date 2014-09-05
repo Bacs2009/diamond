@@ -1,0 +1,62 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: admin
+ * Date: 18.09.12
+ * Time: 12:09
+ * To change this template use File | Settings | File Templates.
+ */
+class LanguagesWidget extends CWidget
+{
+
+	public $languages = array('ru' => 'ру', 'ua' => 'укр');
+	public $language = 'ru';
+
+	public function init()
+	{
+	/*	$absoluteUrl = Yii::app()->createAbsoluteUrl('/');
+		$url = Yii::app()->request->requestUri;
+		$languages = array();
+
+		if(strpos($url, '/ua/') === 0)
+		{
+			$url = substr($url, 3);
+		}
+
+		foreach($this->languages as $key => $value)
+		{
+			$language = array
+			(
+				'title' => $value,
+				'href' => $absoluteUrl . ($this->language !== $key ? '/' . $key : '') . $url,
+				'options' => array()
+			);
+
+			if(Yii::app()->params->language == $key)
+			{
+				$language['options']['class'] = 'b-active';
+			}
+
+			$languages[] = $language;
+		}
+*/
+		//$this->render('languages', array('languages' => $languages));
+		$absoluteUrl = Yii::app()->createAbsoluteUrl('/');
+    $url = Yii::app()->request->requestUri;
+    $temp = split('/ua/',$url);
+    //print_r($temp);
+    if(count($temp) > 1){
+      $link_ru = $absoluteUrl.'/'.str_replace('/ua/','',$url);
+      $link_ua = '';
+      
+    }else{
+      $link_ua = $absoluteUrl.'/ua'.$url;
+      $link_ru = '';
+    }
+   
+    $this->render('languages', array('link_ru' => $link_ru,'link_ua' => $link_ua));
+	}
+
+}
+
+?>

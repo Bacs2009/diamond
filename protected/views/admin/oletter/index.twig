@@ -1,0 +1,22 @@
+{% extends this.layout %}
+
+{% block breadcrumbs %}
+	{% widget('zii.widgets.CBreadcrumbs', {'links' : ['Шаблон письма "заказ с сайта"']}) %}
+{% endblock %}
+
+{% block bigColumn %}
+
+	<h1>Шаблон письма "заказ с сайта"</h1>
+
+	<div style="border: 1px solid #C9E0ED; margin: 10px 0; padding: 10px;">
+	{{ value|raw }}
+	</div>
+
+{% endblock %}
+
+{% block sidebar %}
+	{% set menu = [{'label' : 'Редактировать', 'url' : ['update']}] %}
+	{% beginWidget('zii.widgets.CPortlet', {'title' : 'Действия'}) %}
+		{% widget('zii.widgets.CMenu', {'items' : menu, 'htmlOptions' : {'class' : 'operations'}}) %}
+	{% endWidget %}
+{% endblock %}

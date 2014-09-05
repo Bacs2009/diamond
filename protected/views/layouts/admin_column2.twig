@@ -1,0 +1,17 @@
+{% extends "views/layouts/admin_main.twig" %}
+{% block content %}
+<div class="span-19">
+    <div id="content">
+        {% block bigColumn %}
+        {% endblock %}
+    </div>
+    <!-- content -->
+</div>
+<div class="span-5 last">
+    <div id="sidebar">
+    {% block sidebar%}
+    {% endblock sidebar %}
+    </div>
+    <!-- sidebar -->
+</div>
+{% endblock content %}

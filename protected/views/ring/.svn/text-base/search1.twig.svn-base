@@ -1,0 +1,244 @@
+{% extends this.layout %}
+
+{% block content %}
+
+  <div role="main" class="main">
+     <div class="b-inner-container">
+      <div class="b-h2">{{ lang.t('site', 'Результат поиска') }} ({{search_count}})</div>
+      <div class="b-filter-search"><a href="{{Yii.request.requestUri | replace({'&filter=all':'','&filter=M':'','&filter=W':''}) }}" {% if filter == 'all'%}class="b-active"{% endif %}>{{ lang.t('site', 'все') }}</a><span>|</span><a href="{{Yii.request.requestUri | replace({'&filter=all':'','&filter=M':'','&filter=W':''}) }}&filter=W" {% if filter == 'W'%}class="b-active"{% endif %}>{{ lang.t('site', 'для нее') }}</a><span>|</span><a href="{{Yii.request.requestUri | replace({'&filter=all':'','&filter=M':'','&filter=W':''}) }}&filter=M" {% if filter == 'M'%}class="b-active"{% endif %}>{{ lang.t('site', 'для него') }}</a></div>
+      <div class="b-sort">{% if cost == "DESC" %}<a href="{{Yii.request.requestUri | replace({'&cost=ASC':''}) }}&cost=ASC">{{ lang.t('site', 'цена по убыванию') }}</a>{% else %}<a href="{{Yii.request.requestUri | replace({'&cost=ASC':''}) }}">{{ lang.t('site', 'цена по возрастанию') }}</a>{% endif %}</div>
+      <div class="b-search-icons"><!--a href="#"><img src="/images/social1.jpg" alt=""></a><a href="#"><img src="/images/social2.jpg" alt=""></a><span class="b-links-def"><a href="#"><img src="/images/social3.jpg" alt=""></a><a href="#send-letter-form" class="b-send-letter"><img src="/images/social4.jpg" alt=""></a--><a href="#"><img src="/images/social5.jpg" class='b-search-print' alt=""></a></span></div>
+          <div class="b-offer-block">
+           <div class="b-col">
+            <div class="b-item">
+            {% for item in content[0] %}
+            	<div class="b-offer-item">
+              	<div class="b-wrapper">
+			    <div class="b-name-collection">{{item.collection.name}}</div>
+                <div class="b-name-ring">- {% if item["f"] %}{{item["f"]['name_ua']}}{% else %}{{item["m"]['name_ua']}}{% endif %} -</div>
+                {% if item["f"] %}
+              	<div class="b-img"><a target='_blank' href="{{ Yii.createAbsoluteUrl('/') }}{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}?collection_id={{item['collection']['id']}}&ring_id={{item['collection']['main_ring_id']}}"><img src="/old_images/{{item['f']['articul']}}.png" width='200px'  style='margin: -50px 0px;' alt=""></a></div>
+                <div class="b-block-for-who">
+                 <div class="b-who">{{ lang.t('site', 'Для нее') }}</div>
+                 <div class="b-txt">{% if item['f'].metal.name_ua == 'золото' %}<span class='m_names'>{{item['f'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}</span>{% endif %} {{item['f'].metal.name_ua}}<br />{{item['f'].metal.probe}} {{lang.t('site','проба')}}
+               	                 	<br />
+               	                 	{% for stone in item['f'].stones %}
+               	                 	{% if Yii.params.language == 'ua' %}{{ stone.stones.color_ua }} {{stone.stones.name_ua}}{% else %}{{ stone.stones.color_ru }} {{stone.stones.name_ru}}{% endif %} {{stone.stones.size}}{{stone.stones.size_dimention}}, {{stone.count}}шт, {{stone.stones.karatnost*stone.count}}ct<br />
+               	                 	{% endfor %}
+               	                 	{% if item['f'].surface_id != '' and item['f'].surface_id != 0 %}
+                                      <span id='surface_{{item['f'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {% if Yii.params.language == 'ua' %}{{item['f'].surface_type['name_ua']}}{% else %}{{item['f'].surface_type['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}
+                                  {% if item['f'].enamel_id != '' and item['f'].enamel_id != 0 %}
+                                      <span id='enamel_{{item['f'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {% if Yii.params.language == 'ua' %}{{item['f'].enamel['name_ua']}}{% else %}{{item['f'].enamel['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}            	                 	
+               	                 	{{ lang.t('site', 'Вес кольца') }} {{ item['f'].weight}}г <span><img src='/images/comment_question.png' style="margin-top:-5px;cursor:pointer" rel='f_{{item['f'].id}}' class='weight_help'/><div id='hint_f_{{item['f'].id}}' class='test-popup'>{{lang.t('site','вес украшений, заявленный на сайте, может отличаться от фактического ввиду ручной обработки и на конечную стоимость не влияет')}}</div></span>
+               	                 	<br /> {{ lang.t('site', 'размер') }}: {{item['f'].size}}</div>
+                 <div class="b-price">{{item["f"].price}} UAH ({{item["f"].price/8}} USD)</div>
+                </div>
+                {% endif %}
+                {% if item["m"] %}
+				<div class="b-img"><a target='_blank' href="{{ Yii.createAbsoluteUrl('/') }}{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/?collection_id={{item['collection']['id']}}&ring_id={{item['collection']['main_ring_id']}}"><img src="/old_images/{{item['m']['articul']}}.png" width='200px'  style='margin: -50px 0px;' alt=""></a></div>
+                <div class="b-block-for-who">
+                 <div class="b-who">{{ lang.t('site', 'Для него') }}</div>
+                 <div class="b-txt">{% if item['m'].metal.name_ua == 'золото' %}<span class='m_names'>{{item['m'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}</span>{% endif %} {{item['m'].metal.name_ua}}<br />{{item['m'].metal.probe}} {{lang.t('site','проба')}}
+               	                 	<br />
+               	                 	{% for stone in item['m'].stones %}
+               	                 	{% if Yii.params.language == 'ua' %}{{ stone.stones.color_ua }} {{stone.stones.name_ua}}{% else %}{{ stone.stones.color_ru }} {{stone.stones.name_ru}}{% endif %} {{stone.stones.size}}{{stone.stones.size_dimention}}, {{stone.count}}шт, {{stone.stones.karatnost*stone.count}}ct<br />
+               	                 	{% endfor %}
+               	                 	{% if item['m'].surface_id != '' and item['m'].surface_id != 0 %}
+                                      <span id='surface_{{item['m'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {% if Yii.params.language == 'ua' %}{{item['m'].surface_type['name_ua']}}{% else %}{{item['m'].surface_type['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}
+                                  {% if item['m'].enamel_id != '' and item['m'].enamel_id != 0 %}
+                                      <span id='enamel_{{item['m'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {% if Yii.params.language == 'ua' %}{{item['m'].enamel['name_ua']}}{% else %}{{item['m'].enamel['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}  
+               	                 	{{ lang.t('site', 'Вес кольца') }} {{ item['m'].weight}}г <span><img src='/images/comment_question.png' style="margin-top:-5px;cursor:pointer" rel='m_{{item['m'].id}}' class='weight_help'/><div id='hint_m_{{item['m'].id}}' class='test-popup'>{{lang.t('site','вес украшений, заявленный на сайте, может отличаться от фактического ввиду ручной обработки и на конечную стоимость не влияет')}}</div></span>
+               	                 	<br /> {{ lang.t('site', 'размер') }}: {{item['m'].size}}</div>
+                 <div class="b-price">{{item["m"].price}} UAH ({{item["m"].price/8}} USD)</div>
+                </div>
+                {% endif %}
+              </div>
+             </div>
+            {% endfor %}
+            </div>
+            <div class="b-item">
+               {% for item in content[1] %}
+            	<div class="b-offer-item">
+              	<div class="b-wrapper">
+			    <div class="b-name-collection">{{item.collection.name}}</div>
+                <div class="b-name-ring">- {% if item["f"] %}{{item["f"]['name_ua']}}{% else %}{{item["m"]['name_ua']}}{% endif %} -</div>
+                {% if item["f"] %}
+              	<div class="b-img"><a target='_blank' href="{{ Yii.createAbsoluteUrl('/') }}{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}?collection_id={{item['collection']['id']}}&ring_id={{item['collection']['main_ring_id']}}"><img src="/old_images/{{item['f']['articul']}}.png" width='200px'  style='margin: -50px 0px;' alt=""></a></div>
+                <div class="b-block-for-who">
+                 <div class="b-who">{{ lang.t('site', 'Для нее') }}</div>
+                 <div class="b-txt">{% if item['f'].metal.name_ua == 'золото' %}<span class='m_names'>{{item['f'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}</span>{% endif %} {{item['f'].metal.name_ua}}<br />{{item['f'].metal.probe}} {{lang.t('site','проба')}}
+               	                 	<br />
+               	                 	{% for stone in item['f'].stones %}
+               	                 	{% if Yii.params.language == 'ua' %}{{ stone.stones.color_ua }} {{stone.stones.name_ua}}{% else %}{{ stone.stones.color_ru }} {{stone.stones.name_ru}}{% endif %} {{stone.stones.size}}{{stone.stones.size_dimention}}, {{stone.count}}шт, {{stone.stones.karatnost*stone.count}}ct<br />
+               	                 	{% endfor %}
+               	                 	{% if item['f'].surface_id != '' and item['f'].surface_id != 0 %}
+                                      <span id='surface_{{item['f'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {% if Yii.params.language == 'ua' %}{{item['f'].surface_type['name_ua']}}{% else %}{{item['f'].surface_type['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}
+                                  {% if item['f'].enamel_id != '' and item['f'].enamel_id != 0 %}
+                                      <span id='enamel_{{item['f'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {% if Yii.params.language == 'ua' %}{{item['f'].enamel['name_ua']}}{% else %}{{item['f'].enamel['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}               	                 	
+               	                 	{{ lang.t('site', 'Вес кольца') }} {{ item['f'].weight}}г <span><img src='/images/comment_question.png' style="margin-top:-5px;cursor:pointer" rel='f_{{item['f'].id}}' class='weight_help'/><div id='hint_f_{{item['f'].id}}' class='test-popup'>{{lang.t('site','вес украшений, заявленный на сайте, может отличаться от фактического ввиду ручной обработки и на конечную стоимость не влияет')}}</div></span>
+               	                 	<br /> {{ lang.t('site', 'размер') }}: {{item['f'].size}}</div>
+                 <div class="b-price">{{item["f"].price}} UAH ({{item["f"].price/8}} USD)</div>
+                </div>
+                {% endif %}
+                {% if item["m"] %}
+				<div class="b-img"><a target='_blank' href="{{ Yii.createAbsoluteUrl('/') }}{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/?collection_id={{item['collection']['id']}}&ring_id={{item['collection']['main_ring_id']}}"><img src="/old_images/{{item['m']['articul']}}.png" width='200px'  style='margin: -50px 0px;' alt=""></a></div>
+                <div class="b-block-for-who">
+                 <div class="b-who">{{ lang.t('site', 'Для него') }}</div>
+                 <div class="b-txt">{% if item['m'].metal.name_ua == 'золото' %}<span class='m_names'>{{item['m'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}</span>{% endif %} {{item['m'].metal.name_ua}}<br />{{item['m'].metal.probe}} {{lang.t('site','проба')}}
+               	                 	<br />
+               	                 	{% for stone in item['m'].stones %}
+               	                 	{% if Yii.params.language == 'ua' %}{{ stone.stones.color_ua }} {{stone.stones.name_ua}}{% else %}{{ stone.stones.color_ru }} {{stone.stones.name_ru}}{% endif %} {{stone.stones.size}}{{stone.stones.size_dimention}}, {{stone.count}}шт, {{stone.stones.karatnost*stone.count}}ct<br />
+               	                 	{% endfor %}
+               	                 	{% if item['m'].surface_id != '' and item['m'].surface_id != 0 %}
+                                      <span id='surface_{{item['m'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {% if Yii.params.language == 'ua' %}{{item['m'].surface_type['name_ua']}}{% else %}{{item['m'].surface_type['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}
+                                  {% if item['m'].enamel_id != '' and item['m'].enamel_id != 0 %}
+                                      <span id='enamel_{{item['m'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {% if Yii.params.language == 'ua' %}{{item['m'].enamel['name_ua']}}{% else %}{{item['m'].enamel['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}  
+               	                 	{{ lang.t('site', 'Вес кольца') }} {{ item['m'].weight}}г <span><img src='/images/comment_question.png' style="margin-top:-5px;cursor:pointer" rel='m_{{item['m'].id}}' class='weight_help'/><div id='hint_m_{{item['m'].id}}' class='test-popup'>{{lang.t('site','вес украшений, заявленный на сайте, может отличаться от фактического ввиду ручной обработки и на конечную стоимость не влияет')}}</div></span>
+               	                 	<br /> {{ lang.t('site', 'размер') }}: {{item['m'].size}}</div>
+                 <div class="b-price">{{item["m"].price}} UAH ({{item["m"].price/8}} USD)</div>
+                </div>
+                {% endif %}
+              </div>
+             </div>
+            {% endfor %}
+            </div>
+            <div class="b-item">
+              {% for item in content[2] %}
+            	<div class="b-offer-item">
+              	<div class="b-wrapper">
+			    <div class="b-name-collection">{{item.collection.name}}</div>
+                <div class="b-name-ring">- {% if item["f"] %}{{item["f"]['name_ua']}}{% else %}{{item["m"]['name_ua']}}{% endif %} -</div>
+                {% if item["f"] %}
+              	<div class="b-img"><a target='_blank' href="{{ Yii.createAbsoluteUrl('/') }}{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}?collection_id={{item['collection']['id']}}&ring_id={{item['collection']['main_ring_id']}}"><img src="/old_images/{{item['f']['articul']}}.png" width='200px'  style='margin: -50px 0px;' alt=""></a></div>
+                <div class="b-block-for-who">
+                 <div class="b-who">{{ lang.t('site', 'Для нее') }}</div>
+                 <div class="b-txt">{% if item['f'].metal.name_ua == 'золото' %}<span class='m_names'>{{item['f'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}</span>{% endif %} {{item['f'].metal.name_ua}}<br />{{item['f'].metal.probe}} {{lang.t('site','проба')}}
+               	                 	<br />
+               	                 	{% for stone in item['f'].stones %}
+               	                 	{% if Yii.params.language == 'ua' %}{{ stone.stones.color_ua }} {{stone.stones.name_ua}}{% else %}{{ stone.stones.color_ru }} {{stone.stones.name_ru}}{% endif %} {{stone.stones.size}}{{stone.stones.size_dimention}}, {{stone.count}}шт, {{stone.stones.karatnost*stone.count}}ct<br />
+               	                 	{% endfor %}
+               	                 	{% if item['f'].surface_id != '' and item['f'].surface_id != 0 %}
+                                      <span id='surface_{{item['f'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {% if Yii.params.language == 'ua' %}{{item['f'].surface_type['name_ua']}}{% else %}{{item['f'].surface_type['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}
+                                  {% if item['f'].enamel_id != '' and item['f'].enamel_id != 0 %}
+                                      <span id='enamel_{{item['f'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {% if Yii.params.language == 'ua' %}{{item['f'].enamel['name_ua']}}{% else %}{{item['f'].enamel['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}              	                 	
+               	                 	{{ lang.t('site', 'Вес кольца') }} {{ item['f'].weight}}г <span><img src='/images/comment_question.png' style="margin-top:-5px;cursor:pointer" rel='f_{{item['f'].id}}' class='weight_help'/><div id='hint_f_{{item['f'].id}}' class='test-popup'>{{lang.t('site','вес украшений, заявленный на сайте, может отличаться от фактического ввиду ручной обработки и на конечную стоимость не влияет')}}</div></span>
+               	                 	<br /> {{ lang.t('site', 'размер') }}: {{item['f'].size}}</div>
+                 <div class="b-price">{{item["f"].price}} UAH ({{item["f"].price/8}} USD)</div>
+                </div>
+                {% endif %}
+                {% if item["m"] %}
+				<div class="b-img"><a target='_blank' href="{{ Yii.createAbsoluteUrl('/') }}{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/?collection_id={{item['collection']['id']}}&ring_id={{item['collection']['main_ring_id']}}"><img src="/old_images/{{item['m']['articul']}}.png" width='200px'  style='margin: -50px 0px;' alt=""></a></div>
+                <div class="b-block-for-who">
+                 <div class="b-who">{{ lang.t('site', 'Для него') }}</div>
+                 <div class="b-txt">{% if item['m'].metal.name_ua == 'золото' %}<span class='m_names'>{{item['m'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}</span>{% endif %} {{item['m'].metal.name_ua}}<br />{{item['m'].metal.probe}} {{lang.t('site','проба')}}
+               	                 	<br />
+               	                 	{% for stone in item['m'].stones %}
+               	                 	{% if Yii.params.language == 'ua' %}{{ stone.stones.color_ua }} {{stone.stones.name_ua}}{% else %}{{ stone.stones.color_ru }} {{stone.stones.name_ru}}{% endif %} {{stone.stones.size}}{{stone.stones.size_dimention}}, {{stone.count}}шт, {{stone.stones.karatnost*stone.count}}ct<br />
+               	                 	{% endfor %}
+               	                 	{% if item['m'].surface_id != '' and item['m'].surface_id != 0 %}
+                                      <span id='surface_{{item['m'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {% if Yii.params.language == 'ua' %}{{item['m'].surface_type['name_ua']}}{% else %}{{item['m'].surface_type['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}
+                                  {% if item['m'].enamel_id != '' and item['m'].enamel_id != 0 %}
+                                      <span id='enamel_{{item['m'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {% if Yii.params.language == 'ua' %}{{item['m'].enamel['name_ua']}}{% else %}{{item['m'].enamel['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}  
+               	                 	{{ lang.t('site', 'Вес кольца') }} {{ item['m'].weight}}г <span><img src='/images/comment_question.png' style="margin-top:-5px;cursor:pointer" rel='m_{{item['m'].id}}' class='weight_help'/><div id='hint_m_{{item['m'].id}}' class='test-popup'>{{lang.t('site','вес украшений, заявленный на сайте, может отличаться от фактического ввиду ручной обработки и на конечную стоимость не влияет')}}</div></span>
+               	                 	<br /> {{ lang.t('site', 'размер') }}: {{item['m'].size}}</div>
+                 <div class="b-price">{{item["m"].price}} UAH ({{item["m"].price/8}} USD)</div>
+                </div>
+                {% endif %}
+              </div>
+             </div>
+            {% endfor %}
+            </div>
+            <div class="b-item">
+               {% for item in content[3] %}
+            	<div class="b-offer-item">
+              	<div class="b-wrapper">
+			    <div class="b-name-collection">{{item.collection.name}}</div>
+                <div class="b-name-ring">- {% if item["f"] %}{{item["f"]['name_ua']}}{% else %}{{item["m"]['name_ua']}}{% endif %} -</div>
+                {% if item["f"] %}
+              	<div class="b-img"><a target='_blank' href="{{ Yii.createAbsoluteUrl('/') }}{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}?collection_id={{item['collection']['id']}}&ring_id={{item['collection']['main_ring_id']}}"><img src="/old_images/{{item['f']['articul']}}.png" width='200px'  style='margin: -50px 0px;' alt=""></a></div>
+                <div class="b-block-for-who">
+                 <div class="b-who">{{ lang.t('site', 'Для нее') }}</div>
+                 <div class="b-txt">{% if item['f'].metal.name_ua == 'золото' %}<span class='m_names'>{{item['f'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}</span>{% endif %} {{item['f'].metal.name_ua}}<br />{{item['f'].metal.probe}} {{lang.t('site','проба')}}
+               	                 	<br />
+               	                 	{% for stone in item['f'].stones %}
+               	                 	{% if Yii.params.language == 'ua' %}{{ stone.stones.color_ua }} {{stone.stones.name_ua}}{% else %}{{ stone.stones.color_ru }} {{stone.stones.name_ru}}{% endif %} {{stone.stones.size}}{{stone.stones.size_dimention}}, {{stone.count}}шт, {{stone.stones.karatnost*stone.count}}ct<br />
+               	                 	{% endfor %}
+               	                 	{% if item['f'].surface_id != '' and item['f'].surface_id != 0 %}
+                                      <span id='surface_{{item['f'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {% if Yii.params.language == 'ua' %}{{item['f'].surface_type['name_ua']}}{% else %}{{item['f'].surface_type['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}
+                                  {% if item['f'].enamel_id != '' and item['f'].enamel_id != 0 %}
+                                      <span id='enamel_{{item['f'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {% if Yii.params.language == 'ua' %}{{item['f'].enamel['name_ua']}}{% else %}{{item['f'].enamel['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}             	                 	
+               	                 	{{ lang.t('site', 'Вес кольца') }} {{ item['f'].weight}}г  <span><img src='/images/comment_question.png' style="margin-top:-5px;cursor:pointer" rel='f_{{item['f'].id}}' class='weight_help'/><div id='hint_f_{{item['f'].id}}' class='test-popup'>{{lang.t('site','вес украшений, заявленный на сайте, может отличаться от фактического ввиду ручной обработки и на конечную стоимость не влияет')}}</div></span>
+               	                 	<br /> {{ lang.t('site', 'размер') }}: {{item['f'].size}}</div>
+                 <div class="b-price">{{item["f"].price}} UAH ({{item["f"].price/8}} USD)</div>
+                </div>
+                {% endif %}
+                {% if item["m"] %}
+				<div class="b-img"><a target='_blank' href="{{ Yii.createAbsoluteUrl('/') }}{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/?collection_id={{item['collection']['id']}}&ring_id={{item['collection']['main_ring_id']}}"><img src="/old_images/{{item['m']['articul']}}.png" width='200px'  style='margin: -50px 0px;' alt=""></a></div>
+                <div class="b-block-for-who">
+                 <div class="b-who">{{ lang.t('site', 'Для него') }}</div>
+                 <div class="b-txt">{% if item['m'].metal.name_ua == 'золото' %}<span class='m_names'>{{item['m'].metal.name_short | replace({'W':lang.t('site', 'белое, '),'P':lang.t('site','розовое, '),'Y':lang.t('site','желтое, ')}) | capitalize }}</span>{% endif %} {{item['m'].metal.name_ua}}<br />{{item['m'].metal.probe}} {{lang.t('site','проба')}}
+               	                 	<br />
+               	                 	{% for stone in item['m'].stones %}
+               	                 	{% if Yii.params.language == 'ua' %}{{ stone.stones.color_ua }} {{stone.stones.name_ua}}{% else %}{{ stone.stones.color_ru }} {{stone.stones.name_ru}}{% endif %} {{stone.stones.size}}{{stone.stones.size_dimention}}, {{stone.count}}шт, {{stone.stones.karatnost*stone.count}}ct<br />
+               	                 	{% endfor %}
+               	                 	{% if item['m'].surface_id != '' and item['m'].surface_id != 0 %}
+                                      <span id='surface_{{item['m'].id}}'>{{ lang.t('site', 'Тип покрытия') }}: {% if Yii.params.language == 'ua' %}{{item['m'].surface_type['name_ua']}}{% else %}{{item['m'].surface_type['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}
+                                  {% if item['m'].enamel_id != '' and item['m'].enamel_id != 0 %}
+                                      <span id='enamel_{{item['m'].id}}'>{{ lang.t('site', 'Цвет эмали') }}: {% if Yii.params.language == 'ua' %}{{item['m'].enamel['name_ua']}}{% else %}{{item['m'].enamel['name_ru']}}{% endif %}</span><br />
+                                  {% endif %}  
+               	                 	{{ lang.t('site', 'Вес кольца') }} {{ item['m'].weight}}г <span><img src='/images/comment_question.png' style="margin-top:-5px;cursor:pointer" rel='m_{{item['m'].id}}' class='weight_help'/><div id='hint_m_{{item['m'].id}}' class='test-popup'>{{lang.t('site','вес украшений, заявленный на сайте, может отличаться от фактического ввиду ручной обработки и на конечную стоимость не влияет')}}</div></span>
+               	                 	<br /> {{ lang.t('site', 'размер') }}: {{item['m'].size}}</div>
+                 <div class="b-price">{{item["m"].price}} UAH ({{item["m"].price/8}} USD)</div>
+                </div>
+                {% endif %}
+              </div>
+             </div>
+            {% endfor %}
+            </div>
+           </div>
+           <!--div class="b-show-offers"><a href="#">показать еще</a></div-->
+          </div>
+      <div class="clear"></div>
+     </div>
+   </div>
+   <style>
+.test-popup{
+  padding:5px;
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  width: 361px;
+  margin-left: -47px;
+  margin-top: 20px;
+  background: #FFF;
+  border: 1px solid;
+  }
+</style>
+<script type='text/javascript'>
+window.onload = function(){
+  $('.weight_help').bind('mouseover',function(){
+    ider = "hint_"+$(this).attr('rel');
+    $("#"+ider).show();
+  })
+  $('.weight_help').bind('mouseout',function(){
+    ider = "hint_"+$(this).attr('rel');
+    $("#"+ider).hide();
+  })
+}
+</script>
+{% endblock %}

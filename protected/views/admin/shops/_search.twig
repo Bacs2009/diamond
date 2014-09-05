@@ -1,0 +1,23 @@
+{% autoescape false %}
+
+<div class="wide form">
+
+	{% set form = beginWidget('CActiveForm', {'action' : Yii.createUrl(this.route), 'method' : 'get'}) %}
+
+	<div class="row">
+		{{ form.label(model, 'name_ru') }}
+		{{ form.textField(model, 'name_ru', {'size' : 60, 'maxlength' : 100}) }}
+	</div>
+	<div class="row">
+		{{ form.label(model, 'city_id') }}
+		{{ form.dropDownlist(model, 'city_id', model.cityItems, {'empty' : 'Выберите город'}) }}
+	</div>
+	<div class="row buttons">
+		{{ CHtml.submitButton('Искать') }}
+	</div>
+
+	{% endWidget %}
+
+</div>
+
+{% endautoescape %}

@@ -1,0 +1,21 @@
+array (
+  'try_size_1' => 
+  array (
+    'stone_0' => 
+    array (
+      'id' => '1',
+      'count' => '26',
+      'name_ua' => 'діамант',
+      'name_ru' => 'бриллиант',
+      'karatnost' => '0.005',
+      'price' => '6970',
+      'stone_size' => '1',
+      'size_dimention' => 'мм',
+      'ogranka' => 'Круг',
+      'naturalnost' => '1',
+      'color_ru' => 'Белый',
+      'color_ua' => 'Белый',
+      'remote_id' => '0',
+    ),
+  ),
+)

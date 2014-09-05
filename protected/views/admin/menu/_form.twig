@@ -1,0 +1,106 @@
+{% autoescape  false %}
+
+<div class="form">
+
+    {% set form = beginWidget('CActiveForm', {'id' : 'menu-form', 'enableAjaxValidation' : false, 'htmlOptions' : {'enctype' : 'multipart/form-data'}}) %}
+
+    <p class="note">Поля отмеченные <span class="required">*</span> являются обязательными.</p>
+
+    {{ form.errorSummary(model, 'Исправьте, пожалуйста, следующие ошибки:') }}
+
+    <div class="row">
+        {{ form.labelEx(model, 'name_ru') }}
+        {{ form.textField(model, 'name_ru', {'size':'36%', 'maxlength' : 75}) }}
+        {{ form.error(model, 'name_ru') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'name_ua') }}
+        {{ form.textField(model, 'name_ua', {'size' : '36%', 'maxlength' : 75}) }}
+        {{ form.error(model, 'name_ua') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'name_en') }}
+        {{ form.textField(model, 'name_en', {'size' : '36%', 'maxlength' : 75}) }}
+        {{ form.error(model, 'name_en') }}
+    </div>
+
+		{% if model.system %}
+    <div class="row">
+        {{ form.labelEx(model, 'href_ru') }}
+        {{ form.textField(model, 'href_ru', {'size' : '56%', 'maxlength' : 150, 'readonly' : true}) }}
+        {{ form.error(model, 'href_ru') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'href_ua') }}
+        {{ form.textField(model, 'href_ua', {'size' : '56%', 'maxlength' : 150, 'readonly' : true}) }}
+        {{ form.error(model, 'href_ua') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'href_en') }}
+        {{ form.textField(model, 'href_en', {'size' : '56%', 'maxlength' : 150, 'readonly' : true}) }}
+        {{ form.error(model, 'href_en') }}
+    </div>
+		{% else %}
+    <div class="row">
+        {{ form.labelEx(model, 'href_ru') }}
+        {{ form.textField(model, 'href_ru', {'size' : '56%', 'maxlength' : 150}) }}
+        {{ form.error(model, 'href_ru') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'href_ua') }}
+        {{ form.textField(model, 'href_ua', {'size' : '56%', 'maxlength' : 150}) }}
+        {{ form.error(model, 'href_ua') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'href_en') }}
+        {{ form.textField(model, 'href_en', {'size' : '56%', 'maxlength' : 150}) }}
+        {{ form.error(model, 'href_en') }}
+    </div>
+    {% endif %}
+    
+    <div class="row">
+        {{ form.labelEx(model, 'title_ru') }}
+        {{ form.textField(model, 'title_ru', {'size':'36%', 'maxlength' : 75}) }}
+        {{ form.error(model, 'title_ru') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'title_ua') }}
+        {{ form.textField(model, 'title_ua', {'size' : '36%', 'maxlength' : 75}) }}
+        {{ form.error(model, 'title_ua') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'title_en') }}
+        {{ form.textField(model, 'title_en', {'size' : '36%', 'maxlength' : 75}) }}
+        {{ form.error(model, 'title_en') }}
+    </div>
+    
+    <div class="row">
+        {{ form.labelEx(model,'description_ru') }}
+        {{ form.textArea(model,'description_ru',{'rows':'3', 'cols':'70'}) }}
+        {{ form.error(model,'description_ru') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model,'description_ua') }}
+        {{ form.textArea(model,'description_ua',{'rows':'3', 'cols':'70'}) }}
+        {{ form.error(model,'description_ua') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model,'description_en') }}
+        {{ form.textArea(model,'description_en',{'rows':'3', 'cols':'70'}) }}
+        {{ form.error(model,'description_en') }}
+    </div>
+    
+    <div class="row">
+        {{ form.labelEx(model, 'active') }}
+        {{ form.checkBox(model, 'active') }}
+        {{ form.error(model, 'active') }}
+    </div>
+    
+    <div class="row buttons">
+        {{ CHtml.submitButton(model.isNewRecord ? 'Добавить' : 'Сохранить') }}
+    </div>
+
+    {% endWidget %}
+
+</div>
+{% endautoescape %}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<order>
+  <id>23</id>
+  <name>Клименко Тест</name>
+  <email>klimenko@diamond.ua</email>
+  <phone>0902343434</phone>
+  <comment>3333123456</comment>
+  <city>Киев</city>
+  <ordered_w>
+    <ring_original>
+      <name_ru>Luck.Love.Life. Кролик , беги</name_ru>
+      <name_ua>Luck.Love.Life. Кролик , беги</name_ua>
+      <articul>0003349</articul>
+      <size>17</size>
+      <gender>f</gender>
+      <width>0</width>
+      <height>0</height>
+      <koeff>5.005</koeff>
+      <weight>8.3</weight>
+      <thickness>0</thickness>
+      <price>10460</price>
+      <remote_id>0002L3OF </remote_id>
+      <active_st_size>1</active_st_size>
+      <collection>
+        <id>12</id>
+        <id_for_ring>12</id_for_ring>
+        <name_ua>Luck.Love.Life.</name_ua>
+        <name_ru>Luck.Love.Life.</name_ru>
+      </collection>
+      <metal>
+        <id>1</id>
+        <name_ua>золото</name_ua>
+        <name_ru>золото</name_ru>
+        <name_short>YP</name_short>
+        <probe>585</probe>
+      </metal>
+      <surface>
+        <id>1</id>
+        <name_ua>полірована</name_ua>
+        <name_ru>полированная</name_ru>
+      </surface>
+      <enamel>
+        <id>16</id>
+        <name_ua>персик</name_ua>
+        <name_ru>персиковая</name_ru>
+      </enamel>
+    </ring_original>
+    <selected_size>15.5</selected_size>
+    <selected_surface>
+      <id></id>
+      <name_ua></name_ua>
+      <name_ru></name_ru>
+    </selected_surface>
+    <selected_enamel>
+      <id></id>
+      <name_ua></name_ua>
+      <name_ru></name_ru>
+    </selected_enamel>
+    <selected_metal/>
+    <selected_stones/>
+    <calculated_price>9537</calculated_price>
+  </ordered_w>
+</order>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<order>
+  <id>8</id>
+  <name>test</name>
+  <email>sr@test.uan</email>
+  <phone>123123</phone>
+  <comment>test order</comment>
+  <city>test</city>
+  <ordered_m>
+    <ring_original>
+      <name_ru>Новоозаренные Особенная страсть</name_ru>
+      <name_ua>Новоосяйні Особлива пристрасть</name_ua>
+      <articul>0001443</articul>
+      <size>19</size>
+      <gender>m</gender>
+      <width>5.8</width>
+      <height>0</height>
+      <koeff>3.999996</koeff>
+      <weight>8.358</weight>
+      <thickness>1.4</thickness>
+      <price>10710</price>
+      <remote_id>00014BOF </remote_id>
+      <collection>
+        <id>3</id>
+        <id_for_ring>3</id_for_ring>
+        <name_ua>Новоозаренные</name_ua>
+        <name_ru>Новоозаренные</name_ru>
+        <formula>//все доступные переменные для формулы были предоставлены в письме&#13;
+$rand = rand(100, 300);&#13;
+$new_price = ($ring_info['ring_original']['price'] - 100)+$rand + ((($ring_info['ring_original']['metal']['probe'] * $ring_info['selected_size'])/(int)$ring_info['ring_original']['size']))*rand(2,8);</formula>
+      </collection>
+      <metal>
+        <id>3</id>
+        <name_ua>золото</name_ua>
+        <name_ru>золото</name_ru>
+        <name_short>W</name_short>
+        <probe>585</probe>
+      </metal>
+      <surface>
+        <id>2</id>
+        <name_ua>матована</name_ua>
+        <name_ru>матированная</name_ru>
+      </surface>
+      <enamel>
+        <id>0</id>
+        <name_ua></name_ua>
+        <name_ru></name_ru>
+      </enamel>
+    </ring_original>
+    <selected_size>19</selected_size>
+    <selected_surface>
+      <id></id>
+      <name_ua></name_ua>
+      <name_ru></name_ru>
+    </selected_surface>
+    <selected_enamel>
+      <id></id>
+      <name_ua></name_ua>
+      <name_ru></name_ru>
+    </selected_enamel>
+    <selected_metal>
+      <metal_name>WPзолото</metal_name>
+      <probe>750</probe>
+      <id>16</id>
+      <name_ua>золото</name_ua>
+      <name_ru>золото</name_ru>
+      <name_short>WP</name_short>
+    </selected_metal>
+    <selected_stones/>
+  </ordered_m>
+  <ordered_w>
+    <ring_original>
+      <name_ru>Новоозаренные Особенная страсть</name_ru>
+      <name_ua>Новоосяйні Особлива пристрасть</name_ua>
+      <articul>0001442</articul>
+      <size>17</size>
+      <gender>f</gender>
+      <width>5.8</width>
+      <height>0</height>
+      <koeff>3.999996</koeff>
+      <weight>6.99</weight>
+      <thickness>1.5</thickness>
+      <price>12160</price>
+      <remote_id>0000VDOF </remote_id>
+      <collection>
+        <id>3</id>
+        <id_for_ring>3</id_for_ring>
+        <name_ua>Новоозаренные</name_ua>
+        <name_ru>Новоозаренные</name_ru>
+        <formula>//все доступные переменные для формулы были предоставлены в письме&#13;
+$rand = rand(100, 300);&#13;
+$new_price = ($ring_info['ring_original']['price'] - 100)+$rand + ((($ring_info['ring_original']['metal']['probe'] * $ring_info['selected_size'])/(int)$ring_info['ring_original']['size']))*rand(2,8);</formula>
+      </collection>
+      <metal>
+        <id>3</id>
+        <name_ua>золото</name_ua>
+        <name_ru>золото</name_ru>
+        <name_short>W</name_short>
+        <probe>585</probe>
+      </metal>
+      <surface>
+        <id>2</id>
+        <name_ua>матована</name_ua>
+        <name_ru>матированная</name_ru>
+      </surface>
+      <enamel>
+        <id>0</id>
+        <name_ua></name_ua>
+        <name_ru></name_ru>
+      </enamel>
+      <stones>
+        <stone_0>
+          <id>1</id>
+          <count>21</count>
+          <name_ua>діамант</name_ua>
+          <name_ru>бриллиант</name_ru>
+          <karatnost>0.005</karatnost>
+          <price>6970</price>
+          <stone_size>1</stone_size>
+          <size_dimention>мм</size_dimention>
+          <ogranka>Круг</ogranka>
+          <naturalnost>1</naturalnost>
+          <color>Белый</color>
+          <remote_id>0</remote_id>
+        </stone_0>
+      </stones>
+    </ring_original>
+    <selected_size>17</selected_size>
+    <selected_surface>
+      <id></id>
+      <name_ua></name_ua>
+      <name_ru></name_ru>
+    </selected_surface>
+    <selected_enamel>
+      <id></id>
+      <name_ua></name_ua>
+      <name_ru></name_ru>
+    </selected_enamel>
+    <selected_metal>
+      <metal_name>WPзолото</metal_name>
+      <probe>750</probe>
+      <id>16</id>
+      <name_ua>золото</name_ua>
+      <name_ru>золото</name_ru>
+      <name_short>WP</name_short>
+    </selected_metal>
+    <selected_stones/>
+  </ordered_w>
+</order>

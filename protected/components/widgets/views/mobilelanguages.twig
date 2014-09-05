@@ -1,0 +1,8 @@
+<!--div class="b-lng-select">
+{% for language in languages %}
+{{ CHtml.link(language.title, language.href, language.options)|raw }}
+
+{% endfor %}</div-->
+
+ <a {% if link_ru == '' %}class="active"{% endif %} href="{{link_ru}}">РУС</a><a {% if link_ua == '' %}class="active"{% endif %} href="{{link_ua}}">УКР</a><a {% if link_en == '' %}class="active"{% endif %} href="{{link_en}}">ENG</a>
+

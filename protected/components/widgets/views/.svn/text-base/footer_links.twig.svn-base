@@ -1,0 +1,8 @@
+	  <span class="b-other-select">
+  	<a href="javascript:void(0);" class="b-other-products">{{ lang.t('site', 'Другие проекты компании') }}</a>
+		<span class="b-select-wraper">
+			{% for item in items %}
+			<span class="b-item"><a href="{{ item.href }}" target='_blank'>{{ item.text }}</a></span>
+			{% endfor %}
+		</span>
+	  </span>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <title>{% if meta and meta['title'] %}{{ meta['title'] }}{% else %}STDIAMOND{% endif %}</title>
+  {% if meta %}
+    {% if meta['description'] %}
+  <meta name="description" content="{{ meta['description'] }}" />
+    {% endif %}
+  {% endif %}
+  <link rel="image_src" href="{{Yii.baseUrl(true)}}/images/home.png" />
+  <meta name="og:title" content="{% if meta['title'] %}{{ meta['title'] }}{% else %}STDIAMOND{% endif %}" />
+  <meta name="og:image" content="{{Yii.baseUrl(true)}}/images/home.png" />
+  <meta name="og:type" content="website" />
+  <meta name="og:url" content="{{Yii.createAbsoluteUrl(Yii.request.url)}}" />
+  <link rel="shortcut icon" href="/favicon.ico" >
+  <meta name="viewport" content="width=device-width">
+  {{ void(Yii.clientScript.registerCssFile("#{Yii.request.baseUrl}/css/mobile-style.css")) }}
+  {{ void(Yii.clientScript.registerCssFile("#{Yii.request.baseUrl}/css/flexslider.css")) }}
+  {{ void(Yii.clientScript.registerCssFile("#{Yii.request.baseUrl}/css/jquery.bxslider.css")) }}
+  {{ void(Yii.clientScript.registerCssFile("#{Yii.request.baseUrl}/js/fancybox/jquery.fancybox.css")) }}
+  {% registerScriptFile("#{Yii.baseUrl(true)}/js/libs/jquery.min.js") %}
+  {% registerScriptFile("#{Yii.baseUrl(true)}/js/jquery.flexslider.js") %}
+  {% registerScriptFile("#{Yii.baseUrl(true)}/js/jquery.bxslider.js") %}
+  {% registerScriptFile("#{Yii.baseUrl(true)}/js/main.js") %}
+  {% registerScriptFile("#{Yii.baseUrl(true)}/js/fancybox/jquery.fancybox.pack.js") %}
+  {% registerScriptFile('https://maps.google.com/maps/api/js?sensor=false&language=ru') %}
+
+</head>
+<body id="main-page">
+<div class="b-preloader-overlay"></div>
+  <header>
+    <a href="{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/mobile" id="logo"></a>
+    <div id="menu">
+	    	<a href="#"></a>
+	    	<form action="http://diamond.ua{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/mobile/search" id="search">
+		    	<input name="search" type="text" placeholder="{{ lang.t('site', 'Поиск') }}...">
+		    	<input type="submit" value="">
+	    	</form>
+    </div>
+  </header>
+  
+  
+  <nav>
+	  <li><a href="http://diamond.ua{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/mobile">{{ lang.t('site', 'Коллекции') }}</a></li>
+	  <li><a href="http://diamond.ua{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/mobile/cont">{{ lang.t('site', 'Бутики') }}</a></li>
+	  <li><a href="http://diamond.ua{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/mobile/service">{{ lang.t('site', 'Онлайн-сервис') }}</a></li>
+	  <li><a href="http://diamond.ua{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/mobile/about">{{ lang.t('site', 'О компании') }}</a></li>
+	  <li><a href="http://diamond.ua{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/mobile/other">{{ lang.t('site', 'Другие проекты') }}</a></li>
+	  <li><a href="http://diamond.ua{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/mobile/awards">A'Design Awards</a></li>
+	  <li class="lang">{% widget('application.components.widgets.LanguagesMobileWidget', []) %}</li>
+	</nav>
+	
+	<!--=======content================================-->
+  {% block content %}
+  {% endblock %}
+  <!--=======content================================-->
+  
+  <footer>
+    <ul id="social">
+			<li><a href="http://fb.com" class="soc-fb"></a></li>
+			<li><a href="http://google.com" class="soc-gp"></a></li>
+			<li><a href="http://twitter.com" class="soc-tw"></a></li>
+			<li><a href="http://vk.com" class="soc-vk"></a></li>
+			<li><a href="http://youtube.com" class="soc-yt"></a></li>
+		</ul>
+		<?php date_default_timezone_set('Europe/Kiev'); ?>
+		<p>STDIAMOND © <?php echo date("Y"); ?> email — <a href="mailto:info@diamond.ua">info@diamond.ua</a></p>
+		<p>{{ lang.t('site', 'ОНЛАЙН-БУТИК') }} 10:00 -18:00 +38 067 547 0888</p>
+		<p class="web">{{ lang.t('site', 'Перейти к') }} <a href="http://diamond.ua">{{ lang.t('site', 'веб-версии') }}</a> {{ lang.t('site', 'сайта') }}</p>
+  </footer>
+</body>
+</html>
+<script type="text/javascript">
+	$('#main-slider').flexslider({
+	    animation: "slide",
+	    selector: ".slides > div",
+	    direction: "vertical",
+	    directionNav: false,
+	    start: function(){$('.flex-control-paging').wrap('<div class="pgr-wrap"><div class="pgr"></div></div>');}
+	  });
+  	var sliderH = $('#main-slider').height();
+  	$('.slides>div, .slide-wrap, .slide-content, .pgr').height(sliderH);
+  </script>
+  
+  
+  <div style="display:none;">
+    <div id="order-form" style="display:none"> 
+      <div class="b-close-popup"><div style="font-size: 10px; text-transform: uppercase; margin-right: 19px; margin-top: 1px;">{{ lang.t('site', 'Закрыть') }}</div></div>
+      <div class="b-h3" id="popup_order_make_order">{{ lang.t('site', 'Оформить заказ') }}</div>
+      <div class="b-order-form-wrapper">
+        <div class="b-order-popup">
+          <div class="b-name-ring-popup">Лучезарные</div>
+          <div class="b-name-collection-popup"><span>Dynasty</span></div>
+          <div class="b-who-blocks-popaup"></div>
+         
+        </div>
+
+        <form action="." id="former_order" class="b-order-form" onsubmit="return false">
+          <input type="hidden" id='hidden_size_m' value='' />
+          <input type="hidden" id='hidden_size_w' value='' />
+          <input type="hidden" id='hidden_ring_m' value='' />
+          <input type="hidden" id='hidden_ring_w' value='' />
+          <input type="hidden" id='hidden_price_m' value='' />
+          <input type="hidden" id='hidden_price_w' value='' />
+		  <input type="hidden" id='hidden_btc_price_m' value='' />
+          <input type="hidden" id='hidden_btc_price_w' value='' />
+          <input type="hidden" id='hidden_price' value='' />
+          <input type="hidden" id='hidden_info_w' value='' />
+          <input type="hidden" id='hidden_info_m' value='' />
+
+          <div class="b-title" id="popup_order_text_input">{{ lang.t('site', 'Для оформления заказа<br>введите Ваши данные')|raw }}:</div>
+          <div class="b-item-form"><input type="text" class="b-txt-input" id='order_name' value="{{ lang.t('site', 'Имя') }}" placeholder="{{ lang.t('site', 'Имя') }}"></div>
+          <div class="b-item-form"><input type="text" class="b-txt-input" id='order_email' value="{{ lang.t('site', 'Эл. почта') }}" placeholder="{{ lang.t('site', 'Эл. почта') }}"></div>
+          <div class="b-item-form"><input type="text" class="b-txt-input" id='order_city' value="{{ lang.t('site', 'Город') }}" placeholder="{{ lang.t('site', 'Город') }}"></div>
+          <div class="b-item-form"><input type="text" class="b-txt-input" id='order_phone'  value="{{ lang.t('site', 'Телефон') }}" placeholder={{ lang.t('site', 'Телефон') }}></div>
+          <div class="b-item-form"><textarea class="b-textarea-input" id='order_comment' placeholder="{{ lang.t('site', 'Комментарий к заказу') }}">{{ lang.t('site', 'Комментарий к заказу') }}</textarea></div>
+          <div class="b-item-form"><button class="b-submit-button b-order-confirm" onclick='return send_order();' id='popup_order_button_order'>{{ lang.t('site', 'ОФОРМИТЬ ЗАКАЗ') }}</button></div>
+        </form>
+      </div>
+      <div class="b-order-aceeted" id='order_send'>{{ lang.t('site', 'Cпасибо, Ваш заказ принят. <br>В ближайшее время с Вами свяжется менеджер')|raw  }}</div>
+      <div class="clear"></div>
+      <div style="max-width: 1200px;"  class="content_point_m">
+      <iframe   src="http://diamond.ua/addblock/modal.html" id="content_point_m" width="100%" height="100%"></iframe>
+      
+      <div style="top: 15px; text-align:center" class="b-close-product_m" onclick="new_update_close_m();"><div style="color: #C00;">×</div><div style="color: #C00; font-size:10px; margin-top:-6px;">{{ lang.t('site', 'Закрыть') }}</div></div>
+      </div>
+  
+   <script type="text/javascript">
+      //  Send order
+      function send_order(){
+    	   var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+          order = Array();
+          if($('.b-who-blocks-popaup:eq(0)').css('opacity')==1){
+        	    order['order_price_w'] = $('.b-who-blocks-popaup:eq(0)').attr('price');
+              order['order_size_w'] = $('a.b-open-size-select:eq(0)').text();
+          }else{
+        	  order['order_price_w'] = 0;
+          }
+          if($('.b-who-blocks-popaup:eq(1)').css('opacity')==1){
+        	   order['order_price_m'] = $('.b-who-blocks-popaup:eq(1)').attr('price');
+              order['order_size_m'] = $('a.b-open-size-select:eq(1)').text();
+          }else{
+        	  order['order_price_m'] = 0;
+          }
+          order['order_price_btc_m'] = 0;
+          order['order_price_btc_w'] = 0;
+          
+          
+          //order['order_price'] = $('.b-order-popup .b-usd');
+          order['order_ring_w'] = $('.b-poup-img:eq(0) img').attr('id');
+          order['order_ring_m'] = $('.b-poup-img:eq(1) img').attr('id');
+          
+          order['order_name'] = $("#order_name").val();
+          order['order_email'] = $("#order_email").val();
+          order['order_city'] = $('#order_city').val();
+          order['order_phone'] = $("#order_phone").val();
+          order['order_comment'] = $("#order_comment").val();
+          //order['order_info_w'] = $("#hidden_info_w").val();
+          //order['order_info_m'] = $("#hidden_info_m").val();
+          lang = '{{Yii.params.language}}';
+          error = false;
+          $("#order_name").removeClass('b-error');
+          $("#order_email").removeClass('b-error');
+          $("#order_phone").removeClass('b-error');
+          $("#order_city").removeClass('b-error');
+          if(order['order_name'] == '{{ lang.t("site", "Имя") }}' || order['order_name'] == ''){
+            $("#order_name").addClass('b-error');
+            error = true;
+          }
+          if(order['order_city'] == '{{ lang.t("site", "Город") }}' || order['order_city'] == ''){
+            $("#order_city").addClass('b-error');
+            error = true;
+          }
+          if(order['order_email'] == '{{ lang.t("site", "Эл. почта") }}' || reg.test(order['order_email']) == false || order['order_email'] == ''){
+            $("#order_email").addClass('b-error');
+            $("#order_email").val('{{ lang.t("site", "Эл. почта") }}');
+            error = true;
+          }
+          if(order['order_phone'] == '{{ lang.t("site", "Телефон") }}' || order['order_phone'] == ''){
+            $("#order_phone").addClass('b-error');
+            error = true;
+          }
+          if(!error){
+            $.post('/ring/sendorder',{'order_size_m':order['order_size_m'],'order_size_w':order['order_size_w'],
+            'order_ring_m':order['order_ring_m'],'order_ring_w':order['order_ring_w'],
+            'order_price_m':order['order_price_m'],
+            'order_price_w':order['order_price_w'],
+            'order_price_btc_m':order['order_price_btc_m'],
+            'order_price_btc_w':order['order_price_btc_w'],
+            'order_name':order['order_name'],
+            'order_email':order['order_email'],
+            'order_phone':order['order_phone'],
+            'order_city':order['order_city'],
+            'order_comment':order['order_comment'],
+            'lang':lang,
+            'order_info_w':order['order_info_w'],
+            'order_info_m':order['order_info_m']},function(data){
+              $('#former_order').fadeOut('fast',function(){
+                $('#order_send').fadeIn();
+              });
+              
+            });
+          }else{
+        }
+    	
+      return false;
+    }
+    </script>

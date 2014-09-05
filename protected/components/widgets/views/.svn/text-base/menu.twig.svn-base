@@ -1,0 +1,14 @@
+      <div class="b-menu">
+			{% for item in items %}
+       <a href="{{ item.url }}"{% if item.active %} class="b-active"{% endif %} {% if item.id == 1 %} id="collection_list" {% endif %}>{{ item.label }}</a>
+			{% endfor %}
+			<a id="click-daw" href="#">A'DESIGN AWARD</a>
+{#
+       <a href="#" id="collection_list">коллекции</a>
+       <a href="#">бутики</a>
+       <a href="#">акции</a>
+       <a href="#">Сервис</a>
+       <a href="#">компания</a>
+	   <a id="click-daw" href="#">A'DESIGN AWARD</a>
+#}
+      </div>

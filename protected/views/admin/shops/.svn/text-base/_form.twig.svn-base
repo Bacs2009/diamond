@@ -1,0 +1,85 @@
+{% autoescape  false %}
+
+<div class="form">
+
+    {% set form = beginWidget('CActiveForm', {'id' : 'cityItem-form', 'enableAjaxValidation' : false, 'htmlOptions' : {'enctype' : 'multipart/form-data'}}) %}
+
+    <p class="note">Поля отмеченные <span class="required">*</span> являются обязательными.</p>
+
+    {{ form.errorSummary(model, 'Исправьте, пожалуйста, следующие ошибки:') }}
+
+	 <div class="row">
+        {{ form.labelEx(model, 'city_id') }}
+        {{ form.dropDownlist(model, 'city_id', model.cityItems, {'empty' : 'Выберите город'}) }}
+        {{ form.error(model, 'city_id') }}
+    </div>
+
+    <div class="row">
+        {{ form.labelEx(model, 'name_ru') }}
+        {{ form.textField(model, 'name_ru', {'size' : '46%', 'maxlength' : 100}) }}
+        {{ form.error(model, 'name_ru') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'name_ua') }}
+        {{ form.textField(model, 'name_ua', {'size' : '46%', 'maxlength' : 100}) }}
+        {{ form.error(model, 'name_ua') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'name_en') }}
+        {{ form.textField(model, 'name_en', {'size' : '46%', 'maxlength' : 100}) }}
+        {{ form.error(model, 'name_en') }}
+    </div>
+     <div class="row">
+        {{ form.labelEx(model, 'address_ru') }}
+        {{ form.textField(model, 'address_ru', {'size' : '96%', 'maxlength' : 255}) }}
+        {{ form.error(model, 'address_ru') }}
+    </div>
+     <div class="row">
+        {{ form.labelEx(model, 'address_ua') }}
+        {{ form.textField(model, 'address_ua', {'size' : '96%', 'maxlength' : 255}) }}
+        {{ form.error(model, 'address_ua') }}
+    </div>
+     <div class="row">
+        {{ form.labelEx(model, 'address_en') }}
+        {{ form.textField(model, 'address_en', {'size' : '96%', 'maxlength' : 255}) }}
+        {{ form.error(model, 'address_en') }}
+    </div>
+     <div class="row">
+        {{ form.labelEx(model, 'phone_ru') }}
+        {{ form.textField(model, 'phone_ru', {'size' : '96%', 'maxlength' : 255}) }}
+        {{ form.error(model, 'phone_ru') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'phone_ua') }}
+        {{ form.textField(model, 'phone_ua', {'size' : '96%', 'maxlength' : 255}) }}
+        {{ form.error(model, 'phone_ua') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'phone_en') }}
+        {{ form.textField(model, 'phone_en', {'size' : '96%', 'maxlength' : 255}) }}
+        {{ form.error(model, 'phone_en') }}
+    </div>
+	<div class="row">
+        {{ form.labelEx(model, 'lat') }}
+        {{ form.textField(model, 'lat', {'size' : '16%', 'maxlength' : 12}) }}
+        {{ form.error(model, 'lat') }}
+    </div>
+    <div class="row">
+        {{ form.labelEx(model, 'lng') }}
+        {{ form.textField(model, 'lng', {'size' : '16%', 'maxlength' : 12}) }}
+        {{ form.error(model, 'lng') }}
+    </div>
+   <img src="{{ model.imageUrl['preview'] }}"/>
+    <div class="row">
+        {{ form.labelEx(model,'previewImage') }}
+        {{ form.fileField(model,'previewImage') }}
+        {{ form.error(model,'previewImage') }}
+    </div>
+    <div class="row buttons">
+        {{ CHtml.submitButton(model.isNewRecord ? 'Добавить' : 'Сохранить') }}
+    </div>
+
+    {% endWidget %}
+
+</div>
+{% endautoescape %}

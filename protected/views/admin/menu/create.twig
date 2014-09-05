@@ -1,0 +1,20 @@
+{% extends this.layout %}
+
+{% block breadcrumbs %}
+	{% widget('zii.widgets.CBreadcrumbs', {'links' : {'Управление меню' : ['index'], 0 : 'добавление'}}) %}
+{% endblock %}
+
+{% block bigColumn %}
+
+	<h1>Добавление пункта меню</h1>
+
+	{{ this.renderPartial('_form', {'model' : model}) }}
+
+{% endblock %}
+
+{% block sidebar %}
+	{% set menu = [{'label' : 'К списку пунктов меню', 'url' : ['index']}] %}
+	{% beginWidget('zii.widgets.CPortlet', {'title' : 'Действия'}) %}
+		{% widget('zii.widgets.CMenu', {'items' : menu, 'htmlOptions' : {'class' : 'operations'}}) %}
+	{% endWidget %}
+{% endblock %}

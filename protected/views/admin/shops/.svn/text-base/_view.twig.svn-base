@@ -1,0 +1,48 @@
+{% autoescape  false %}
+{# this CityItemController #}
+{# model CityItem #}
+{# form CActiveForm #}
+
+<div class="view">
+	<b>{{ CHtml.encode(data.getAttributeLabel('city_id')) }}:</b>
+	{{ CHtml.encode(data.city.name_ru) }}
+	<br />
+	
+	<b>{{ CHtml.encode(data.getAttributeLabel('name_ru')) }}:</b>
+	{{ CHtml.encode(data.name_ru) }}
+	<br />
+
+	<b>{{ CHtml.encode(data.getAttributeLabel('name_ua')) }}:</b>
+	{{ CHtml.encode(data.name_ua) }}
+	<br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('name_en')) }}:</b>
+  {{ CHtml.encode(data.name_en) }}
+  <br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('address_ru')) }}:</b>
+	{{ CHtml.encode(data.address_ru) }}
+	<br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('address_ua')) }}:</b>
+	{{ CHtml.encode(data.address_ua) }}
+	<br />
+	 <b>{{ CHtml.encode(data.getAttributeLabel('address_en')) }}:</b>
+  {{ CHtml.encode(data.address_en) }}
+  <br />
+  
+	<b>{{ CHtml.encode(data.getAttributeLabel('phone_ru')) }}:</b>
+	{{ CHtml.encode(data.phone_ru }}
+	<br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('phone_ua')) }}:</b>
+	{{ CHtml.encode(data.phone_ua) }}
+	<br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('phone_en')) }}:</b>
+  {{ CHtml.encode(data.phone_en) }}
+  <br />
+  
+	<b>{{ CHtml.encode(data.getAttributeLabel('lat')) }}:</b>
+	{{ CHtml.encode(data.lat) }}
+	<br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('lng')) }}:</b>
+	{{ CHtml.encode(data.lng) }}
+	<br />
+</div>
+{% endautoescape %}

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <title>{% if meta and meta['title'] %}{{ meta['title'] }}{% else %}STDIAMOND{% endif %}</title>
+  {% if meta %}
+    {% if meta['description'] %}
+  <meta name="description" content="{{ meta['description'] }}" />
+    {% endif %}
+  {% endif %}
+  <link rel="image_src" href="{{Yii.baseUrl(true)}}/images/home.png" />
+  <meta name="og:title" content="{% if meta['title'] %}{{ meta['title'] }}{% else %}STDIAMOND{% endif %}" />
+  <meta name="og:image" content="{{Yii.baseUrl(true)}}/images/home.png" />
+  <meta name="og:type" content="website" />
+  <meta name="og:url" content="{{Yii.createAbsoluteUrl(Yii.request.url)}}" />
+  <link rel="shortcut icon" href="/favicon.ico" >
+  <meta name="viewport" content="width=device-width">
+  {{ void(Yii.clientScript.registerCssFile("#{Yii.request.baseUrl}/css/style.css")) }}
+  
+  {% registerScriptFile("#{Yii.baseUrl(true)}/js/libs/jquery.min.js") %}
+  
+  {% registerScriptFile("#{Yii.baseUrl(true)}/js/libs/headjs/head.min.js") %}
+  
+  <script>
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+	  var url = window.location.hostname;
+	  window.location.replace('/mobile');
+  }
+  jQuery(document).ready(function ($) {
+			function l_tooltip(target_items, name) {
+				$(target_items).each(function (i) {        
+					$("body").append("<div class='" + name + "' id='" + name + i + "'><p>" + $(this).attr('title') + "</p></div>");        
+					var tooltip = $("#" + name + i);        
+					if ($(this).attr("title") != "" && $(this).attr("title") != "undefined") {        
+						$(this).removeAttr("title").mouseover(function () {                
+							tooltip.css({
+								opacity: 1,
+								display: "none"
+							}).fadeIn(30);        
+						}).mousemove(function (kmouse) {                
+							tooltip.css({
+								left: kmouse.pageX + -20,
+								top: kmouse.pageY + -150
+							});        
+						}).mouseout(function () {                
+							tooltip.fadeOut(10);        
+						});        
+					}    
+				});
+			}
+			l_tooltip(".ttp_lnk a","tooltip");
+		});
+  
+  
+  hiddenImg= new Image();
+  hiddenImg.src= "/images/preloader.png";
+  </script>
+</head>
+<body {% if this.id != 'site' %} class="b-inner" {% endif %}>
+<div id="fb-root"></div>
+<script src="https://connect.facebook.net/ru_RU/all.js"></script>
+<script type='text/javascript'>
+window.fbAsyncInit = function() {
+  FB.init({
+      appId      : '304225519692656', // App ID
+        channelUrl : '//app.studio7.ua/channel.html', // Channel File
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        xfbml      : true  // parse XFBML
+    });
+};
+(function(d){
+  var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    d.getElementsByTagName('head')[0].appendChild(js);
+}(document));
+</script>
+<div id='globalLangSet' style="display:none;">{{Yii.params.language}}</div>
+<div class="b-preloader-overlay"></div>
+<header class="b-body-header">
+  <div class="b-container">
+    <div class="b-logo"><a onclick="new_update_close();" href="/{% if Yii.params.language != 'ru' %}{{ Yii.params.language }}/{% endif %}"><img src="/images/logo.png" alt=""></a></div>
+    {% widget('application.components.widgets.MenuWidget', []) %}
+    {% widget('application.components.widgets.LanguagesWidget', []) %}
+    <form action="{{ Yii.createAbsoluteUrl('/') }}{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/ring/search" class="b-search-form">
+      <input type="text" class="b-search-input" name="search" placeholder="{{ lang.t('site', 'Поиск') }}">
+      <a href="#" class="b-search-button"><img src="/images/search_ico.png" alt=""></a>
+    </form>
+  </div>
+</header>
+
+<div class="b-colletcion">
+  <div class="b-container">
+    <div class="b-colletcion-list"></div>
+    <div class="b-close-collection"><a href="#">{{ lang.t('site', 'свернуть') }}</a></div>
+  </div>
+</div>
+
+{% block content %}
+{% endblock %}
+
+<footer class="b-body-footer">
+  <div class="b-container">
+    <div class="b-coparate">Stdiamond © 2013 
+     <span style="text-transform: lowercase;"> Email - <a href='mailto:info@diamond.ua'>info@diamond.ua</a></span>
+    </div>
+    <div class="b-online-butik"><span class="b-title">{{ lang.t('site', 'Онлайн-бутик') }}</span> 10:00 -18:00<span class="b-separate">|</span>+38 067 547 0888 
+	</div>
+<!-- 
+	<div class="ttp_lnk"><a style="text-decoration: none;" href="#" title="<div style='padding: 5px; width: 335px;'>
+	<img src='/images/btc-c.jpg' style='float:left; width: 30%;'  />
+	<div style='float:right; width: 70%; '>
+	<p style='padding-left: 11px; padding-top: 9px; line-height: 16px;'>
+	<b style='font-size: 16px; letter-spacing: 0.92em;'>STDIAMOND</b></p>
+	<p style='padding-left: 0px;line-height: 16px;'>
+	<b style='font-size: 9px; letter-spacing: 1em;'>&nbsp;BITCOIN CENTURY</b></p>
+	<p style='font-size: 12px; padding-left: 5px; text-align: justify;'>Скоро мы предложим вам возможность расчета за украшения в биткоинах. Спасибо за внимание!</p></div></div>">
+	<img src="/images/btc-icon.jpg" />&nbsp;&nbsp;&nbsp;<span style="color: red;">СКОРО!</span></a> 
+    
+       </div>
+-->
+    <div class="b-social">
+      <a href="https://www.facebook.com/N1STDIAMOND" target='_blank'><img src="/images/social1.jpg" alt=""></a
+      ><a href="http://vk.com/n1stdiamond" target='_blank'><img src="/images/social2.jpg" alt=""></a
+    ><a href="https://twitter.com/N1STDIAMOND" target='_blank'><img src="/images/social_tw1.jpg" alt=""></a>
+	    <a href="https://plus.google.com/115626423838225381778" target='_blank'><img src="/images/social_goo.jpg" alt=""></a>
+	  <!--<a href="http://instagram.com/diamond.ua" target='_blank'><img src="images/insta_w.jpg" alt=""></a>-->
+	  <a href="http://www.pinterest.com/n1stdiamond/" target='_blank'><img src="/images/social_pin.jpg" alt=""></a>
+	  <a href="https://www.youtube.com/user/TheSTDIAMOND" target='_blank'><img src="/images/you.jpg" alt=""></a>
+</div>
+    
+    
+  </div>
+</footer>
+
+
+  <div style="display:none;">
+    <div id="order-form" style="display:none"> 
+      <div class="b-close-popup"><div style="font-size: 10px; text-transform: uppercase; margin-right: 19px; margin-top: 1px;">{{ lang.t('site', 'Закрыть') }}</div></div>
+      <div class="b-h3" id="popup_order_make_order">{{ lang.t('site', 'Оформить заказ') }}</div>
+      <div class="b-order-form-wrapper">
+        <div class="b-order-popup">
+          <div class="b-name-ring-popup">Лучезарные</div>
+          <div class="b-name-collection-popup"><span>Dynasty</span></div>
+          <div class="b-who-blocks-popaup"></div>
+          <div class="b-total">
+            <span>{{ lang.t('site', 'Всего') }}</span>
+            <div class="b-price-block"><span class="b-uah">22 310</span><span class="b-usd btc">2 965</span> <span class="d-usd">USD</span></div>
+            <div class="clear"></div>
+          </div>
+        </div>
+
+        <form action="." id="former_order" class="b-order-form" onsubmit="return false">
+          <input type="hidden" id='hidden_size_m' value='' />
+          <input type="hidden" id='hidden_size_w' value='' />
+          <input type="hidden" id='hidden_ring_m' value='' />
+          <input type="hidden" id='hidden_ring_w' value='' />
+          <input type="hidden" id='hidden_price_m' value='' />
+          <input type="hidden" id='hidden_price_w' value='' />
+		  <input type="hidden" id='hidden_btc_price_m' value='' />
+          <input type="hidden" id='hidden_btc_price_w' value='' />
+          <input type="hidden" id='hidden_price' value='' />
+          <input type="hidden" id='hidden_info_w' value='' />
+          <input type="hidden" id='hidden_info_m' value='' />
+
+          <div class="b-title" id="popup_order_text_input">{{ lang.t('site', 'Для оформления заказа<br>введите Ваши данные')|raw }}:</div>
+          <div class="b-item-form"><input type="text" class="b-txt-input" id='order_name' value="{{ lang.t('site', 'Имя') }}" placeholder="{{ lang.t('site', 'Имя') }}"></div>
+          <div class="b-item-form"><input type="text" class="b-txt-input" id='order_email' value="{{ lang.t('site', 'Эл. почта') }}" placeholder="{{ lang.t('site', 'Эл. почта') }}"></div>
+          <div class="b-item-form"><input type="text" class="b-txt-input" id='order_city' value="{{ lang.t('site', 'Город') }}" placeholder="{{ lang.t('site', 'Город') }}"></div>
+          <div class="b-item-form"><input type="text" class="b-txt-input" id='order_phone'  value="Телефон" placeholder="Телефон"></div>
+          <div class="b-item-form"><textarea class="b-textarea-input" id='order_comment' placeholder="{{ lang.t('site', 'Комментарий к заказу') }}">{{ lang.t('site', 'Комментарий к заказу') }}</textarea></div>
+          <div class="b-item-form"><button class="b-submit-button b-order-confirm" onclick='return send_order();' id='popup_order_button_order'>{{ lang.t('site', 'ОФОРМИТЬ ЗАКАЗ') }}</button></div>
+        </form>
+      </div>
+	  
+	  
+
+      <div class="b-order-aceeted" id='order_send'>{{ lang.t('site', 'Cпасибо, Ваш заказ принят. <br>В ближайшее время с Вами свяжется менеджер')|raw  }}</div>
+      <div class="clear"></div>
+    </div>
+    
+    <div id="send-letter-form"> 
+      <div class="b-close-popup" style="top:0px;"><div style="font-size: 9px; text-transform: uppercase; margin-top: 16px;">{{ lang.t('site', 'Закрыть') }}</div></div>
+     
+      <div class="b-h3">{{ lang.t('site', 'Написать письмо<br />другу') | raw }}</div>
+        <form action="." class="b-order-form" id='former_email' onsubmit="return false">
+          <input type="hidden" value="" id='hidden_email' name='mail_linker' />
+          <div class="b-item-form"><input type="text" class="b-txt-input" id="mail_name" value="{{ lang.t('site', 'Имя') }}" placeholder="{{ lang.t('site', 'Имя') }}" ></div>
+          <div class="b-item-form"><input type="text" class="b-txt-input" id="mail_email" value="{{ lang.t('site', 'Эл. почта') }}" placeholder="{{ lang.t('site', 'Эл. почта') }}"></div>
+          <div class="b-item-form"><input type="text" class="b-txt-input" id="mail_theme" value="{{ lang.t('site', 'Тема') }}" placeholder="{{ lang.t('site', 'Тема') }}"></div>
+          <div class="b-item-form"><textarea class="b-textarea-input" id="mail_comment" placeholder="{{ lang.t('site', 'Комментарий к письму') }}">{{ lang.t('site', 'Комментарий к письму') }}</textarea></div>
+          <div style="font-size:11px; margin-left:5px">{{ lang.t('site','отправляю письмо, вы отправляете ссылку на просматриваемые кольца')}}</div>
+          <div class="b-item-form" style="text-align:center;"><button class="b-submit-button"  onclick='return send_mailer()'>{{ lang.t('site', 'ОТПРАВИТЬ') }}</button></div>
+        </form>
+        <div class="b-order-aceeted" id='mail_send'>{{ lang.t('site', 'Cпасибо, Ваше письмо отправлено') }}</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="garderob">
+        <div class="b-title">примерочная</div>
+        <div class="b-close-popup">&times;</div>
+        <div class="b-swf-object" style="width:980px; height: 640px;">
+          {% registerScriptFile("#{Yii.baseUrl(true)}/images/flash_rings/js/swfobject.js") %}
+          <div class="flash" id="flash">
+            <div  id="flashHolder" >&nbsp;</div>
+          </div>
+          <script type="text/javascript">
+            swfobject.embedSWF("/images/flash_rings/stdiamond.swf", "flashHolder", "980", "640", "11.0.0", "expressInstall.swf",
+            { "configURL":"/images/flash_rings/config.json", "groupId":-1, "itemId":-1},
+            { 'scale': 'noscale', 'salign': 't', 'allowFullscreen': 'false','allowScriptAccess':'always', 'wmode':'window'},
+            { 'id' : 'flashHolder', 'name' : 'flashHolder' });
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <div class="b-cramp">
+      <div class="b-wrapper">
+        <div class="b-text">{{ lang.t('site', 'для корректного отображения сайта<br>обновите, пожалуйста, версию браузера')|raw  }}</div>
+      </div>
+    </div>
+  
+    <script type="text/javascript">
+      function send_mailer(){
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        mail_link = $("#hidden_email").val();
+        mail_name = $("#mail_name").val();
+        mail_email = $("#mail_email").val();
+        mail_theme = $("#mail_theme").val();
+        mail_comment = $("#mail_comment").val();
+        lang = $("#globalLangSet").html();
+        error = false;
+        $("#mail_name").removeClass('b-error');
+        $("#mail_theme").removeClass('b-error');
+        $("#mail_email").removeClass('b-error');
+        
+        if(mail_name == '{{ lang.t("site", "Имя") }}' || mail_name == ''){
+          $("#mail_name").addClass('b-error');
+          error = true;
+        }
+        if(mail_theme == '{{ lang.t("site", "Тема") }}' || mail_theme == ''){
+          $("#mail_theme").addClass('b-error');
+          $("#mail_theme").val("{{ lang.t('site', 'Тема') }}");
+          error = true;
+        }
+        if(mail_email == '{{ lang.t("site", "Эл. почта") }}' || reg.test(mail_email) == false || mail_email == ''){
+          $("#mail_email").addClass('b-error');
+          $("#mail_email").val('{{ lang.t("site", "Эл. почта") }}');
+          error = true;
+        }
+        if(!error){
+          $.post('/ring/sendmailsite',{'lang':lang,'mail_link':mail_link,'mail_name':mail_name,'mail_email':mail_email,'mail_theme':mail_theme,'mail_comment':mail_comment},function(data){
+            $('#former_email').fadeOut('fast',function(){
+            $('#mail_send').fadeIn();
+          });
+          });
+        }else{
+        }
+        return false;
+      }
+	  
+	   
+	 
+
+
+      function send_order(){
+		
+		
+	 
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        order = Array();
+        order['order_size_m'] = $("#hidden_size_m").val();
+        order['order_size_w'] = $("#hidden_size_w").val();
+        order['order_ring_m'] = $("#hidden_ring_m").val();
+        order['order_ring_w'] = $("#hidden_ring_w").val();
+        order['order_price_m'] = $("#hidden_price_m").val();
+        order['order_price_w'] = $("#hidden_price_w").val();
+		
+		if($('.btc_price').is(':visible'))
+	    {
+		
+			order['order_price_btc_m'] = $("#hidden_btc_price_m").val();
+			order['order_price_btc_w'] = $("#hidden_btc_price_w").val();
+			alert(order['order_price_btc_m']);
+	    }
+		else
+		{
+			 order['order_price_btc_m'] = 0;
+			 order['order_price_btc_w'] = 0;
+		}
+        order['order_price'] = $("#hidden_price").val();
+        order['order_name'] = $("#order_name").val();
+        order['order_email'] = $("#order_email").val();
+        order['order_city'] = $('#order_city').val();
+        order['order_phone'] = $("#order_phone").val();
+        order['order_comment'] = $("#order_comment").val();
+        order['order_info_w'] = $("#hidden_info_w").val();
+        order['order_info_m'] = $("#hidden_info_m").val();
+        lang = '{{Yii.params.language}}';
+        error = false;
+        $("#order_name").removeClass('b-error');
+        $("#order_email").removeClass('b-error');
+        $("#order_phone").removeClass('b-error');
+        $("#order_city").removeClass('b-error');
+        if(order['order_name'] == '{{ lang.t("site", "Имя") }}' || order['order_name'] == ''){
+          $("#order_name").addClass('b-error');
+          error = true;
+        }
+        if(order['order_city'] == '{{ lang.t("site", "Город") }}' || order['order_city'] == ''){
+          $("#order_city").addClass('b-error');
+          error = true;
+        }
+        if(order['order_email'] == '{{ lang.t("site", "Эл. почта") }}' || reg.test(order['order_email']) == false || order['order_email'] == ''){
+          $("#order_email").addClass('b-error');
+          $("#order_email").val('{{ lang.t("site", "Эл. почта") }}');
+          error = true;
+        }
+        if(order['order_phone'] == '{{ lang.t("site", "Телефон") }}' || order['order_phone'] == ''){
+          $("#order_phone").addClass('b-error');
+          error = true;
+        }
+        if(!error){
+          $.post('/ring/sendorder',{'order_size_m':order['order_size_m'],'order_size_w':order['order_size_w'],
+          'order_ring_m':order['order_ring_m'],'order_ring_w':order['order_ring_w'],
+          'order_price_m':order['order_price_m'],
+          'order_price_w':order['order_price_w'],
+		  'order_price_btc_m':order['order_price_btc_m'],
+          'order_price_btc_w':order['order_price_btc_w'],
+          'order_name':order['order_name'],
+          'order_email':order['order_email'],
+          'order_phone':order['order_phone'],
+          'order_city':order['order_city'],
+          'order_comment':order['order_comment'],
+          'lang':lang,
+          'order_info_w':order['order_info_w'],
+          'order_info_m':order['order_info_m']},function(data){
+            $('#former_order').fadeOut('fast',function(){
+              $('#order_send').fadeIn();
+            });
+            
+          });
+        }else{
+        }
+		
+      return false;
+      }
+
+    </script>
+
+    {% registerScriptFile("#{Yii.baseUrl(true)}/js/script.attach.js") %}
+    {% registerScriptFile("#{Yii.baseUrl(true)}/js/gaym.js") %}
+
+    <!-- Yandex.Metrika counter -->
+    <noscript><div><img src="//mc.yandex.ru/watch/22043707" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+<div class="content_point">
+  <div id="content_point"></div>
+  <div style="text-align:center" class="b-close-product" onclick="new_update_close();"><div>×</div><div style="font-size:10px; margin-top:-6px;">{{ lang.t('site', 'Закрыть') }}</div></div>
+</div>
+  <!--block modal full-screen ru-->
+<div style="max-width: 1200px;"  class="content_point_m">
+  <iframe   src="http://diamond.ua/addblock/modal.html" id="content_point_m" width="100%" height="100%"></iframe>
+  
+  <div style="top: 15px; text-align:center" class="b-close-product_m" onclick="new_update_close_m();"><div style="color: #C00;">×</div><div style="color: #C00; font-size:10px; margin-top:-6px;">{{ lang.t('site', 'Закрыть') }}</div></div>
+  </div>
+   <!--block modal full-screen en-->
+<div style="max-width: 1200px;"  class="content_point_m_en">
+  <iframe   src="http://diamond.ua/addblock/modal_en.html" id="content_point_m" width="100%" height="100%"></iframe>
+  
+  <div style="top: 15px; text-align:center" class="b-close-product_m_en" onclick="new_update_close_m_en();"><div style="color: #C00;">×</div><div style="color: #C00; font-size:10px; margin-top:-6px;">{{ lang.t('site', 'Закрыть') }}</div></div>
+  </div>
+</body>
+</html>
+
+<script type="text/javascript">
+  var content_p;
+  content_p = $('#content_point');
+  //console.info(content_p);
+  </script>

@@ -1,0 +1,30 @@
+{% extends this.layout %}
+
+{% block breadcrumbs %}
+	{% widget('zii.widgets.CBreadcrumbs',{'links':{'Коллекции':['index'],0:'сортировка'}}) %}
+{% endblock %}
+
+{% block bigColumn %}
+
+	{{ void(Yii.clientScript.registerCss('prog','
+		#order_list { margin: 0; padding: 0; position: relative; }
+		#order_list li { float: left; list-style: none; }
+		#order_list li div { margin: 9px; border: 1px solid #AAA; cursor: move; }
+		#order_list li img { width: 120px; height: 120px; }
+	')) }}
+
+	<h1>Сортировка коллекций</h1>
+
+	{% widget('application.components.widgets.AdminOrderingWidget',{'items':model,'imgName':'big','imgTitle':'name_ru'}) %}
+
+{% endblock %}
+
+{% block sidebar %}
+	{% set menu=[
+		{'label':'К списку коллекций','url':['index']},
+		{'label':'Добавить нового','url':['create']}
+	] %}
+	{% beginWidget('zii.widgets.CPortlet',{'title':'Действия'}) %}
+		{% widget('zii.widgets.CMenu',{'items':menu,'htmlOptions':{'class':'operations'}}) %}
+	{% endWidget %}
+{% endblock %}

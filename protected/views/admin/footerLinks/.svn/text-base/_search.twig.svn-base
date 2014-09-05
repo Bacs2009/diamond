@@ -1,0 +1,45 @@
+{% autoescape false %}
+
+<div class="wide form">
+
+	{% set form = beginWidget('CActiveForm', {'action' : Yii.createUrl(this.route), 'method' : 'get'}) %}
+
+	<div class="row">
+		{{ form.label(model, 'name_ru') }}
+		{{ form.textField(model, 'name_ru', {'size' : 60, 'maxlength' : 100}) }}
+	</div>
+
+	<div class="row">
+		{{ form.label(model, 'name_ua') }}
+		{{ form.textField(model, 'name_ua', {'size' : 60, 'maxlength' : 100}) }}
+	</div>
+	
+	<div class="row">
+    {{ form.label(model, 'name_en') }}
+    {{ form.textField(model, 'name_en', {'size' : 60, 'maxlength' : 100}) }}
+  </div>
+
+	<div class="row">
+		{{ form.label(model, 'href_ru') }}
+		{{ form.textField(model, 'href_ru', {'size' : 60, 'maxlength' : 150}) }}
+	</div>
+
+	<div class="row">
+		{{ form.label(model, 'href_ua') }}
+		{{ form.textField(model, 'href_ua', {'size' : 60, 'maxlength' : 150}) }}
+	</div>
+	
+	 <div class="row">
+    {{ form.label(model, 'href_en') }}
+    {{ form.textField(model, 'href_en', {'size' : 60, 'maxlength' : 150}) }}
+  </div>
+
+	<div class="row buttons">
+		{{ CHtml.submitButton('Искать') }}
+	</div>
+
+	{% endWidget %}
+
+</div>
+
+{% endautoescape %}

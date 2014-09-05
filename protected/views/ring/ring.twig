@@ -1,0 +1,36 @@
+<style>
+.b-ring-select .carousel li a img{
+  margin: -24px 0px;
+}
+</style>
+<script>
+if(head){
+  head.js("/js/script_for_ajax_pages.js");
+}
+</script>
+<div class="b-wrapper-rings">
+  <div class="b-product-wrapper b-prduct-block ajax-continaer-ring">
+
+    <div id="insert_block_data"></div>
+
+    <div class="b-ring-select">
+      <div class="carousel-wrapper">
+        <div data-jcarousel="true" data-wrap="circular" class="carousel">
+          <ul>
+            {% for ring in rings_in_collection%}
+            <li>
+              <a href="/ring/getfullinfo?ring_id={{ring['id']}}"  class="ajax_select_curent_ring">
+                <img src="/old_images/{{ring['articul']}}.png" width='93px' height='94px'  alt="">
+                <span class="b-carusel-name">{% if language == 'ua' %}{{ring['name_ua'] | replace({collection_name:''})}}{% elseif language == 'en' %}{{ring['name_en'] | replace({collection_name:''})}}{% else %}{{ring['name_ru'] | replace({collection_name:''})}}{% endif %}</span>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <a data-jcarousel-control="true" data-target="-=1" href="#" class="carousel-control-prev"></a>
+        <a data-jcarousel-control="true" data-target="+=1" href="#" class="carousel-control-next"></a>
+      </div>
+    </div>
+
+  </div>
+</div>

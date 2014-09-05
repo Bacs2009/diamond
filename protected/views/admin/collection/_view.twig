@@ -1,0 +1,34 @@
+{% autoescape  false %}
+{# this CollectionController #}
+{# model Collection #}
+{# form CActiveForm #}
+
+<div class="view">
+	
+	<b>{{ CHtml.encode(data.getAttributeLabel('name_ru')) }}:</b>
+	{{ CHtml.encode(data.name_ru) }}
+	<br />
+
+	<b>{{ CHtml.encode(data.getAttributeLabel('name_ua')) }}:</b>
+	{{ CHtml.encode(data.name_ua) }}
+	<br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('name_en')) }}:</b>
+  {{ CHtml.encode(data.name_en) }}
+  <br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('text_ru')) }}:</b>
+	{{ CHtml.encode(data.text_ru) }}
+	<br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('text_ua')) }}:</b>
+	{{ CHtml.encode(data.text_ua) }}
+	<br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('text_en')) }}:</b>
+  {{ CHtml.encode(data.text_en) }}
+  <br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('active')) }}:</b>
+	{{ CHtml.encode(data.active }}
+	<br />
+	<b>{{ CHtml.encode(data.getAttributeLabel('remote_id')) }}:</b>
+	{{ CHtml.encode(data.remote_id) }}
+	<br />
+</div>
+{% endautoescape %}

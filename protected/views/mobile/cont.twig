@@ -1,0 +1,80 @@
+{% extends this.layout %}
+{% block content%}
+
+
+<section id="cont">
+	    <p id="page-name">Бутики</p>
+		<div id="map_canvas"></div>
+		<ul id="city-list">
+			<li><a href="#">Выберите город</a></li>
+			<li><a href="#" id="Kyiv">Киев</a></li>
+			<li><a href="#" id="Lviv">Львов</a></li>
+			<li><a href="#" id="Odessa">Одесса</a></li>
+			<li><a href="#" id="Dnepr">Днепропетровск</a></li>
+		</ul>
+	</section>
+	
+	<script type="text/javascript">
+  	window.onload = function(){
+  		mapLoad(50.449395, 30.525794);
+  	}
+	   function mapLoad(x, y) {
+	  // Create an array of styles.
+	  var styles = [
+	   {
+	      stylers: [
+      		{ saturation: -100 }
+	      ]
+		}
+	  ];
+
+	  // Create a new StyledMapType object, passing it the array of styles,
+	  // as well as the name to be displayed on the map type control.
+	  var styledMap = new google.maps.StyledMapType(styles,
+	    {name: "Styled Map"});
+
+	  // Create a map object, and include the MapTypeId to add
+	  // to the map type control.
+	  var mapOptions = {
+	       center: new google.maps.LatLng(x, y),
+	       zoom: 16,
+	       disableDefaultUI: true,
+	    mapTypeControlOptions: {
+	      mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+	    }
+	  };
+	  var map = new google.maps.Map(document.getElementById('map_canvas'),
+	    mapOptions);
+	    var ico =  '{{Yii.baseUrl(true)}}/images/ui/pin.png';
+	    var marker = new google.maps.Marker({
+	      position: new google.maps.LatLng(x, y),
+	      map: map,
+	      icon: ico
+	  });
+
+	  //Associate the styled map with the MapTypeId and set it to display.
+	  map.mapTypes.set('map_style', styledMap);
+	  map.setMapTypeId('map_style');
+	}
+	$(document).ready(function(){
+		$('#city-list li').on('click',function(){
+			$('#city-list').toggleClass('visible');
+			$('#city-list li:eq(0) a').text($(this).children('a').text());
+		});
+
+		$('#Kyiv').on('click',function(){
+			mapLoad(50.449395, 30.525794);
+		});
+		$('#Lviv').on('click',function(){
+			mapLoad(49.835924, 24.031621);
+		});
+		$('#Odessa').on('click',function(){
+			mapLoad(46.483038, 30.735435);
+		});
+		$('#Dnepr').on('click',function(){
+			mapLoad(48.465783, 35.04262);
+		});
+	});
+	</script>
+{% endblock %}
+

@@ -1,0 +1,44 @@
+{% extends this.layout %}
+
+{% block breadcrumbs %}
+	{% widget('zii.widgets.CBreadcrumbs', {'links' : ['Заказы']}) %}
+{% endblock %}
+
+{% block bigColumn %}
+
+	{% registerScript('search',"
+	$('.search-button').click(function(){ $('.search-form').toggle(); return false; });
+	$('.search-form form').submit(function(){
+		$.fn.yiiGridView.update('actions-grid',{data:$(this).serialize()});
+		return false;
+	});
+	") %}
+
+	<h1>Управление заказами</h1>
+
+	<div class="search-form">
+		{{ this.renderPartial('_search', {'model' : model}) }}
+	</div>
+
+	{% widget('application.components.widgets.AdminGridView',
+		{
+			'id' : 'actions-grid',
+			'dataProvider' : model.search(),
+			'columns' :
+			[
+				'id',
+				'name',
+				'email',
+				'city',
+				'phone',
+				'comment',
+				{'buttons':
+         {
+            'update':{'visible' :'false','label':'Смотреть','url':'Yii::app()->createUrl("admin/orders/view", array("id" => $data->id))'}
+          }
+        }
+			],
+			
+		}) %}
+
+{% endblock %}

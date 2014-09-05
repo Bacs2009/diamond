@@ -1,0 +1,33 @@
+{% extends this.layout %}
+{% block content%}
+
+	<section id="main-slider">
+        <div class="slides">
+          <div style="background-image: url('../images/mobile/bg/bg0.jpg')">
+	    			<div class="slide-wrap">
+		    			<div class="slide-content">
+			    			<h2>{{ lang.t('site', 'СОЕДИНЯЯ СЕРДЦА') }}</h2>
+			    			<p class="col-desc">{{ lang.t('site', 'Обручальные кольца') }}  STDIAMOND</p>
+			    			<img src="../images/mobile/bg/ring1.png" alt="">
+			    			<a class="watch" href="#">{{ lang.t('site', 'Смотреть коллекции') }}</a>
+		    			</div>
+	    			</div>
+	    		</div>
+	    	{% for collection in collections %}
+	    		<div style="background-image: url('../images/mobile/bg/{{collection.path}}.jpg')">
+	    			<div class="slide-wrap" style="font-size: 12px;">
+		    			<div class="slide-content" {% if collection.menu_color == '' %}style='color:#fff;'{% else %}style='color:#000;'{% endif %}>
+			    			<h2>{{collection.getLangProp('name')}}</h2>
+			    			<p class="col-desc">- {{ lang.t('site', 'Коллекция') }} -</p>
+			    			<img src="../images/mobile/collection/display/{{collection.path}}.png" alt="">
+			    			{{collection.getLangProp('name') | striptags}}
+			    			<br />
+			    			<a href="{% if Yii.params.language != 'ru' %}/{{ Yii.params.language }}{% endif %}/mobile/{{collection.name_ru | lower | to_latin}}" {% if collection.menu_color == '' %}style='border-color:#fff; color:#fff;'{% else %}style='border-color:000; color:000;'{% endif %}>{{ lang.t('site', 'Подробнее') }}</a>
+		    			</div>
+	    			</div>
+	    		</div>
+	    	{% endfor %}
+        </div>
+	</section>
+	{% endblock %}
+	
