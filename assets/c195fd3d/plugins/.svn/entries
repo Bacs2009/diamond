@@ -1,0 +1,252 @@
+10
+
+dir
+0
+svn://80.70.73.158/boot/egor/svn/repositories/diamond.project.test/assets/c195fd3d/plugins
+svn://80.70.73.158/boot/egor/svn/repositories/diamond.project.test
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+8d44b393-7e91-4471-a43a-958d1cbf72cc
+
+a11yhelp
+dir
+
+
+
+add
+
+about
+dir
+
+
+
+add
+
+autogrow
+dir
+
+
+
+add
+
+clipboard
+dir
+
+
+
+add
+
+colordialog
+dir
+
+
+
+add
+
+devtools
+dir
+
+
+
+add
+
+dialog
+dir
+
+
+
+add
+
+docprops
+dir
+
+
+
+add
+
+find
+dir
+
+
+
+add
+
+flash
+dir
+
+
+
+add
+
+forms
+dir
+
+
+
+add
+
+iframe
+dir
+
+
+
+add
+
+iframedialog
+dir
+
+
+
+add
+
+image
+dir
+
+
+
+add
+
+link
+dir
+
+
+
+add
+
+liststyle
+dir
+
+
+
+add
+
+mediaembed
+dir
+
+
+
+add
+
+pagebreak
+dir
+
+
+
+add
+
+pastetext
+dir
+
+
+
+add
+
+placeholder
+dir
+
+
+
+add
+
+scayt
+dir
+
+
+
+add
+
+showblocks
+dir
+
+
+
+add
+
+smiley
+dir
+
+
+
+add
+
+specialchar
+dir
+
+
+
+add
+
+styles
+dir
+
+
+
+add
+
+stylesheetparser
+dir
+
+
+
+add
+
+table
+dir
+
+
+
+add
+
+tableresize
+dir
+
+
+
+add
+
+tabletools
+dir
+
+
+
+add
+
+templates
+dir
+
+
+
+add
+
+uicolor
+dir
+
+
+
+add
+
+wsc
+dir
+
+
+
+add
+

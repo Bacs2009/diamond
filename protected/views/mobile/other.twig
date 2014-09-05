@@ -3,33 +3,21 @@
 
 
 <section>
-    		<p id="page-name">Другие проекты</p>
-			<ul id="proj-list">
-				<li>
-					<a href="#">
-						<img src="{{Yii.baseUrl(true)}}/images/prj1.png" alt="">
-						<span>Арт проект <br>"Кольца"</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<img src="{{Yii.baseUrl(true)}}/images/prj2.png" alt="">
-						<span>Украшения</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<img src="{{Yii.baseUrl(true)}}/images/prj3.png" alt="">
-						<span>Программа <br>"Хеппипипл"</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<img src="{{Yii.baseUrl(true)}}/images/prj4.png" alt="">
-						<span>Проект <br>"Нас 50 миллионов"</span>
-					</a>
-				</li>
-			</ul>
-	</section>
+    <p id="page-name">{{ lang.t('mobile', 'Другие проекты') }}</p>
+    <ul id="proj-list">
+        {% for i in 1..4 %}
+            {% for key, action in actions %}
+                {% if (key % 4) + 1 == i %}
+                    <li>
+                        <a href="{% if action.link == '' %}{{ action.getUrl() }}{% else %}{{action.link}}{% endif %}">
+                            <img src="{{ action.imageUrl['preview'] }}" alt="">
+                            <span>{{ action.getLangProp('title') }}</span>
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}    
+    </ul>
+</section>
 {% endblock %}
 

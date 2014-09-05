@@ -26,42 +26,49 @@ work_pc
 
 8d44b393-7e91-4471-a43a-958d1cbf72cc
 
-ring
+1page
 dir
 
-actions
-dir
-
-boutiques
-dir
-
-layouts
-dir
-
-service
-dir
-
-ajax
-dir
-
-site
-dir
-
-compare
-dir
-
-bitcoin
-dir
-
-admin
+1promo
 dir
 
 about
 dir
 
-1page
+actions
 dir
 
-1promo
+admin
+dir
+
+ajax
+dir
+
+bitcoin
+dir
+
+boutiques
+dir
+
+compare
+dir
+
+layouts
+dir
+
+mobile
+dir
+
+
+
+add
+
+ring
+dir
+
+service
+dir
+
+site
 dir
 

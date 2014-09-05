@@ -25,12 +25,31 @@ class MobileController extends Controller
   
   public function actionOther()
   {
-    $this->render('other');
+    $actions = Actions::model()->getList(Yii::app()->params->language);
+    //$menuItem = Menu::model()->getItemByUrl(Yii::app()->params->language);
+    $temp = split('/',Yii::app()->request->requestUri);
+    $meta_info = Menu::model()->get_meta($temp[count($temp)-1],Yii::app()->params->language);
+		
+    $this->render
+    (
+            'other',
+            array
+            (
+                    'actions' => $actions['list'],
+                    'count' => $actions['count'],
+                    'moreUrl' => Yii::app()->urlManager->createAbsoluteLanguageUrl('actions/more'),
+                    //'menuItem' => $menuItem,
+                    'meta' => $meta_info
+            )
+    );
   }
   
   public function actionAbout()
   {
-    $this->render('about');
+    $content = StaticPages::model()->findByPk('mobileabout');
+    $temp = split('/',Yii::app()->request->requestUri);
+    $meta_info = Menu::model()->get_meta($temp[count($temp)-1],Yii::app()->params->language);
+    $this->render('about', array('meta' => $meta_info,'content' => $content ? $content->{'value_' . Yii::app()->params->language} : ''));
   }
   
   public function actionCont()

@@ -1,0 +1,47 @@
+{% extends this.layout %}
+{% if Yii.params.language == 'ua' %}
+{% registerScriptFile('https://maps.google.com/maps/api/js?sensor=false&language=uk') %}
+{% elseif Yii.params.language == 'ru' %}
+{% registerScriptFile('https://maps.google.com/maps/api/js?sensor=false&language=ru') %}
+{% else %}
+{% registerScriptFile('https://maps.google.com/maps/api/js?sensor=false&language=en') %}
+{% endif %}
+{% registerScriptFile("#{Yii.baseUrl(true)}/js/infobox.js") %}
+{% registerScriptFile("#{Yii.baseUrl(true)}/js/boutiques.js") %}
+
+{% block content %}
+
+   <div role="main" class="main">
+     <div class="b-inner-container">
+       <div class="b-h2">{{ menuItem.label }}</div> 
+      
+        <div class="b-map-menu">
+		
+        {% for city in cities %}
+         <a href="javascript:void(0);" data-lat="{{ city.lat }}" data-lng="{{ city.lng }}" >{{ city.getLangProp('name') }}</a>
+        {% endfor %}
+		<a href="{% if Yii.params.language == 'ru' %}/actions/12{% else %}/ua/actions/12{% endif %}">{{ lang.t('site', 'Онлайн-сервис') }}</a>
+        </div>
+      <div class="clear"></div>
+     </div>
+     <div class="b-map" id="map_canvas">
+       
+     </div> 
+			<script type="text/javascript">
+				var shops =
+				[
+					{% for shop in shops %}
+					['{{ shop.getLangProp('address') }}', {{ shop.lat }}, {{ shop.lng }}, {{ shop.online }}, '<div class="b-map-windwo" style="min-width:50px;  padding-left:13px !important;"> <!-- <img src="{{ shop.imageUrl['preview'] }}" width="125px" height="80px" style="margin-right:16px;margin-bottom:10px;" align="left"> --> <div class="b-map-angle"></div><div class="b-name-map-winodow">{{ shop.getLangProp('name') }}</div><div class="b-text-map-window">{{ shop.getLangProp('address') }}</div><div class="b-num-map-window">{{ shop.getLangProp('phone') }}</div></div>']{% if not loop.last %},{% endif %}
+					{% endfor %}
+				];
+				shopsMap.setShops(shops);
+
+				</script>
+   </div>
+
+   
+   {% for city in cities %}
+					{{ city.name_ru }}
+	 {% endfor %}
+   
+{% endblock %}

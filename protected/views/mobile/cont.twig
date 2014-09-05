@@ -1,18 +1,25 @@
 {% extends this.layout %}
-{% block content%}
+{% if Yii.params.language == 'ua' %}
+{% registerScriptFile('https://maps.google.com/maps/api/js?sensor=false&language=uk') %}
+{% elseif Yii.params.language == 'ru' %}
+{% registerScriptFile('https://maps.google.com/maps/api/js?sensor=false&language=ru') %}
+{% else %}
+{% registerScriptFile('https://maps.google.com/maps/api/js?sensor=false&language=en') %}
+{% endif %}
+{% block content %}
 
 
 <section id="cont">
-	    <p id="page-name">Бутики</p>
-		<div id="map_canvas"></div>
-		<ul id="city-list">
-			<li><a href="#">Выберите город</a></li>
-			<li><a href="#" id="Kyiv">Киев</a></li>
-			<li><a href="#" id="Lviv">Львов</a></li>
-			<li><a href="#" id="Odessa">Одесса</a></li>
-			<li><a href="#" id="Dnepr">Днепропетровск</a></li>
-		</ul>
-	</section>
+    <p id="page-name">{{ lang.t('mobile', 'Бутики') }}</p>
+        <div id="map_canvas"></div>
+        <ul id="city-list">
+            <li><a href="#">{{ lang.t('mobile', 'Выберите город') }}</a></li>
+            <li><a href="#" id="Kyiv">{{ lang.t('mobile', 'Киев') }}</a></li>
+            <li><a href="#" id="Lviv">{{ lang.t('mobile', 'Львов') }}</a></li>
+            <li><a href="#" id="Odessa">{{ lang.t('mobile', 'Одесса') }}</a></li>
+            <li><a href="#" id="Dnepr">{{ lang.t('mobile', 'Днепропетровск') }}</a></li>
+        </ul>
+</section>
 	
 	<script type="text/javascript">
   	window.onload = function(){

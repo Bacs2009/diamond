@@ -1,0 +1,69 @@
+{% extends this.layout %}
+{% block content%}
+ <div id="nav" class="b-menu-colection">
+    <ul>
+    	{% for collection in collections %}
+    	<li><a href="b-page{{collection.remote_id}}" {% if collection.menu_color_add %} name="{{collection.menu_color_add}}" {% endif %}>{{collection.getLangProp('name')}}</a></li>
+    	{% endfor %}
+    </ul>
+  </div>
+
+   <div role="main" class="main">
+     <div class="b-pages">
+        <div  id="b-page0" class="b-page b-page0 b-home">
+          
+          <div class="b-container">
+           <div class="b-data-ring idark b-first-block-content">
+              <div class="b-title">{{ lang.t('site', 'СОЕДИНЯЯ<br><span>СЕРДЦА</span>')|raw }}</div>
+              <div class="b-colection main_slide" style="margin-bottom: 13px;margin-top: 4px;"><h1>- {{lang.t('site','Обручальные кольца')}} STDIAMOND -</h1></div>
+              <div class="b-img"><img src="/images/home.png" alt="Кольца STDIAMOND"></div>
+              <!--div class="b-dsrcption">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which.</div-->
+              <div class="b-read-more"><a href="b-page8" class="b-read-more-link b-show-colletion">{{ lang.t('site', 'CМОТРЕТЬ КОЛЛЕКЦИИ') }}</a></div>
+            </div>
+          </div>
+        </div>
+        
+        {% for collection in collections %}
+          <div  id="b-page{{collection.remote_id}}" class="b-page {{collection.bg_all_class}}">
+          
+          <div class="b-product">
+               <div class="b-close-product" style='text-align:center'><div>&times;</div><div style='font-size:10px; margin-top:-6px;'>{{ lang.t('site', 'Закрыть') }}</div></div>
+               <div class="b-product-ajax-container">
+               	
+               </div>
+          </div>
+		  {% if collection.bg1_class %}
+		  	<div class="{{collection.bg1_class}} b-paralax"></div>
+		  {% endif %}
+		  
+		  {% if collection.bg2_class %}
+		  	<div class="{{collection.bg2_class}} b-paralax"></div>
+		  {% endif %}
+		  
+		  {% if collection.bg3_class %}
+		  	<div class="{{collection.bg3_class}} b-paralax"></div>
+		  {% endif %}
+		  
+		  {% if collection.bg4_class %}
+		  	<div class="{{collection.bg4_class}} b-paralax"></div>
+		  {% endif %}
+		           
+          <div class="b-container">
+           <div class="b-data-ring {% if collection.menu_color %}{{collection.menu_color}}{% endif %}">
+              <div class="b-title">{{collection.getLangProp('name')}}</div>
+              <div class="b-colection"> - {% if collection.remote_id == 13 %}{{ lang.t('site', 'Программа') }}{% else %}{{ lang.t('site', 'Коллекция') }}{% endif %} -</div>
+              <div class="b-img"><img src='{{collection.imageUrl['big']}}' alt='обручальные кольца {{collection.getLangProp('name')}}' /></div>
+              <div class="b-dsrcption">{{collection.getLangProp('text')|raw}}</div>
+              <div class="b-read-more">
+			  {% if collection.remote_id == 13 %}<a href="http://stdiamond.ua/wedding_rings/happypeople#/1"  target='_blank' class="b-read-more-link">{{ lang.t('site', 'ПОДРОБНЕЕ') }}</a>{% else %}
+			  <a style='cursor:pointer' id='collection_select_{{collection.remote_id}}' class="b-read-more-link b-show-current">{{ lang.t('site', 'ПОДРОБНЕЕ') }}</a>
+			  {% endif %}</div>
+            </div>
+          </div>
+        </div> 
+        {% endfor %}
+      
+     </div>
+   </div>
+{% endblock %}
+
